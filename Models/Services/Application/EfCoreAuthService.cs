@@ -19,7 +19,7 @@ namespace HrNexus.Models.Services.Application
         public async Task<bool> Accesso(User user)
         {
             Console.WriteLine("Username recuperato");
-            /*bool findPassword = false;
+            bool findPassword = false;
             bool findUserAzienda = await dbContext.Aziende.AnyAsync(a => a.Username == user.Username);
             bool findUserDipendete = await dbContext.Dipendenti.AnyAsync(d => d.Username == user.Username);
             if (findUserAzienda == true ){
@@ -29,8 +29,8 @@ namespace HrNexus.Models.Services.Application
             if (findUserDipendete == true ){
                 findPassword = await dbContext.Dipendenti.AnyAsync(a => a.Password == user.Password);
                 return findPassword;
-            } */
-            return true;
+            } 
+            return findPassword;
         }
         }
 }

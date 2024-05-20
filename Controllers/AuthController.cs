@@ -14,7 +14,10 @@ namespace HrNexus.Controllers
     public class AuthController : Controller
     {
         private readonly IAuthService authService;
-
+        public AuthController(IAuthService authService)
+        {
+            this.authService = authService;
+        }
         public IActionResult Index()
         {
             Console.WriteLine("controller lanicato");
@@ -23,7 +26,7 @@ namespace HrNexus.Controllers
 
         public async Task<IActionResult> Login()
         {
-            User user = new User("Mario44", "password1");
+            User user = new User("Mario44", "password2");
             bool logged = await authService.Accesso(user);
             if (logged)
             {
