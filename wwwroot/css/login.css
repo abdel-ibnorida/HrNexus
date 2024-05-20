@@ -1,0 +1,47 @@
+form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 30px; 
+    border: 1px solid #ccc;
+    border-radius: 8px; 
+    background-color: #79abb8;
+}
+
+form h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 28px; 
+    text-align: center;
+}
+
+form label {
+    display: block;
+    margin-bottom: 10px; 
+}
+
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 10px; 
+    margin-bottom: 15px; 
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+form button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #000;
+    border-radius: 6px;
+    background-color: #84a4ac;
+    color: #000000;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+    background-color: #ace6f5;
+}
