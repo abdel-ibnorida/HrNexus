@@ -33,7 +33,7 @@ namespace HrNexus.Models.Entities
 
             modelBuilder.Entity<Azienda>(entity =>
             {
-                entity.ToTable("AZIENDE");
+                entity.ToTable("AZIENDA");
 
               
                 entity.Property(a => a.IdAzienda).HasColumnName("ID_AZIENDA");
@@ -41,7 +41,7 @@ namespace HrNexus.Models.Entities
                 entity.Property(a => a.Nome).HasColumnName("NOME");
                 entity.Property(a => a.PIva).HasColumnName("P_IVA");
                 entity.Property(a => a.Password).HasColumnName("PASSWORD");
-                entity.Property(a => a.DataNascita).HasColumnName("DATANASCITA");
+                entity.Property(a => a.DataNascita).HasColumnName("DATA_NASCITA");
                 entity.Property(a => a.Email).HasColumnName("EMAIL");
 
                 entity.HasKey(azienda => azienda.IdAzienda);
@@ -55,13 +55,13 @@ namespace HrNexus.Models.Entities
                 entity.ToTable("DIPENDENTI");
                
                 entity.Property(d => d.IdAzienda).HasColumnName("ID_AZIENDA");
-                entity.Property(d => d.IdDipendente).HasColumnName("Id_DIPENDENTE");
+                entity.Property(d => d.IdDipendente).HasColumnName("ID_DIPENDENTE");
                 entity.Property(d => d.Username).HasColumnName("USERNAME");
                 entity.Property(d => d.Nome).HasColumnName("NOME");
                 entity.Property(d => d.Cognome).HasColumnName("COGNOME");
                 entity.Property(d => d.Valutazione).HasColumnName("VALUTAZIONE");
                 entity.Property(d => d.Password).HasColumnName("PASSWORD");
-                entity.Property(d => d.DataNascita).HasColumnName("DATANASCITA");
+                entity.Property(d => d.DataNascita).HasColumnName("DATA_NASCITA");
                 entity.Property(d => d.Email).HasColumnName("EMAIL");
                 entity.Property(d => d.Stipendio).HasColumnName("STIPENDIO");
 

@@ -8,7 +8,7 @@ namespace HrNexus.Models.Services.Application
 {
     public interface IAuthService
     {
-        Task<User> CreaNuovoUtente(User user);
-        Task<bool> Login(User user);
+        //Task<User> CreaNuovoUtente(User user);
+        Task<bool> Accesso(User user);
     }
 }

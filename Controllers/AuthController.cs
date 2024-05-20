@@ -17,13 +17,14 @@ namespace HrNexus.Controllers
 
         public IActionResult Index()
         {
+            Console.WriteLine("controller lanicato");
             return Content("home");
         }
 
         public async Task<IActionResult> Login()
         {
             User user = new User("Mario44", "password1");
-            bool logged = await authService.Login(user);
+            bool logged = await authService.Accesso(user);
             if (logged)
             {
                 return Content("fatto");

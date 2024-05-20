@@ -9,27 +9,28 @@ namespace HrNexus.Models.Services.Application
 {
     public class EfCoreAuthService : IAuthService
     { 
-        private readonly MyCourseDbContext dbContext;
+        private readonly MyDbContext dbContext;
 
         public EfCoreAuthService(MyDbContext dbContext){
             this.dbContext = dbContext;
         }
 
         
-        public async Task<User> Login(User user)
+        public async Task<bool> Accesso(User user)
         {
-            bool findPassword = false;
+            Console.WriteLine("Username recuperato");
+            /*bool findPassword = false;
             bool findUserAzienda = await dbContext.Aziende.AnyAsync(a => a.Username == user.Username);
             bool findUserDipendete = await dbContext.Dipendenti.AnyAsync(d => d.Username == user.Username);
             if (findUserAzienda == true ){
-                findPassword = await dbContext.Azienda.AnyAsync(a => a.Password == user.Password);
-                return user;
+                findPassword = await dbContext.Aziende.AnyAsync(a => a.Password == user.Password);
+                return findPassword;
             }
             if (findUserDipendete == true ){
-                findPassword = await dbContext.Azienda.AnyAsync(a => a.Password == user.Password);
-                return user;
-            } 
+                findPassword = await dbContext.Dipendenti.AnyAsync(a => a.Password == user.Password);
+                return findPassword;
+            } */
+            return true;
         }
-
         }
 }
