@@ -4,7 +4,7 @@ using HrNexus.Models.Entities;
 
 namespace HrNexus.Models.Entities
 {
-    public partial class Azienda
+    public partial class Azienda : User
     {
        public Azienda()
         {
@@ -12,9 +12,7 @@ namespace HrNexus.Models.Entities
 
         public int IdAzienda { get; set; }
         public string PIva { get; set; }
-        public string Username { get; set; }
         public string Nome { get; set; }
-        public string Password { get; set; }
         public DateTime DataNascita { get; set; }
         public string Email { get; set; }
     

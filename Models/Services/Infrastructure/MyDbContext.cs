@@ -35,6 +35,8 @@ namespace HrNexus.Models.Entities
             {
                 entity.ToTable("AZIENDE");
 
+              
+                entity.Property(a => a.IdAzienda).HasColumnName("ID_AZIENDA");
                 entity.Property(a => a.Username).HasColumnName("USERNAME");
                 entity.Property(a => a.Nome).HasColumnName("NOME");
                 entity.Property(a => a.PIva).HasColumnName("P_IVA");
@@ -51,8 +53,9 @@ namespace HrNexus.Models.Entities
             modelBuilder.Entity<Dipendente>(entity =>
             {
                 entity.ToTable("DIPENDENTI");
-
+               
                 entity.Property(d => d.IdAzienda).HasColumnName("ID_AZIENDA");
+                entity.Property(d => d.IdDipendente).HasColumnName("Id_DIPENDENTE");
                 entity.Property(d => d.Username).HasColumnName("USERNAME");
                 entity.Property(d => d.Nome).HasColumnName("NOME");
                 entity.Property(d => d.Cognome).HasColumnName("COGNOME");
