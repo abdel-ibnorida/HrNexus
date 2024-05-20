@@ -1,0 +1,174 @@
+
+    <link rel="stylesheet" href="~/css/elencolavoratori.css">
+
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Cerca dipendente...">
+        <button id="search-button">Cerca</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th style="min-width: 150px;">Nome</th>
+                <th style="min-width: 150px;">Cognome</th>
+                <th>Email</th>
+                <th>Numero telefonico</th>
+                <th>ID</th>
+                <th>Longevità</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Mario</td>
+                <td>Rossi</td>
+                <td>mariorossi45@gmail.com</td>
+                <td>3950269105</td>
+                <td>MR40353</td>
+                <td>7 anni</td>
+                <td><button onclick="editEmployee(this)">i</button></td>
+            </tr>
+            <tr>
+                <td>Sandra</td>
+                <td>Marcucci</td>
+                <td>sandramarcucci1980@gmail.com</td>
+                <td>3829540129</td>
+                <td>SM30284</td>
+                <td>3 anni</td>
+                <td><button onclick="editEmployee(this)">i</button></td>
+            </tr>
+            <tr>
+                <td>Elena</td>
+                <td>Verdi</td>
+                <td>elenaverdi90@gmail.com</td>
+                <td>3920485016</td>
+                <td>EV40274</td>
+                <td>1 anno</td>
+                <td><button onclick="editEmployee(this)">i</button></td>
+            </tr>
+            <tr>
+                <td>Antonio</td>
+                <td>Andreucci</td>
+                <td>antonioandreucci67@gmail.com</td>
+                <td>3729461903</td>
+                <td>AA73058</td>
+                <td>6 mesi</td>
+                <td><button onclick="editEmployee(this)">i</button></td>
+            </tr>
+            <tr>
+                <td>Giorgia</td>
+                <td>Ventura</td>
+                <td>giorgiaventura2003@gmail.com</td>
+                <td>3429501384</td>
+                <td>GV493025</td>
+                <td>5 anni</td>
+                <td><button onclick="editEmployee(this)">i</button></td>
+            </tr>
+            <tr>
+                <td>Gabriel</td>
+                <td>Sandrini</td>
+                <td>gabrielsandrini70@gmail.com</td>
+                <td>3850269485</td>
+                <td>GS50367</td>
+                <td>3 mesi</td>
+                <td><button onclick="editEmployee(this)">i</button></td>
+            </tr>
+            <tr>
+                <td>Rosa</td>
+                <td>Luna</td>
+                <td>rosaluna89@gmail.com</td>
+                <td>3408104850</td>
+                <td>RL29403</td>
+                <td>11 anni</td>
+                <td><button onclick="editEmployee(this)">i</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination">
+        <a href="#">&laquo; Precedente</a>
+        <a href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">Successivo &raquo;</a>
+    </div>
+ <div class="modal" id="modal">
+    <div class="modal-content">
+        <span class="close" id="close">&times;</span>
+        <h2 id="employee-name">Nome Cognome</h2>
+        <input type="text" id="employee-nome" placeholder="Nome">
+        <input type="text" id="employee-cognome" placeholder="Cognome">
+        <input type="date" id="employee-data-nascita" placeholder="Data di nascita">
+        <input type="text" id="employee-nazionalita" placeholder="Nazionalità">
+        <input type="text" id="employee-residenza" placeholder="Residenza">
+        <input type="text" id="employee-citta" placeholder="Città">
+        <input type="text" id="employee-cap" placeholder="CAP">
+        <input type="tel" id="employee-telefono" placeholder="Telefono">
+        <input type="email" id="employee-email" placeholder="Email">
+        <input type="text" id="employee-id" placeholder="ID">
+        <button onclick="saveChanges()">Salva</button>
+    </div>
+</div>
+<script>
+    function editEmployee(button) {
+    // Simulazione di dati di esempio
+    var nome = "Mario";
+    var cognome = "Rossi";
+    var email = "mariorossi45@gmail.com";
+    var numero = "3950269105";
+    var id = "MR40353";
+    var longevita = "7 anni";
+    // Aggiungi altri dati necessari
+
+    // Popola il riquadro modale con i dettagli dell'utente
+    var modal = document.getElementById('modal');
+    var modalName = document.getElementById('employee-name');
+    var modalNome = document.getElementById('employee-nome');
+    var modalCognome = document.getElementById('employee-cognome');
+    var modalDataNascita = document.getElementById('employee-data-nascita');
+    var modalNazionalita = document.getElementById('employee-nazionalita');
+    var modalResidenza = document.getElementById('employee-residenza');
+    var modalCitta = document.getElementById('employee-citta');
+    var modalCAP = document.getElementById('employee-cap');
+    var modalTelefono = document.getElementById('employee-telefono');
+    var modalEmail = document.getElementById('employee-email');
+    var modalID = document.getElementById('employee-id');
+
+    modalName.textContent = nome + " " + cognome;
+    modalNome.value = nome;
+    modalCognome.value = cognome;
+    // Popola gli altri campi con i dati dell'utente
+  
+    // Mostra il riquadro modale
+    modal.style.display = 'block';
+}
+
+// Funzione per salvare le modifiche
+function saveChanges() {
+    // Recupera i dati inseriti dall'utente
+    var nome = document.getElementById('employee-nome').value;
+    var cognome = document.getElementById('employee-cognome').value;
+    var dataNascita = document.getElementById('employee-data-nascita').value;
+    var nazionalita = document.getElementById('employee-nazionalita').value;
+    var residenza = document.getElementById('employee-residenza').value;
+    var citta = document.getElementById('employee-citta').value;
+    var cap = document.getElementById('employee-cap').value;
+    var telefono = document.getElementById('employee-telefono').value;
+    var email = document.getElementById('employee-email').value;
+    var id = document.getElementById('employee-id').value;
+
+    var modalName = document.getElementById('employee-name');
+    modalName.textContent = nome + " " + cognome;
+
+    // Aggiorna gli altri campi con i nuovi valori
+    // ...
+    // Aggiungi il codice per aggiornare gli altri campi come data di nascita, nazionalità, residenza, ecc.
+
+    // Chiudi il riquadro modale dopo l'aggiornamento
+    var modal = document.getElementById('modal');
+    modal.style.display = 'none';
+
+    // Visualizza un messaggio di conferma
+    alert('Modifiche salvate con successo!');
+}
+</script>
+
