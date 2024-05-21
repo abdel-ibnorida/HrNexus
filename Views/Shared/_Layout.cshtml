@@ -1,40 +1,119 @@
+@model UserViewModel
+@if (Model is AziendaViewModel)
+{
+    <!DOCTYPE html>
+    <html lang="it">
 
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/css/style.css">
-</head>
-<body>
-    <div class="topnav">
-        <a asp-action="ElencoLavoratori" asp-controller="Azienda">Elenco 
-            <br>
-            lavoratori
-        </a>
-        <a asp-action="CalendarioLavoratori" asp-controller="Azienda">Calendario 
-            <br>
-            lavoratori
-        </a>
-        <div class="immagine">
-            <a asp-action="Index" asp-controller="Home">
-                <img src="~/immagini/hrneuxs-high-resolution-logo-transparent.png" alt="Logo">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"]</title>
+        <link rel="stylesheet" href="~/css/style.css">
+    </head>
+
+    <body>
+        <div class="topnav">
+            <a asp-action="ElencoLavoratori" asp-controller="Azienda">Elenco
+                <br>
+                lavoratori
+            </a>
+            <a asp-action="CalendarioLavoratori" asp-controller="Azienda">Calendario
+                <br>
+                lavoratori
+            </a>
+            <div class="immagine">
+                <a asp-action="Index" asp-controller="Home">
+                    <img src="~/immagini/hrneuxs-high-resolution-logo-transparent.png" alt="Logo">
+                </a>
+            </div>
+            <a asp-action="GestioneAssenze" asp-controller="Azienda">Gestione
+                <br>
+                permessi/ferie/malattie
+            </a>
+            <a asp-action="GestioneValutazioni" asp-controller="Azienda">Valutazione</a>
+        </div>
+
+        <div class="content">
+            @RenderBody()
+        </div>
+
+        <div class="footer">
+            <p>Copyright © 2024 HrNeuxs Management.</p>
+        </div>
+    </body>
+
+    </html>
+
+}
+else if (Model is DipendenteViewModel)
+{
+    <!DOCTYPE html>
+    <html lang="it">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"]</title>
+        <link rel="stylesheet" href="~/css/style.css">
+    </head>
+
+    <body>
+        <div class="topnav">
+            <a asp-action="CalendarioLavoratori" asp-controller="Dipendente">Calendario
+                <br>
+                personale
+            </a>
+            <div class="immagine">
+                <a asp-action="Index" asp-controller="Home">
+                    <img src="~/immagini/hrneuxs-high-resolution-logo-transparent.png" alt="Logo">
+                </a>
+            </div>
+            <a asp-action="GestioneAssenze" asp-controller="Dipendente">Gestione
+                <br>
+                permessi/ferie/malattie
             </a>
         </div>
-        <a asp-action="GestioneAssenze" asp-controller="Azienda">Gestione
-            <br>
-            permessi/ferie/malattie
-        </a>
-        <a asp-action="GestioneValutazioni" asp-controller="Azienda">Valutazione</a>
-    </div>
 
-    <div class="content">
-        @RenderBody()
-    </div>
+        <div class="content">
+            @RenderBody()
+        </div>
 
-    <div class="footer">
-        <p>Copyright © 2024 HrNeuxs Management.</p>
-    </div>
-</body>
-</html>
+        <div class="footer">
+            <p>Copyright © 2024 HrNeuxs Management.</p>
+        </div>
+    </body>
+
+    </html>
+}
+else
+{
+    <!DOCTYPE html>
+    <html lang="it">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"]</title>
+        <link rel="stylesheet" href="~/css/style.css">
+    </head>
+
+    <body>
+        <div class="topnav">
+            <div class="immagine">
+                <a asp-action="Index" asp-controller="Home">
+                    <img src="~/immagini/hrneuxs-high-resolution-logo-transparent.png" alt="Logo">
+                </a>
+            </div>
+        </div>
+
+        <div class="content">
+            @RenderBody()
+        </div>
+
+        <div class="footer">
+            <p>Copyright © 2024 HrNeuxs Management.</p>
+        </div>
+    </body>
+
+    </html>
+}
