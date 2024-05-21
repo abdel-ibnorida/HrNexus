@@ -20,12 +20,12 @@ namespace HrNexus.Controllers
         }
         public IActionResult Index()
         {
-            return Content("home");
+            return View();
         }
 
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login(string username,string password )
         {
-            User user = new User("Mario44", "password2");
+            User user = new User(username,password);
             bool logged = await authService.Accesso(user);
             if (logged)
             {
