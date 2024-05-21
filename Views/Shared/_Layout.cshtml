@@ -1,3 +1,5 @@
+@if ruolo=dipendente 
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -8,11 +10,11 @@
 </head>
 <body>
     <div class="topnav">
-        <a asp-action="Index" asp-controller="ElencoLavoratori">Elenco 
+        <a asp-action="ElencoLavoratori" asp-controller="Azienda">Elenco 
             <br>
             lavoratori
         </a>
-        <a asp-action="Index" asp-controller="CalendarioLavoratori">Calendario 
+        <a asp-action="CalendarioLavoratori" asp-controller="Azienda">Calendario 
             <br>
             lavoratori
         </a>
@@ -21,11 +23,11 @@
                 <img src="~/immagini/hrneuxs-high-resolution-logo-transparent.png" alt="Logo">
             </a>
         </div>
-        <a asp-action="Index" asp-controller="GestioneDipendenti">Gestione
+        <a asp-action="GestioneAssenze" asp-controller="Azienda">Gestione
             <br>
             permessi/ferie/malattie
         </a>
-        <a asp-action="Index" asp-controller="Valutazione">Valutazione</a>
+        <a asp-action="GestioneValutazioni" asp-controller="Azienda">Valutazione</a>
     </div>
 
     <div class="content">
@@ -33,7 +35,7 @@
     </div>
 
     <div class="footer">
-        <p>Copyright © 2024 Hrneuxs Management.</p>
+        <p>Copyright © 2024 HrNeuxs Management.</p>
     </div>
 </body>
 </html>

@@ -22,7 +22,7 @@ namespace HrNexus.Controllers
         {
             return View();
         }
-
+        [HttpGet]
         public async Task<IActionResult> Login(string username,string password )
         {
             User user = new User(username,password);
