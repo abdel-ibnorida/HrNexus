@@ -110,16 +110,14 @@
 </div>
 <script>
     function editEmployee(button) {
-    // Simulazione di dati di esempio
+ 
     var nome = "Mario";
     var cognome = "Rossi";
     var email = "mariorossi45@gmail.com";
     var numero = "3950269105";
     var id = "MR40353";
     var longevita = "7 anni";
-    // Aggiungi altri dati necessari
 
-    // Popola il riquadro modale con i dettagli dell'utente
     var modal = document.getElementById('modal');
     var modalName = document.getElementById('employee-name');
     var modalNome = document.getElementById('employee-nome');
@@ -136,15 +134,11 @@
     modalName.textContent = nome + " " + cognome;
     modalNome.value = nome;
     modalCognome.value = cognome;
-    // Popola gli altri campi con i dati dell'utente
-  
-    // Mostra il riquadro modale
     modal.style.display = 'block';
 }
 
-// Funzione per salvare le modifiche
 function saveChanges() {
-    // Recupera i dati inseriti dall'utente
+
     var nome = document.getElementById('employee-nome').value;
     var cognome = document.getElementById('employee-cognome').value;
     var dataNascita = document.getElementById('employee-data-nascita').value;
@@ -159,15 +153,11 @@ function saveChanges() {
     var modalName = document.getElementById('employee-name');
     modalName.textContent = nome + " " + cognome;
 
-    // Aggiorna gli altri campi con i nuovi valori
-    // ...
-    // Aggiungi il codice per aggiornare gli altri campi come data di nascita, nazionalità, residenza, ecc.
-
-    // Chiudi il riquadro modale dopo l'aggiornamento
+  
     var modal = document.getElementById('modal');
     modal.style.display = 'none';
 
-    // Visualizza un messaggio di conferma
+    
     alert('Modifiche salvate con successo!');
 }
 </script>
