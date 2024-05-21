@@ -23,11 +23,11 @@ namespace HrNexus.Models.Services.Application
             bool findUserAzienda = await dbContext.Aziende.AnyAsync(a => a.Username == user.Username);
             bool findUserDipendete = await dbContext.Dipendenti.AnyAsync(d => d.Username == user.Username);
             if (findUserAzienda == true ){
-                findPassword = await dbContext.Aziende.AnyAsync(a => a.Password == user.Password);
+                findPassword = await dbContext.Aziende.AnyAsync(a => a.Username == user.Username && a.Password == user.Password);
                 return findPassword;
             }
             if (findUserDipendete == true ){
-                findPassword = await dbContext.Dipendenti.AnyAsync(a => a.Password == user.Password);
+                findPassword = await dbContext.Dipendenti.AnyAsync(a => a.Username == user.Username &&  a.Password == user.Password);
                 return findPassword;
             } 
             return findPassword;

@@ -20,7 +20,6 @@ namespace HrNexus.Controllers
         }
         public IActionResult Index()
         {
-            Console.WriteLine("controller lanicato");
             return Content("home");
         }
 
