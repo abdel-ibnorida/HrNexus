@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HrNexus.Models.Services.Application;
 using HrNexus.Models.Entities;
+using HrNexus.Models.ViewModels;
 
 
 namespace HrNexus.Controllers
@@ -14,6 +15,8 @@ namespace HrNexus.Controllers
     public class AziendaController : Controller
     {
        
+        AziendaService aziendaService;
+
         public IActionResult Index()
         {
             return View();
@@ -21,7 +24,13 @@ namespace HrNexus.Controllers
 
         public IActionResult ElencoLavoratori()
         {
-            return View();
+            string IdAzienda = 1 ;
+
+
+            List<DipendenteViewModel>lista =  aziendaService.ElencoLavoratoriById(IdAzienda);
+            return View(lista);
+
+
         }
         public IActionResult CalendarioLavoratori()
         {
