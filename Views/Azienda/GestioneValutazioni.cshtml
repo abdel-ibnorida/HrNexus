@@ -50,52 +50,6 @@
             <button onclick="saveEvaluation()">Salva</button>
         </div>
     </div>
-
-    <div class="evaluation-form">
-        <h2>Scheda di Valutazione</h2>
-        <div class="form-group">
-            <label for="employee-name-2">Nome Dipendente</label>
-            <input type="text" id="employee-name-2" placeholder="Nome e Cognome">
-        </div>
-        <div class="form-group">
-            <label for="evaluation-period-2">Periodo di Valutazione</label>
-            <input type="text" id="evaluation-period-2" placeholder="MM/AAAA - MM/AAAA">
-        </div>
-        
-        <div class="form-group">
-            <label>Valutazione delle Prestazioni</label>
-            <div class="rating">
-                <label>Qualità del Lavoro:</label>
-                <input type="radio" name="work-quality" value="1"> 1
-                <input type="radio" name="work-quality" value="2"> 2
-                <input type="radio" name="work-quality" value="3"> 3
-                <input type="radio" name="work-quality" value="4"> 4
-                <input type="radio" name="work-quality" value="5"> 5
-            </div>
-            <div class="rating">
-                <label>Collaborazione:</label>
-                <input type="radio" name="teamwork" value="1"> 1
-                <input type="radio" name="teamwork" value="2"> 2
-                <input type="radio" name="teamwork" value="3"> 3
-                <input type="radio" name="teamwork" value="4"> 4
-                <input type="radio" name="teamwork" value="5"> 5
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <label for="comments-2">Commenti</label>
-            <textarea id="comments-2" placeholder="Inserisci commenti qui..."></textarea>
-        </div>
-        
-        <div class="form-group">
-            <label for="evaluator-name-2">Nome del Valutatore</label>
-            <input type="text" id="evaluator-name-2" placeholder="Nome e Cognome">
-        </div>
-        
-        <div class="form-actions">
-            <button onclick="saveEvaluation2()">Salva</button>
-        </div>
-    </div>
 </div>
 
 <script>
@@ -104,20 +58,6 @@
         var evaluationPeriod = document.getElementById('evaluation-period').value;
         var comments = document.getElementById('comments').value;
         var evaluatorName = document.getElementById('evaluator-name').value;
-
-        if (!employeeName || !evaluationPeriod || !evaluatorName) {
-            alert('Tutti i campi sono obbligatori.');
-            return;
-        }
-
-        alert('Valutazione salvata con successo!');
-    }
-
-    function saveEvaluation2() {
-        var employeeName = document.getElementById('employee-name-2').value;
-        var evaluationPeriod = document.getElementById('evaluation-period-2').value;
-        var comments = document.getElementById('comments-2').value;
-        var evaluatorName = document.getElementById('evaluator-name-2').value;
 
         if (!employeeName || !evaluationPeriod || !evaluatorName) {
             alert('Tutti i campi sono obbligatori.');

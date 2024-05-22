@@ -1,12 +1,17 @@
-<link rel="stylesheet" href="~/css/gestioneassenze.css">
-<div class="riquadro">
-  <h2>Richieste di Permesso e Ferie</h2>
+<link rel="stylesheet" href="~/css/gestioneassenze.css"><div class="container">
+  <div class="search-container">
+        <input type="text" id="search" placeholder="Cerca dipendente...">
+        <button id="search-button">Cerca</button>
+    </div>
+  
+  <div class="riquadro">
+     <h2>Richieste di Permesso e Ferie</h2>
   <ul id="richieste">
-    <!-- Qui verranno aggiunte dinamicamente le richieste -->
+   
   </ul>
-</div>
-<div class="riquadro">
-  <h2>Gestione Giorni Disponibili</h2>
+  </div>
+  <div class="riquadro">
+     <h2>Gestione Giorni Disponibili</h2>
   <form id="gestione-giorni">
     <label for="ferie">Giorni Ferie Disponibili:</label>
     <input type="number" id="ferie" name="ferie"><br><br>
@@ -14,6 +19,7 @@
     <input type="number" id="permessi" name="permessi"><br><br>
     <input type="submit" value="Salva">
   </form>
+  </div>
 </div>
 
 <script>

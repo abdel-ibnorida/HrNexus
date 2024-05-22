@@ -4,8 +4,7 @@
     margin: 20px;
 }
 
-.evaluation-form 
-{
+.evaluation-form {
     background-color: #ffffff;
     padding: 20px;
 
@@ -16,7 +15,7 @@
 
 .evaluation-form h2 {
     margin-bottom: 20px;
-    color:  #91bfca;;
+    color: #91bfca;;
 }
 
 .form-group {
@@ -45,7 +44,6 @@
 .form-group textarea 
 {
     height: 100px;
-
 }
 
 .form-actions {
@@ -81,45 +79,40 @@
 .rating input[type="radio"] {
     margin: 0 5px;
 }
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-th {
-    background-color: #000000;
-    color: white;
-    font-weight: bold;
-}
 
-tr:hover {
-    background-color: rgb(133, 221, 224);
-}
 .search-container {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
 }
+
 #search {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
     margin-right: 10px;
+    transition: border-color 0.3s;
 }
+
+#search:focus {
+    border-color: #ffffff;
+    outline: none;
+}
+
 #search-button {
-    background-color: #000000;
+    background-color: #141313;
     border: none;
-
-
     color: #fff;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s;
 }
+
 #search-button:hover {
-    background-color: #ffffff;
-    color: black;
+    background-color: rgb(255, 255, 255);
+    color: #000;
 }

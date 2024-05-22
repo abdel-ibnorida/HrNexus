@@ -1,34 +1,114 @@
+
 .riquadro {
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin: 10px;
-    width: 45%;
-    float: left;
-    border-radius: 5px;
-  }
-  
-  /* Stile per i pulsanti */
-  .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-right: 10px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-accetta {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .btn-rifiuta {
-    background-color: #f44336;
-    color: white;
-  }
-  
-  /* Hover effect per i pulsanti */
-  .btn:hover {
-    background-color: #555;
-  }
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 10px;
+  width: 45%;
+  float: left;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.riquadro h2 {
+  margin-top: 0;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.riquadro form {
+  margin-top: 10px;
+}
+
+.riquadro label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.riquadro input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.riquadro input[type="submit"] {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+.riquadro input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.riquadro ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.riquadro li {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.riquadro li button {
+  margin-left: 5px;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+
+.riquadro li button.btn-accetta {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.riquadro li button.btn-rifiuta {
+  background-color: #f44336;
+  color: white;
+}
+
+.riquadro li button:hover {
+  background-color: #ddd;
+}
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+#search {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+#search-button {
+  background-color: #000000;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+#search-button:hover {
+  background-color: #ffffff;
+  color: black;
+}
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
