@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using HrNexus.Models.Services.Application;
 using HrNexus.Models.Entities;
@@ -20,11 +21,14 @@ namespace HrNexus.Controllers
         }
 
         public IActionResult ElencoLavoratori()
-        {
+        {   
+
             return View();
         }
         public IActionResult CalendarioLavoratori()
         {
+            string user = HttpContext.Session.GetString("Username");
+            Console.WriteLine(user);
             return View();
         }
         public IActionResult GestioneAssenze()
@@ -35,6 +39,6 @@ namespace HrNexus.Controllers
         {
             return View();
         }
-      
+
     }
 }

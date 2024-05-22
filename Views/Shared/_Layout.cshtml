@@ -1,5 +1,6 @@
 @model UserViewModel
-@if (Model is AziendaViewModel)
+@inject IHttpContextAccessor Accessor
+@if (Model is AziendaViewModel || @Accessor.HttpContext.Session.GetString("TipoUtente") == "azienda" )
 {
     <!DOCTYPE html>
     <html lang="it">

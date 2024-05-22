@@ -9,6 +9,6 @@ namespace HrNexus.Models.ViewModels
 
     public class AziendaViewModel:UserViewModel
     {
-       
+        
     }
 }
