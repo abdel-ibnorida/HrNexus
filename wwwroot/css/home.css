@@ -1,0 +1,47 @@
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.testo {
+    color: white; 
+    background-color: rgba(0, 0, 0, 0.856); 
+    font-family: 'Courier New', Courier, monospace; 
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px; 
+    text-align: center;
+}
+
+.company-name {
+    font-family: "Times New Roman", serif;
+    font-size: 2.5em;
+    color: white; 
+    background-color: rgba(0, 0, 0, 0.856); 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+ 
+}
+.login-link-container {
+    text-align: center; 
+}
+
+.login-link {
+    color: #000000; 
+    text-decoration: none;
+    font-weight: bold; 
+    font-size: 16px; 
+    padding: 5px 10px;
+    border: 2px solid #030303; 
+    border-radius: 5px; 
+    background-color: rgb(255, 255, 255); 
+}
+
+
+.login-link:hover {
+    background-color: rgba(0, 0, 0, 0.5); 
+
+    color: #fff; 
+}

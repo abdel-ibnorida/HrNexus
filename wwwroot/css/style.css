@@ -4,21 +4,28 @@
 }
 
 body {
-    background-color: #ace6f5;
+    background-image: url('../immagini/Progetto senza titolo (1).png');
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-attachment: fixed; 
     margin: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+   
 }
+
 
 
 .topnav {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #000000;
-    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.856); 
+ 
 }
+
 
 
 .topnav a {
@@ -30,10 +37,12 @@ body {
 }
 
 
+
 .immagine {
     display: flex;
     align-items: center;
 }
+
 
 .immagine img {
     height: 100%;
@@ -43,7 +52,7 @@ body {
 
 
 .topnav a:hover:not(.immagine a) {
-    background-color: #f7f2f2;
+    background-color: rgba(120, 231, 231, 0.8); 
     color: black;
 }
 
@@ -55,7 +64,7 @@ body {
 
 
 .footer {
-    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.856); 
     padding: 10px;
     text-align: center;
     color: #f2f2f2;
