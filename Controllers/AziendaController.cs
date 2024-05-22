@@ -15,22 +15,23 @@ namespace HrNexus.Controllers
     public class AziendaController : Controller
     {
        
-        AziendaService aziendaService;
+        private readonly IAziendaService aziendaService;
+        public AziendaController(IAziendaService aziendaService)
+        {
+            this.aziendaService = aziendaService;
+        }
 
         public IActionResult Index()
         {
-            return View();
+            return Content("home aziende");
         }
 
         public IActionResult ElencoLavoratori()
         {
-            string IdAzienda = 1 ;
+            int IdAzienda = 1 ;
+            /*AziendaViewModel azienda =  await aziendaService.ElencoLavoratoriById(IdAzienda);*/
 
-
-            List<DipendenteViewModel>lista =  aziendaService.ElencoLavoratoriById(IdAzienda);
-            return View(lista);
-
-
+            return Content("c" + IdAzienda.ToString() + "  ciaoo");
         }
         public IActionResult CalendarioLavoratori()
         {

@@ -3,33 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using MyApp.Models;
 using System.ComponentModel.DataAnnotations;
-using MyApp.Data;
 using HrNexus.Models.Entities;
 using HrNexus.Models.ViewModels;
+using HrNexus.Models.Services.Application;
 
 
 
 
-namespace HrNexus.MyApp.Models.Services.Application
+namespace HrNexus.Models.Services.Application
 {
 
-    public class DipendenteService
+    public class AziendaService : IAziendaService
     {
         private readonly MyDbContext _context;
 
-        public DipendenteService(MyDbContext context)
+        public AziendaService(MyDbContext context)
         {
             _context = context;
         }
 
 
-        public async Task<List<DipendenteViewModel>> ElencoLavoratoriById(int aziendaId)
+        public async Task<AziendaViewModel> ElencoLavoratoriById(int aziendaId)
         {
-            return await _context.Dipendenti
-                .Where(d => d.AziendaId == aziendaId)
-                .ToListAsync();
+            Azienda azienda = await _context.Aziende
+                .Include(a => a.Dipendenti)
+                .FirstOrDefaultAsync(a => a.IdAzienda == aziendaId);
+
+
+            return AziendaViewModel.FromEntity(azienda);
         }
 
     }

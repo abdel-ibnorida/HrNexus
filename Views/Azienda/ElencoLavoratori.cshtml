@@ -1,4 +1,4 @@
-@model listDipendenteViewModel
+@model AziendaViewModel
     <link rel="stylesheet" href="~/css/elencolavoratori.css">
 
     <div class="search-container">
@@ -8,18 +8,18 @@
     <table>
         <thead>
             <tr>
+                <th>Id</th>
                 <th style="min-width: 150px;">Nome</th>
                 <th style="min-width: 150px;">Cognome</th>
-                <th>Email</th>
-                <th>Numero telefonico</th>
-                <th>ID</th>
-                <th>Longevità</th>
-                <th>Azioni</th>
-            </tr>
+    using HrNexus.Models.Entities;
+#line default
+        </tr>
         </thead>
         <tbody>
             @{
-                
+                foreach(Dipendente dip in Model.Dipendenti){
+
+                }
             }
             <tr>
                 <td>Mario</td>
@@ -30,60 +30,7 @@
                 <td>7 anni</td>
                 <td><button onclick="editEmployee(this)">i</button></td>
             </tr>
-            <tr>
-                <td>Sandra</td>
-                <td>Marcucci</td>
-                <td>sandramarcucci1980@gmail.com</td>
-                <td>3829540129</td>
-                <td>SM30284</td>
-                <td>3 anni</td>
-                <td><button onclick="editEmployee(this)">i</button></td>
-            </tr>
-            <tr>
-                <td>Elena</td>
-                <td>Verdi</td>
-                <td>elenaverdi90@gmail.com</td>
-                <td>3920485016</td>
-                <td>EV40274</td>
-                <td>1 anno</td>
-                <td><button onclick="editEmployee(this)">i</button></td>
-            </tr>
-            <tr>
-                <td>Antonio</td>
-                <td>Andreucci</td>
-                <td>antonioandreucci67@gmail.com</td>
-                <td>3729461903</td>
-                <td>AA73058</td>
-                <td>6 mesi</td>
-                <td><button onclick="editEmployee(this)">i</button></td>
-            </tr>
-            <tr>
-                <td>Giorgia</td>
-                <td>Ventura</td>
-                <td>giorgiaventura2003@gmail.com</td>
-                <td>3429501384</td>
-                <td>GV493025</td>
-                <td>5 anni</td>
-                <td><button onclick="editEmployee(this)">i</button></td>
-            </tr>
-            <tr>
-                <td>Gabriel</td>
-                <td>Sandrini</td>
-                <td>gabrielsandrini70@gmail.com</td>
-                <td>3850269485</td>
-                <td>GS50367</td>
-                <td>3 mesi</td>
-                <td><button onclick="editEmployee(this)">i</button></td>
-            </tr>
-            <tr>
-                <td>Rosa</td>
-                <td>Luna</td>
-                <td>rosaluna89@gmail.com</td>
-                <td>3408104850</td>
-                <td>RL29403</td>
-                <td>11 anni</td>
-                <td><button onclick="editEmployee(this)">i</button></td>
-            </tr>
+            
         </tbody>
     </table>
 

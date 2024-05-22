@@ -26,10 +26,10 @@ namespace HrNexus.Controllers
         [HttpGet]
         public async Task<IActionResult> Login(string username,string password )
         {
-           User userInput = new User(username,password);
+            User userInput = new User(username,password);
             User user = await authService.Accesso(userInput);
 
-           if (user != null)
+            if (user != null)
             {
                 if (user is Azienda azienda)
                 {
