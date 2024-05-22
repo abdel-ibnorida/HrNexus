@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HrNexus.Models.Services.Application;
 using HrNexus.Models.Entities;
+using HrNexus.Models.ViewModels;
 
 
 namespace HrNexus.Controllers
@@ -25,16 +26,32 @@ namespace HrNexus.Controllers
         [HttpGet]
         public async Task<IActionResult> Login(string username,string password )
         {
-            User user = new User(username,password);
-            bool logged = await authService.Accesso(user);
-            if (logged)
+           User userInput = new User(username,password);
+            User user = await authService.Accesso(userInput);
+
+           if (user != null)
             {
-                return Content("fatto");
+                if (user is Azienda azienda)
+                {
+                    AziendaViewModel model = new AziendaViewModel();
+                    model.Username = user.Username;
+                    model.Nome = user.Nome;
+                    Console.WriteLine("viewmodel di azienda");
+                    return View(model); 
+                }
+                else if (user is Dipendente dipendente){
+                    DipendenteViewModel model = new DipendenteViewModel();
+                    model.Username = user.Username;
+                    model.Nome = user.Nome;
+                    Console.WriteLine("viewmodel di dipendente");
+                    return View(model);
+                }
             }
             else
             {
-                return Content("fallito");
+                return Content("login fallito");
             }
+            return View();
         }
     }
 }

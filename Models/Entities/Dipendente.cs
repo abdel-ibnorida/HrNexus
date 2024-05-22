@@ -12,7 +12,7 @@ namespace HrNexus.Models.Entities
         
         public int IdDipendente { get; set; }
         public int IdAzienda { get; set; }
-        public string Nome { get; set; }
+        
         public string Cognome { get; set; }
         public string Valutazione { get; set; }
         public DateTime DataNascita { get; set; }

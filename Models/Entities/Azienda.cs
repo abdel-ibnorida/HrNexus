@@ -12,7 +12,6 @@ namespace HrNexus.Models.Entities
 
         public int IdAzienda { get; set; }
         public string PIva { get; set; }
-        public string Nome { get; set; }
         public DateTime DataNascita { get; set; }
         public string Email { get; set; }
     
