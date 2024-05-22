@@ -11,6 +11,6 @@ namespace HrNexus.Models.ViewModels
     {
         public string Username { get; set; }
         public string Nome { get; set; }
-
+        public int Id { get; set; }
     }
 }

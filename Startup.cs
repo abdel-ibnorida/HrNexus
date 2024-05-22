@@ -28,6 +28,7 @@ namespace HrNexus
         {
             services.AddControllersWithViews();
             services.AddTransient<IAuthService, EfCoreAuthService>();
+             services.AddTransient<IAziendaService, AziendaService>();
             services.AddDbContext<MyDbContext>();
             services.AddDistributedMemoryCache();
             
