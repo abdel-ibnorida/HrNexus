@@ -1,4 +1,57 @@
-<div>
-    gestione assenze
+<link rel="stylesheet" href="~/css/gestioneassenze.css">
+<div class="riquadro">
+  <h2>Richieste di Permesso e Ferie</h2>
+  <ul id="richieste">
+    <!-- Qui verranno aggiunte dinamicamente le richieste -->
+  </ul>
 </div>
+<div class="riquadro">
+  <h2>Gestione Giorni Disponibili</h2>
+  <form id="gestione-giorni">
+    <label for="ferie">Giorni Ferie Disponibili:</label>
+    <input type="number" id="ferie" name="ferie"><br><br>
+    <label for="permessi">Giorni Permessi Disponibili:</label>
+    <input type="number" id="permessi" name="permessi"><br><br>
+    <input type="submit" value="Salva">
+  </form>
+</div>
+
+<script>
+  // Array di esempio con le richieste
+  const richieste = [
+    { id: 1, tipo: 'Ferie', giorni: 5 },
+    { id: 2, tipo: 'Permesso', giorni: 1 }
+  ];
+
+  // Funzione per aggiungere le richieste al riquadro delle richieste
+  function aggiornaRichieste() {
+    const richiesteList = document.getElementById('richieste');
+    richiesteList.innerHTML = '';
+    richieste.forEach(richiesta => {
+      const listItem = document.createElement('li');
+      listItem.textContent = `ID ${richiesta.id}: ${richiesta.tipo} (${richiesta.giorni} giorni)`;
+      const btnAccetta = document.createElement('button');
+      btnAccetta.textContent = 'Accetta';
+      btnAccetta.className = 'btn btn-accetta';
+      const btnRifiuta = document.createElement('button');
+      btnRifiuta.textContent = 'Rifiuta';
+      btnRifiuta.className = 'btn btn-rifiuta';
+      listItem.appendChild(btnAccetta);
+      listItem.appendChild(btnRifiuta);
+      richiesteList.appendChild(listItem);
+    });
+  }
+
+  // Funzione per gestire il submit del form per la gestione dei giorni disponibili
+  document.getElementById('gestione-giorni').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const ferie = parseInt(document.getElementById('ferie').value);
+    const permessi = parseInt(document.getElementById('permessi').value);
+    // Qui puoi inserire la logica per salvare i giorni disponibili
+    alert(`Giorni Ferie: ${ferie}, Giorni Permessi: ${permessi} - Salvato con successo!`);
+  });
+
+  // Aggiornamento iniziale delle richieste
+  aggiornaRichieste();
+</script>
 

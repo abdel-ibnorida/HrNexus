@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="~/css/calendariolavoratori.css">
- <div class="search-container">
+<div class="search-container">
     <input type="text" id="search" placeholder="Cerca dipendente...">
     <button id="search-button">Cerca</button>
 </div>
@@ -21,74 +21,143 @@
         <button id="save">Salva</button>
     </div>
 </div>
+<div class="alert-table-container">
+    <table class="alert-table">
+        <thead>
+            <tr>
+                <th>Titolo</th>
+                <th>Azione</th>
+            </tr>
+        </thead>
+        <tbody id="alert-table-body">
+            <!-- Qui verranno inseriti dinamicamente gli avvisi -->
+        </tbody>
+    </table>
+</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const calendar = document.getElementById('calendar');
-            const modal = document.getElementById('modal');
-            const close = document.getElementById('close');
-            const saveButton = document.getElementById('save');
-            const modalDate = document.getElementById('modal-date');
-            const appointment = document.getElementById('appointment');
-            const prevMonth = document.getElementById('prev-month');
-            const nextMonth = document.getElementById('next-month');
-            const currentMonth = document.getElementById('current-month');
-            let selectedDate;
-            let currentYear = new Date().getFullYear();
-            let currentMonthIndex = new Date().getMonth();
+<script>
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
-            function updateCalendar() {
-                calendar.innerHTML = '';
-                const daysInMonth = new Date(currentYear, currentMonthIndex + 1, 0).getDate();
-                for (let day = 1; day <= daysInMonth; day++) {
-                    const dayElement = document.createElement('div');
-                    dayElement.textContent = day;
-                    dayElement.classList.add('day');
-                    dayElement.addEventListener('click', function() {
-                        selectedDate = `${day}/${currentMonthIndex + 1}/${currentYear}`;
-                        modalDate.textContent = `Impegno del giorno ${selectedDate}`;
-                        appointment.value = localStorage.getItem(`appointment-${selectedDate}`) || '';
-                        modal.style.display = 'flex';
-                    });
-                    calendar.appendChild(dayElement);
-                }
-                currentMonth.textContent = new Date(currentYear, currentMonthIndex).toLocaleString('default', { month: 'long', year: 'numeric' });
+    function updateCalendar() {
+        calendar.innerHTML = '';
+        const daysInMonth = new Date(currentYear, currentMonthIndex + 1, 0).getDate();
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayElement = document.createElement('div');
+            dayElement.textContent = day;
+            dayElement.classList.add('day');
+            dayElement.addEventListener('click', function() {
+                selectedDate = `${day}/${currentMonthIndex + 1}/${currentYear}`;
+                modalDate.textContent = `Impegno del giorno ${selectedDate}`;
+                appointment.value = localStorage.getItem(`appointment-${selectedDate}`) || '';
+                modal.style.display = 'flex';
+            });
+            calendar.appendChild(dayElement);
+        }
+        const monthName = new Date(currentYear, currentMonthIndex).toLocaleString('default', { month: 'long', year: 'numeric' });
+        currentMonth.textContent = capitalizeFirstLetter(monthName);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const calendar = document.getElementById('calendar');
+        const modal = document.getElementById('modal');
+        const close = document.getElementById('close');
+        const saveButton = document.getElementById('save');
+        const modalDate = document.getElementById('modal-date');
+        const appointment = document.getElementById('appointment');
+        const prevMonth = document.getElementById('prev-month');
+        const nextMonth = document.getElementById('next-month');
+        const currentMonth = document.getElementById('current-month');
+        let selectedDate;
+        let currentYear = new Date().getFullYear();
+        let currentMonthIndex = new Date().getMonth();
+
+        function updateCalendar() {
+            calendar.innerHTML = '';
+            const daysInMonth = new Date(currentYear, currentMonthIndex + 1, 0).getDate();
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.textContent = day;
+                dayElement.classList.add('day');
+                dayElement.addEventListener('click', function() {
+                    selectedDate = `${day}/${currentMonthIndex + 1}/${currentYear}`;
+                    modalDate.textContent = `Impegno del giorno ${selectedDate}`;
+                    appointment.value = localStorage.getItem(`appointment-${selectedDate}`) || '';
+                    modal.style.display = 'flex';
+                });
+                calendar.appendChild(dayElement);
             }
+            const monthName = new Date(currentYear, currentMonthIndex).toLocaleString('default', { month: 'long', year: 'numeric' });
+            currentMonth.textContent = capitalizeFirstLetter(monthName);
+        }
 
-            close.addEventListener('click', function() {
+        close.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target == modal) {
                 modal.style.display = 'none';
-            });
+            }
+        });
 
-            window.addEventListener('click', function(event) {
-                if (event.target == modal) {
-                    modal.style.display = 'none';
-                }
-            });
+        saveButton.addEventListener('click', function() {
+            localStorage.setItem(`appointment-${selectedDate}`, appointment.value);
+            alert('Impegno salvato!');
+            modal.style.display = 'none';
+        });
 
-            saveButton.addEventListener('click', function() {
-                localStorage.setItem(`appointment-${selectedDate}`, appointment.value);
-                alert('Impegno salvato!');
-                modal.style.display = 'none';
-            });
-
-            prevMonth.addEventListener('click', function() {
-                currentMonthIndex--;
-                if (currentMonthIndex < 0) {
-                    currentMonthIndex = 11;
-                    currentYear--;
-                }
-                updateCalendar();
-            });
-
-            nextMonth.addEventListener('click', function() {
-                currentMonthIndex++;
-                if (currentMonthIndex > 11) {
-                    currentMonthIndex = 0;
-                    currentYear++;
-                }
-                updateCalendar();
-            });
-
+        prevMonth.addEventListener('click', function() {
+            currentMonthIndex--;
+            if (currentMonthIndex < 0) {
+                currentMonthIndex = 11;
+                currentYear--;
+            }
             updateCalendar();
         });
-    </script>
+
+        nextMonth.addEventListener('click', function() {
+            currentMonthIndex++;
+            if (currentMonthIndex > 11) {
+                currentMonthIndex = 0;
+                currentYear++;
+            }
+            updateCalendar();
+        });
+
+        updateCalendar();
+    });
+</script>
+<script> document.addEventListener('DOMContentLoaded', function() {
+        const alertTableBody = document.getElementById('alert-table-body');
+
+        function addAlertRow(title) {
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td>${title}</td>
+                <td>
+                    <button class="open-alert">Apri</button>
+                    <button class="close-alert">Elaborazione</button>
+                </td>
+            `;
+            alertTableBody.appendChild(newRow);
+
+            // Associa eventi ai pulsanti appena aggiunti
+            newRow.querySelector('.open-alert').addEventListener('click', function() {
+                const alertContent = title;
+                modalDate.textContent = `Contenuto dell'avviso "${alertContent}"`; // Aggiorna il testo del modal
+                modal.style.display = 'flex'; // Visualizza il modal
+            });
+
+            newRow.querySelector('.close-alert').addEventListener('click', function() {
+                showProcessingNotification(); // Simula elaborazione
+            });
+        }
+
+        function showProcessingNotification() {
+            alert("Elaborazione in corso..."); // Simula elaborazione
+        }
+
+        addAlertRow('Titolo dell\'avviso');
+    });</script>
