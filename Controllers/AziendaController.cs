@@ -28,7 +28,7 @@ namespace HrNexus.Controllers
 
         public async Task<IActionResult> ElencoLavoratori()
         {
-            int IdAzienda = 1; //recuperare l'id dell'azienda loggata
+            int IdAzienda = Convert.ToInt32(HttpContext.Session.GetString("Id")); //recuperare l'id dell'azienda loggata
             AziendaViewModel azienda = await aziendaService.ElencoLavoratoriById(IdAzienda);
 
             return View(azienda);

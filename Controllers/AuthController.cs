@@ -37,21 +37,26 @@ namespace HrNexus.Controllers
                 if (user is Azienda azienda)
                 {
                     AziendaViewModel model = new AziendaViewModel();
-                    model.Username = user.Username;
-                    model.Nome = user.Nome;
-                    accessor.HttpContext.Session.SetString("Username", user.Username);
-                    accessor.HttpContext.Session.SetString("Nome", user.Nome);
+                    model.Username = azienda.Username;
+                    model.Nome = azienda.Nome;
+                    model.IdAzienda = azienda.IdAzienda;
+                    accessor.HttpContext.Session.SetString("Username", azienda.Username);
+                    accessor.HttpContext.Session.SetString("Nome", azienda.Nome);
                     accessor.HttpContext.Session.SetString("TipoUtente", "azienda");
+                    accessor.HttpContext.Session.SetString("Id", azienda.IdAzienda.ToString());
+
                     return View(model);
                 }
                 else if (user is Dipendente dipendente)
                 {
                     DipendenteViewModel model = new DipendenteViewModel();
-                    model.Username = user.Username;
-                    model.Nome = user.Nome;
-                    accessor.HttpContext.Session.SetString("Username", user.Username);
-                    accessor.HttpContext.Session.SetString("Nome", user.Nome);
+                    model.Username = dipendente.Username;
+                    model.Nome = dipendente.Nome;
+                    model.IdDipendente = dipendente.IdDipendente;
+                    accessor.HttpContext.Session.SetString("Username", dipendente.Username);
+                    accessor.HttpContext.Session.SetString("Nome", dipendente.Nome);
                     accessor.HttpContext.Session.SetString("TipoUtente", "dipendente");
+                    accessor.HttpContext.Session.SetString("Id", dipendente.IdDipendente.ToString());
                     return View(model);
                 }
             }
