@@ -13,11 +13,20 @@ namespace HrNexus.Controllers
 {
     public class DipendenteController : Controller
     {
-       
+
         public IActionResult Index()
         {
             return View();
         }
-      
+        public IActionResult CalendarioPersonale()
+        {
+            return View();
         }
+         public IActionResult GestioneAssenze()
+        {
+            return View();
+        }
+
+
+    }
 }
