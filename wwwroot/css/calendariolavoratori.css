@@ -35,22 +35,22 @@
     color: #000;
 }
 
-/* Contenitore del calendario */
+
 .calendar-container {
     background-color: #ffffff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     
     padding: 20px;
-    max-width: 600px; /* Aumenta la larghezza massima */
+    max-width: 600px;
     width: 100%;
-    margin: 0 auto; /* Centra il contenitore del calendario */
+    margin: 0 auto; 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-/* Selettore del mese */
+
 .month-selector {
     display: flex;
     align-items: center;
@@ -82,7 +82,7 @@
     color: #333;
 }
 
-/* Calendario */
+
 .calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -106,7 +106,7 @@
     transform: scale(1.05);
 }
 
-/* Modale */
+
 .modal {
     display: none;
     position: fixed;
@@ -231,19 +231,19 @@
     background-color: rgb(218, 152, 11);
 }
 .open-alert {
-    background-color: #4CAF50; /* Colore di sfondo */
-    border: none; /* Rimuove il bordo */
-    color: white; /* Colore del testo */
-    padding: 8px 16px; /* Spaziatura interna */
-    text-align: center; /* Allineamento del testo */
-    text-decoration: none; /* Rimuove il sottolineato */
-    display: inline-block; /* Mostra come blocco */
-    font-size: 14px; /* Dimensione del carattere */
-    margin: 4px 2px; /* Spaziatura esterna */
-    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
-    border-radius: 4px; /* Bordo arrotondato */
+    background-color: #4CAF50; 
+    border: none; 
+    color: white; 
+    padding: 8px 16px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 14px; 
+    margin: 4px 2px; 
+    cursor: pointer; 
+    border-radius: 4px;
 }
 
 .open-alert:hover {
-    background-color: #45a049; /* Cambia colore al passaggio del mouse */
+    background-color: #45a049; 
 }
