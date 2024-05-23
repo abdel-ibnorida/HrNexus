@@ -1,90 +1,65 @@
 <link rel="stylesheet" href="~/css/valutazione.css">
-<div class="evaluation-form">
-    <h2>Scheda di Valutazione del Dipendente</h2>
-    <div class="form-group">
-        <label for="employee-name">Nome Dipendente</label>
-        <input type="text" id="employee-name" placeholder="Nome e Cognome">
+
+<div class="search-container">
+        <input type="text" id="search" placeholder="Cerca dipendente...">
+        <button id="search-button">Cerca</button>
     </div>
-    <div class="form-group">
-        <label for="employee-id">ID Dipendente</label>
-        <input type="text" id="employee-id" placeholder="ID">
-    </div>
-    <div class="form-group">
-        <label for="department">Dipartimento</label>
-        <input type="text" id="department" placeholder="Dipartimento">
-    </div>
-    <div class="form-group">
-        <label for="evaluation-period">Periodo di Valutazione</label>
-        <input type="text" id="evaluation-period" placeholder="MM/AAAA - MM/AAAA">
-    </div>
-    
-    <div class="form-group">
-        <label>Valutazione delle Prestazioni</label>
-        <div class="rating">
-            <label>Qualità del Lavoro:</label>
-            <input type="radio" name="work-quality" value="1"> 1
-            <input type="radio" name="work-quality" value="2"> 2
-            <input type="radio" name="work-quality" value="3"> 3
-            <input type="radio" name="work-quality" value="4"> 4
-            <input type="radio" name="work-quality" value="5"> 5
+<div class="evaluation-form-container">
+    <div class="evaluation-form">
+        <h2>Scheda di Valutazione</h2>
+        <div class="form-group">
+            <label for="employee-name">Nome Dipendente</label>
+            <input type="text" id="employee-name" placeholder="Nome e Cognome">
         </div>
-        <div class="rating">
-            <label>Puntualità:</label>
-            <input type="radio" name="punctuality" value="1"> 1
-            <input type="radio" name="punctuality" value="2"> 2
-            <input type="radio" name="punctuality" value="3"> 3
-            <input type="radio" name="punctuality" value="4"> 4
-            <input type="radio" name="punctuality" value="5"> 5
+        <div class="form-group">
+            <label for="evaluation-period">Periodo di Valutazione</label>
+            <input type="text" id="evaluation-period" placeholder="MM/AAAA - MM/AAAA">
         </div>
-        <div class="rating">
-            <label>Collaborazione:</label>
-            <input type="radio" name="teamwork" value="1"> 1
-            <input type="radio" name="teamwork" value="2"> 2
-            <input type="radio" name="teamwork" value="3"> 3
-            <input type="radio" name="teamwork" value="4"> 4
-            <input type="radio" name="teamwork" value="5"> 5
+        
+        <div class="form-group">
+            <label>Valutazione delle Prestazioni</label>
+            <div class="rating">
+                <label>Qualità del Lavoro:</label>
+                <input type="radio" name="work-quality" value="1"> 1
+                <input type="radio" name="work-quality" value="2"> 2
+                <input type="radio" name="work-quality" value="3"> 3
+                <input type="radio" name="work-quality" value="4"> 4
+                <input type="radio" name="work-quality" value="5"> 5
+            </div>
+            <div class="rating">
+                <label>Collaborazione:</label>
+                <input type="radio" name="teamwork" value="1"> 1
+                <input type="radio" name="teamwork" value="2"> 2
+                <input type="radio" name="teamwork" value="3"> 3
+                <input type="radio" name="teamwork" value="4"> 4
+                <input type="radio" name="teamwork" value="5"> 5
+            </div>
         </div>
-        <div class="rating">
-            <label>Iniziativa:</label>
-            <input type="radio" name="initiative" value="1"> 1
-            <input type="radio" name="initiative" value="2"> 2
-            <input type="radio" name="initiative" value="3"> 3
-            <input type="radio" name="initiative" value="4"> 4
-            <input type="radio" name="initiative" value="5"> 5
+        
+        <div class="form-group">
+            <label for="comments">Commenti</label>
+            <textarea id="comments" placeholder="Inserisci commenti qui..."></textarea>
         </div>
-    </div>
-    
-    <div class="form-group">
-        <label for="comments">Commenti</label>
-        <textarea id="comments" placeholder="Inserisci commenti qui..."></textarea>
-    </div>
-    
-    <div class="form-group">
-        <label for="evaluator-name">Nome del Valutatore</label>
-        <input type="text" id="evaluator-name" placeholder="Nome e Cognome">
-    </div>
-    
-    <div class="form-group">
-        <label for="evaluation-date">Data di Valutazione</label>
-        <input type="date" id="evaluation-date">
-    </div>
-    
-    <div class="form-actions">
-        <button onclick="saveEvaluation()">Salva</button>
+        
+        <div class="form-group">
+            <label for="evaluator-name">Nome del Valutatore</label>
+            <input type="text" id="evaluator-name" placeholder="Nome e Cognome">
+        </div>
+        
+        <div class="form-actions">
+            <button onclick="saveEvaluation()">Salva</button>
+        </div>
     </div>
 </div>
 
 <script>
     function saveEvaluation() {
         var employeeName = document.getElementById('employee-name').value;
-        var employeeId = document.getElementById('employee-id').value;
-        var department = document.getElementById('department').value;
         var evaluationPeriod = document.getElementById('evaluation-period').value;
         var comments = document.getElementById('comments').value;
         var evaluatorName = document.getElementById('evaluator-name').value;
-        var evaluationDate = document.getElementById('evaluation-date').value;
 
-        if (!employeeName || !employeeId || !department || !evaluationPeriod || !evaluatorName || !evaluationDate) {
+        if (!employeeName || !evaluationPeriod || !evaluatorName) {
             alert('Tutti i campi sono obbligatori.');
             return;
         }

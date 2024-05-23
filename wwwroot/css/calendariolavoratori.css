@@ -11,26 +11,35 @@
     border-radius: 5px;
     font-size: 16px;
     margin-right: 10px;
+    transition: border-color 0.3s;
+}
+
+#search:focus {
+    border-color: #ffffff;
+    outline: none;
 }
 
 #search-button {
-    background-color: #546b83;
+    background-color: #141313;
     border: none;
     color: #fff;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s;
 }
 
 #search-button:hover {
-    background-color: #84a4ac;
+    background-color: rgb(255, 255, 255);
+    color: #000;
 }
 
+/* Contenitore del calendario */
 .calendar-container {
-    background-color: #79abb8;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    
     padding: 20px;
     max-width: 600px; /* Aumenta la larghezza massima */
     width: 100%;
@@ -41,7 +50,7 @@
     justify-content: center;
 }
 
-
+/* Selettore del mese */
 .month-selector {
     display: flex;
     align-items: center;
@@ -51,17 +60,20 @@
 }
 
 .month-selector button {
-    background-color: #546b83;
+    background-color: #000000;
     border: none;
     color: #fff;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s;
 }
 
 .month-selector button:hover {
-    background-color: #84a4ac;
+    background-color: #f8f8f8;
+    color: #000;
+    
 }
 
 .month-selector #current-month {
@@ -70,6 +82,7 @@
     color: #333;
 }
 
+/* Calendario */
 .calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -83,15 +96,17 @@
     cursor: pointer;
     border: 1px solid #ddd;
     border-radius: 5px;
-    background-color: #84a4ac;
-    transition: background-color 0.3s;
+    background-color: #f7f9fa;
+    transition: background-color 0.3s, transform 0.3s;
     box-sizing: border-box;
 }
 
 .calendar .day:hover {
     background-color: #e9e9e9;
+    transform: scale(1.05);
 }
 
+/* Modale */
 .modal {
     display: none;
     position: fixed;
@@ -111,11 +126,12 @@
     background-color: #fff;
     margin: auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid #ccc;
     width: 80%;
     max-width: 500px;
     border-radius: 10px;
     position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .close {
@@ -126,6 +142,7 @@
     position: absolute;
     top: 10px;
     right: 10px;
+    transition: color 0.3s;
 }
 
 .close:hover,
@@ -147,10 +164,16 @@
     border-radius: 5px;
     resize: none;
     font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+#appointment:focus {
+    border-color: #546b83;
+    outline: none;
 }
 
 #save {
-    background-color: #84a4ac;
+    background-color: #000000;
     border: none;
     color: #fff;
     padding: 10px 20px;
@@ -160,8 +183,67 @@
     margin-top: 10px;
     display: block;
     width: 100%;
+    transition: background-color 0.3s;
 }
 
+
 #save:hover {
-    background-color: #5fac70;
+    background-color: #91bfca;
+}
+.alert-table-container {
+    margin-top: 20px;
+}
+
+.alert-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+}
+
+.alert-table th, .alert-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.alert-table th {
+    background-color: #f2f2f2;
+}
+
+.alert-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.alert-table tbody tr:hover {
+    background-color: #ddd;
+}
+
+.alert-table .close-alert {
+    background-color: rgb(218, 152, 11);
+    color: white;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.alert-table .close-alert:hover {
+    background-color: rgb(218, 152, 11);
+}
+.open-alert {
+    background-color: #4CAF50; /* Colore di sfondo */
+    border: none; /* Rimuove il bordo */
+    color: white; /* Colore del testo */
+    padding: 8px 16px; /* Spaziatura interna */
+    text-align: center; /* Allineamento del testo */
+    text-decoration: none; /* Rimuove il sottolineato */
+    display: inline-block; /* Mostra come blocco */
+    font-size: 14px; /* Dimensione del carattere */
+    margin: 4px 2px; /* Spaziatura esterna */
+    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+    border-radius: 4px; /* Bordo arrotondato */
+}
+
+.open-alert:hover {
+    background-color: #45a049; /* Cambia colore al passaggio del mouse */
 }
