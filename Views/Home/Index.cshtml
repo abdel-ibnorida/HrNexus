@@ -1,21 +1,32 @@
-
-
-
-    
-
- <link rel="stylesheet" href="~/css/home.css">
-  <div class="container">
-        <span class="company-name">Benvenuti in Hrnexus Management</span></div>
-        <div class= "testo"><p>Siamo un'azienda nata nei primi anni del 2000,</p>
+@model UserViewModel
+@inject IHttpContextAccessor Accessor
+@if (Model is AziendaViewModel || @Accessor.HttpContext.Session.GetString("TipoUtente") == "azienda" ){
+    <div>
+        benevenuto azienda 
+    </div>
+}
+else if(Model is DipendenteViewModel || @Accessor.HttpContext.Session.GetString("TipoUtente") == "dipendente")
+{
+    <div>
+        benevenuto dipendnete 
+    </div>
+}
+else{
+    <link rel="stylesheet" href="~/css/home.css">
+    <div class="container">
+        <span class="company-name">Benvenuti in Hrnexus Management</span>
+    </div>
+    <div class= "testo"><p>Siamo un'azienda nata nei primi anni del 2000,</p>
         <p>che cerca di offrire ai propri dipendenti servizi di qualità. 
         </p>
         <p>La nostra azienda si occupa del gestionale per dipendenti per far sì</p>
         <p>che il personale abbia la facilità di svolgere e comunicare qualsiasi informazione in modo diretto all'azienda,</p>
-        <p>senza passare per pratiche complesse.</p></div>
-       <div class="login-link-container">
+        <p>senza passare per pratiche complesse.</p>
+    </div>
+    <div class="login-link-container">
     <a class="login-link" asp-controller="Auth" asp-action="Index">LOGIN</a>
-</div>
-
+    </div>
+}
 
 
 

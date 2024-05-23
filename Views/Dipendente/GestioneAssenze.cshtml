@@ -1,0 +1,76 @@
+<link rel="stylesheet" href="~/css/gestionepermessipersonale.css">
+   <div class="container">
+        <h1>Gestionale Permessi e Ferie</h1>
+        
+        <div class="form-container">
+            <h2>Richiedi Permesso/Ferie/Malattia</h2>
+            <form id="requestForm">
+                <div class="form-group">
+                    <label for="type">Tipo di Richiesta:</label>
+                    <select id="type" name="type" required>
+                        <option value="permesso">Permesso</option>
+                        <option value="ferie">Ferie</option>
+                        <option value="malattia">Malattia</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="startDate">Data Inizio:</label>
+                    <input type="date" id="startDate" name="startDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="endDate">Data Fine:</label>
+                    <input type="date" id="endDate" name="endDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Note:</label>
+                    <textarea id="notes" name="notes"></textarea>
+                </div>
+                <button type="submit">Invia Richiesta</button>
+            </form>
+        </div>
+
+        <div class="requests-container">
+            <h2>Le tue Richieste</h2>
+            <ul id="requestsList">
+               
+            </ul>
+        </div>
+    </div>
+    <script>
+        document.getElementById('requestForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const type = document.getElementById('type').value;
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    const notes = document.getElementById('notes').value;
+    
+    const request = {
+        type: type,
+        startDate: startDate,
+        endDate: endDate,
+        notes: notes
+    };
+    
+    addRequestToList(request);
+    clearForm();
+});
+
+function addRequestToList(request) {
+    const requestsList = document.getElementById('requestsList');
+    
+    const listItem = document.createElement('li');
+    listItem.innerHTML = `
+        <strong>Tipo:</strong> ${request.type}<br>
+        <strong>Data Inizio:</strong> ${request.startDate}<br>
+        <strong>Data Fine:</strong> ${request.endDate}<br>
+        <strong>Note:</strong> ${request.notes}
+    `;
+    
+    requestsList.appendChild(listItem);
+}
+
+function clearForm() {
+    document.getElementById('requestForm').reset();
+}
+    </script>

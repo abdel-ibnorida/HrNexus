@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using HrNexus.Models.Services.Application;
 using HrNexus.Models.Entities;
@@ -15,35 +16,47 @@ namespace HrNexus.Controllers
     public class AuthController : Controller
     {
         private readonly IAuthService authService;
-        public AuthController(IAuthService authService)
+        IHttpContextAccessor accessor;
+        public AuthController(IAuthService authService, IHttpContextAccessor accessor)
         {
             this.authService = authService;
+            this.accessor = accessor;
         }
         public IActionResult Index()
         {
             return View();
         }
         [HttpGet]
-        public async Task<IActionResult> Login(string username,string password )
+        public async Task<IActionResult> Login(string username, string password)
         {
-           User userInput = new User(username,password);
+            User userInput = new User(username, password);
             User user = await authService.Accesso(userInput);
 
-           if (user != null)
+            if (user != null)
             {
                 if (user is Azienda azienda)
                 {
                     AziendaViewModel model = new AziendaViewModel();
-                    model.Username = user.Username;
-                    model.Nome = user.Nome;
-                    Console.WriteLine("viewmodel di azienda");
-                    return View(model); 
+                    model.Username = azienda.Username;
+                    model.Nome = azienda.Nome;
+                    model.IdAzienda = azienda.IdAzienda;
+                    accessor.HttpContext.Session.SetString("Username", azienda.Username);
+                    accessor.HttpContext.Session.SetString("Nome", azienda.Nome);
+                    accessor.HttpContext.Session.SetString("TipoUtente", "azienda");
+                    accessor.HttpContext.Session.SetString("Id", azienda.IdAzienda.ToString());
+
+                    return View(model);
                 }
-                else if (user is Dipendente dipendente){
+                else if (user is Dipendente dipendente)
+                {
                     DipendenteViewModel model = new DipendenteViewModel();
-                    model.Username = user.Username;
-                    model.Nome = user.Nome;
-                    Console.WriteLine("viewmodel di dipendente");
+                    model.Username = dipendente.Username;
+                    model.Nome = dipendente.Nome;
+                    model.IdDipendente = dipendente.IdDipendente;
+                    accessor.HttpContext.Session.SetString("Username", dipendente.Username);
+                    accessor.HttpContext.Session.SetString("Nome", dipendente.Nome);
+                    accessor.HttpContext.Session.SetString("TipoUtente", "dipendente");
+                    accessor.HttpContext.Session.SetString("Id", dipendente.IdDipendente.ToString());
                     return View(model);
                 }
             }

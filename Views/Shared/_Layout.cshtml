@@ -1,5 +1,6 @@
 @model UserViewModel
-@if (Model is AziendaViewModel)
+@inject IHttpContextAccessor Accessor
+@if (Model is AziendaViewModel || @Accessor.HttpContext.Session.GetString("TipoUtente") == "azienda" )
 {
     <!DOCTYPE html>
     <html lang="it">
@@ -10,8 +11,7 @@
         <title>@ViewData["Title"]</title>
         <link rel="stylesheet" href="~/css/style.css">
     </head>
-
-    <body>
+<body>
         <div class="topnav">
             <a asp-action="ElencoLavoratori" asp-controller="Azienda">Elenco
                 <br>
@@ -45,7 +45,7 @@
     </html>
 
 }
-else if (Model is DipendenteViewModel)
+else if (Model is DipendenteViewModel || @Accessor.HttpContext.Session.GetString("TipoUtente") == "dipendente" )
 {
     <!DOCTYPE html>
     <html lang="it">
