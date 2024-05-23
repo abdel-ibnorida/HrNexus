@@ -8,27 +8,35 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using HrNexus.Models.Services.Application;
 using HrNexus.Models.Entities;
+using HrNexus.Models.ViewModels;
 
 
 namespace HrNexus.Controllers
 {
     public class AziendaController : Controller
     {
-       
+        private readonly IAziendaService aziendaService;
+        public AziendaController(IAziendaService aziendaService)
+        {
+            this.aziendaService = aziendaService;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult ElencoLavoratori()
-        {   
+        public async Task<IActionResult> ElencoLavoratori()
+        {
+            int IdAzienda = 1; //recuperare l'id dell'azienda loggata
+            AziendaViewModel azienda = await aziendaService.ElencoLavoratoriById(IdAzienda);
 
-            return View();
+            return View(azienda);
+
         }
         public IActionResult CalendarioLavoratori()
         {
-            string user = HttpContext.Session.GetString("Username");
-            Console.WriteLine(user);
+
             return View();
         }
         public IActionResult GestioneAssenze()
