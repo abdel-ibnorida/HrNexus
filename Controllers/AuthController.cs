@@ -40,7 +40,7 @@ namespace HrNexus.Controllers
                     model.Username = azienda.Username;
                     model.Nome = azienda.Nome;
                     model.IdAzienda = azienda.IdAzienda;
-                    accessor.HttpContext.Session.SetString("Username", azienda.Username);
+                    accessor.HttpContext.Session.SetString("Username", azienda.Username); 
                     accessor.HttpContext.Session.SetString("Nome", azienda.Nome);
                     accessor.HttpContext.Session.SetString("TipoUtente", "azienda");
                     accessor.HttpContext.Session.SetString("Id", azienda.IdAzienda.ToString());

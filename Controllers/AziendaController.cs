@@ -36,7 +36,6 @@ namespace HrNexus.Controllers
         }
         public IActionResult CalendarioLavoratori()
         {
-
             return View();
         }
         public IActionResult GestioneAssenze()
