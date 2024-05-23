@@ -1,115 +1,46 @@
  <link rel="stylesheet" href="~/css/calendariopersonale.css">
- 
-
-<div class="calendar-container">
-    <div class="month-selector">
-        <button id="prev-month">&lt;</button>
-        <span id="current-month"></span>
-        <button id="next-month">&gt;</button>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+      <div class="container">
+        <div class="buttons">
+            <button id="checkInBtn">Timbra Entrata</button>
+            <button id="checkOutBtn">Timbra Uscita</button>
+        </div>
+        <div id="calendar"></div>
     </div>
-    <div class="calendar" id="calendar"></div>
-</div>
-
-<div class="modal" id="modal">
-    <div class="modal-content">
-        <span class="close" id="close">&times;</span>
-        <h2 id="modal-date"></h2>
-        <textarea id="appointment" rows="4" cols="50"></textarea>
-        <button id="save">Salva</button>
-    </div>
-</div>
-
-<script>
-    function capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
-    function updateCalendar() {
-        calendar.innerHTML = '';
-        const daysInMonth = new Date(currentYear, currentMonthIndex + 1, 0).getDate();
-        for (let day = 1; day <= daysInMonth; day++) {
-            const dayElement = document.createElement('div');
-            dayElement.textContent = day;
-            dayElement.classList.add('day');
-            dayElement.addEventListener('click', function() {
-                selectedDate = `${day}/${currentMonthIndex + 1}/${currentYear}`;
-                modalDate.textContent = `Impegno del giorno ${selectedDate}`;
-                appointment.value = localStorage.getItem(`appointment-${selectedDate}`) || '';
-                modal.style.display = 'flex';
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                editable: true,
+                events: []
             });
-            calendar.appendChild(dayElement);
-        }
-        const monthName = new Date(currentYear, currentMonthIndex).toLocaleString('default', { month: 'long', year: 'numeric' });
-        currentMonth.textContent = capitalizeFirstLetter(monthName);
-    }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const calendar = document.getElementById('calendar');
-        const modal = document.getElementById('modal');
-        const close = document.getElementById('close');
-        const saveButton = document.getElementById('save');
-        const modalDate = document.getElementById('modal-date');
-        const appointment = document.getElementById('appointment');
-        const prevMonth = document.getElementById('prev-month');
-        const nextMonth = document.getElementById('next-month');
-        const currentMonth = document.getElementById('current-month');
-        let selectedDate;
-        let currentYear = new Date().getFullYear();
-        let currentMonthIndex = new Date().getMonth();
+            document.getElementById('checkInBtn').addEventListener('click', function() {
+                var now = new Date();
+                var checkInEvent = {
+                    title: 'Entrata',
+                    start: now,
+                    allDay: false
+                };
+                $('#calendar').fullCalendar('renderEvent', checkInEvent, true);
+            });
 
-        function updateCalendar() {
-            calendar.innerHTML = '';
-            const daysInMonth = new Date(currentYear, currentMonthIndex + 1, 0).getDate();
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dayElement = document.createElement('div');
-                dayElement.textContent = day;
-                dayElement.classList.add('day');
-                dayElement.addEventListener('click', function() {
-                    selectedDate = `${day}/${currentMonthIndex + 1}/${currentYear}`;
-                    modalDate.textContent = `Impegno del giorno ${selectedDate}`;
-                    appointment.value = localStorage.getItem(`appointment-${selectedDate}`) || '';
-                    modal.style.display = 'flex';
-                });
-                calendar.appendChild(dayElement);
-            }
-            const monthName = new Date(currentYear, currentMonthIndex).toLocaleString('default', { month: 'long', year: 'numeric' });
-            currentMonth.textContent = capitalizeFirstLetter(monthName);
-        }
-
-        close.addEventListener('click', function() {
-            modal.style.display = 'none';
+            document.getElementById('checkOutBtn').addEventListener('click', function() {
+                var now = new Date();
+                var checkOutEvent = {
+                    title: 'Uscita',
+                    start: now,
+                    allDay: false
+                };
+                $('#calendar').fullCalendar('renderEvent', checkOutEvent, true);
+            });
         });
-
-        window.addEventListener('click', function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        });
-
-        saveButton.addEventListener('click', function() {
-            localStorage.setItem(`appointment-${selectedDate}`, appointment.value);
-            alert('Impegno salvato!');
-            modal.style.display = 'none';
-        });
-
-        prevMonth.addEventListener('click', function() {
-            currentMonthIndex--;
-            if (currentMonthIndex < 0) {
-                currentMonthIndex = 11;
-                currentYear--;
-            }
-            updateCalendar();
-        });
-
-        nextMonth.addEventListener('click', function() {
-            currentMonthIndex++;
-            if (currentMonthIndex > 11) {
-                currentMonthIndex = 0;
-                currentYear++;
-            }
-            updateCalendar();
-        });
-
-        updateCalendar();
-    });
-</script>
+    </script> 

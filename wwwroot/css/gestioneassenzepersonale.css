@@ -33,14 +33,16 @@ button {
     display: block;
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #91bfca;
     color: #fff;
     border: none;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #ffffff;
+    color: black;
+  
 }
 
 ul {
@@ -49,7 +51,7 @@ ul {
 }
 
 ul li {
-    background-color: #e9ecef;
+    background-color: #91bfca;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
