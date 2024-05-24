@@ -20,6 +20,7 @@ namespace HrNexus.Models.Entities
         public decimal Stipendio { get; set; }
 
         public virtual Azienda Azienda { get; set; }
+        public virtual ICollection<Programmazione> Programmazioni { get; set; }
         
     }
 }

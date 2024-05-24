@@ -10,5 +10,6 @@ namespace HrNexus.Models.Services.Application
     public interface IAziendaService
     { 
         Task<AziendaViewModel> ElencoLavoratoriById(int id);
+        Task<DipendenteViewModel> ProgrammazioniLavoratoreByNome(string nome, int IdAzienda, int mese, int anno);
     }
 }

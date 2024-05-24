@@ -18,6 +18,7 @@ namespace HrNexus.Models.Entities
 
         public virtual DbSet<Azienda> Aziende { get; set; }
         public virtual DbSet<Dipendente> Dipendenti { get; set; }
+        public virtual DbSet<Programmazione> Programmazioni { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -68,8 +69,25 @@ namespace HrNexus.Models.Entities
                 entity.HasKey(dipendente => dipendente.IdDipendente);
                 //andiamo a settare la relazione n a 1 tra l'entity Dipendente e l'entity Azienda
                 entity.HasOne(dipendente => dipendente.Azienda).WithMany(azienda => azienda.Dipendenti);
+                entity.HasMany(dipendente => dipendente.Programmazioni).WithOne(programmazione => programmazione.Dipendente).HasForeignKey(programmazione => programmazione.IdDipendente);
             });
 
+            modelBuilder.Entity<Programmazione>(entity =>{
+                entity.ToTable("PROGRAMMAZIONI");
+
+                entity.Property(p => p.IdProgrammazione).HasColumnName("ID_PROGRAMMAZIONE");
+                entity.Property(p => p.IdDipendente).HasColumnName("ID_DIPENDENTE");
+                entity.Property(p => p.DataGiorno).HasColumnName("DATA_GIORNO");
+                entity.Property(p => p.InizioTurno).HasColumnName("INIZIO_TURNO");
+                entity.Property(p => p.FineTurno).HasColumnName("FINE_TURNO");
+                entity.Property(p => p.GiornoFerie).HasColumnName("GIORNO_DI_FERIE");
+                entity.Property(p => p.GiornoPermesso).HasColumnName("GIORNO_PERMESSO");
+                entity.Property(p => p.GiornoMalattia).HasColumnName("GIORNO_MALATTIA");
+
+                entity.HasKey(p => p.IdProgrammazione);
+
+                entity.HasOne(p => p.Dipendente).WithMany(d => d.Programmazioni);
+            });
         }
     }
 }
