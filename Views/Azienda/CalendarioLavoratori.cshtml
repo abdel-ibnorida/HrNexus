@@ -1,7 +1,7 @@
 @model DipendenteViewModel
 <link rel="stylesheet" href="~/css/calendariolavoratori.css">
 <div class="search-container">
-    <form asp-action="CalendarioLavoratori" method="post">
+    <form asp-action="CalendarioLavoratori" method="get">
         <input type="text" id="nome" name="nome" placeholder="Cerca dipendente" />
         <input type="hidden" id="annoCorrente" name="annoCorrente" />
         <input type="hidden" id="meseCorrente" name="meseCorrente" />
@@ -11,22 +11,27 @@
 
 @if (Model != null && Model.DipendenteTrovato == true)
 {
+    int meseCorrente = Model.MeseProgrammazione;
+    int annoCorrente = Model.AnnoProgrammazione;
+    string meseTestuale = new DateTime(@Model.AnnoProgrammazione,@Model.MeseProgrammazione , 1).ToString("MMMM");
     <div> 
-        <button> precedente</button>
-        @{
-            string mese = new DateTime(@Model.AnnoProgrammazione,@Model.MeseProgrammazione , 1).ToString("MMMM");
-        }
-        <span>@mese</span> 
-        <span>@Model.AnnoProgrammazione</span> 
-        <button> succesivo</button>
+        <form asp-action="CalendarioLavoratori" method="get">
+            <input type="hidden" name="nome" value="@Model.Nome" />
+            <input type="hidden" name="annoCorrente" value="@Model.AnnoProgrammazione" />
+            <input type="hidden" name="meseCorrente" value="@Model.MeseProgrammazione" />
+            <button type="submit" name="direzione" value="precedente"> precedente</button>    
+            <span>@meseTestuale</span> 
+            <span>@annoCorrente</span> 
+            <button type="submit" name="direzione" value="successivo"> successivo</button>
+        </form>
     </div>
     <div class="calendar">
-@for (int i = 1; i <= DateTime.DaysInMonth(Model.AnnoProgrammazione, Model.MeseProgrammazione); i++)
+    @for (int i = 1; i <= DateTime.DaysInMonth(Model.AnnoProgrammazione, Model.MeseProgrammazione); i++)
     {
         <div class="day">
             @i
             @{
-                ProgrammazioniMensiliViewModel programmazione = Model.Programmazioni.FirstOrDefault(pm => pm.DataGiorno.Day == i);
+                ProgrammazioneViewModel programmazione = Model.Programmazioni.FirstOrDefault(pm => pm.DataGiorno.Day == i);
             }
             @if (programmazione != null)
             {
@@ -36,6 +41,9 @@
             }
         </div>
     }
+    </div>
+    <div>
+        form per inserire o modificare una programmazione 
     </div>
 }
 else if (Model != null && Model.DipendenteTrovato == false)

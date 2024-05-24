@@ -6,7 +6,7 @@ using System;
 namespace HrNexus.Models.ViewModels
 {
 
-    public class ProgrammazioniMensiliViewModel
+    public class ProgrammazioneViewModel
     {
         public int IdProgrammazione { get; set; }
         public int Mese { get; set; }
