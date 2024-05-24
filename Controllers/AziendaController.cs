@@ -34,11 +34,45 @@ namespace HrNexus.Controllers
             return View(azienda);
 
         }
-        public IActionResult CalendarioLavoratori()
+        public IActionResult CalendarioLavoratori(DateTime? selectedDate)
         {
+            var currentDate = selectedDate ?? DateTime.Now;
+            var daysInMonth = DateTime.DaysInMonth(currentDate.Year, currentDate.Month);
+            var firstDayOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
+            var dayOfWeek = (int)firstDayOfMonth.DayOfWeek;
 
+            ViewBag.CurrentDate = currentDate;
+            ViewBag.DaysInMonth = daysInMonth;
+            ViewBag.FirstDayOfMonth = firstDayOfMonth;
+            ViewBag.DayOfWeek = dayOfWeek-1;
             return View();
         }
+        [HttpPost]
+        public IActionResult ChangeMonth(int year, int month, string direction)
+        {
+            DateTime newDate;
+
+            if (direction == "previous")
+            {
+                newDate = new DateTime(year, month, 1).AddMonths(-1);
+            }
+            else
+            {
+                newDate = new DateTime(year, month, 1).AddMonths(1);
+            }
+
+            var daysInMonth = DateTime.DaysInMonth(newDate.Year, newDate.Month);
+            var firstDayOfMonth = new DateTime(newDate.Year, newDate.Month, 1);
+            var dayOfWeek = (int)firstDayOfMonth.DayOfWeek;
+
+            ViewBag.CurrentDate = newDate;
+            ViewBag.DaysInMonth = daysInMonth;
+            ViewBag.FirstDayOfMonth = firstDayOfMonth;
+            ViewBag.DayOfWeek = dayOfWeek-1;
+
+            return View("CalendarioLavoratori");
+        }
+
         public IActionResult GestioneAssenze()
         {
             return View();
