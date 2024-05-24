@@ -30,47 +30,18 @@ namespace HrNexus.Controllers
         {
             int IdAzienda = Convert.ToInt32(HttpContext.Session.GetString("Id")); //recuperare l'id dell'azienda loggata
             AziendaViewModel azienda = await aziendaService.ElencoLavoratoriById(IdAzienda);
-
             return View(azienda);
-
         }
-        public IActionResult CalendarioLavoratori(DateTime? selectedDate)
+        public async Task<IActionResult> CalendarioLavoratori()
         {
-            var currentDate = selectedDate ?? DateTime.Now;
-            var daysInMonth = DateTime.DaysInMonth(currentDate.Year, currentDate.Month);
-            var firstDayOfMonth = new DateTime(currentDate.Year, currentDate.Month, 1);
-            var dayOfWeek = (int)firstDayOfMonth.DayOfWeek;
-
-            ViewBag.CurrentDate = currentDate;
-            ViewBag.DaysInMonth = daysInMonth;
-            ViewBag.FirstDayOfMonth = firstDayOfMonth;
-            ViewBag.DayOfWeek = dayOfWeek-1;
             return View();
         }
         [HttpPost]
-        public IActionResult ChangeMonth(int year, int month, string direction)
+        public async Task<IActionResult> CalendarioLavoratori(string nome, int meseCorrente, int annoCorrente)
         {
-            DateTime newDate;
-
-            if (direction == "previous")
-            {
-                newDate = new DateTime(year, month, 1).AddMonths(-1);
-            }
-            else
-            {
-                newDate = new DateTime(year, month, 1).AddMonths(1);
-            }
-
-            var daysInMonth = DateTime.DaysInMonth(newDate.Year, newDate.Month);
-            var firstDayOfMonth = new DateTime(newDate.Year, newDate.Month, 1);
-            var dayOfWeek = (int)firstDayOfMonth.DayOfWeek;
-
-            ViewBag.CurrentDate = newDate;
-            ViewBag.DaysInMonth = daysInMonth;
-            ViewBag.FirstDayOfMonth = firstDayOfMonth;
-            ViewBag.DayOfWeek = dayOfWeek-1;
-
-            return View("CalendarioLavoratori");
+            int IdAzienda = Convert.ToInt32(HttpContext.Session.GetString("Id")); //recuperare l'id dell'azienda loggata
+            DipendenteViewModel dipendente = await aziendaService.ProgrammazioniLavoratoreByNome(nome,IdAzienda,meseCorrente,annoCorrente);
+            return View(dipendente);
         }
 
         public IActionResult GestioneAssenze()
