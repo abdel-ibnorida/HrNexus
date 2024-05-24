@@ -14,34 +14,38 @@
     var dayOfWeek = (int)firstDayOfMonth.DayOfWeek;
 
     <div class="calendar-container">
-        <div class="month-selector">
-            
-            <span id="current-month">@currentDate.ToString("MMMM yyyy")</span>
-            
-        </div>
-
-        <div id="calendar" class="calendar">
-            @for (int i = 0; i < dayOfWeek; i++)
-            {
-                <div class="day"></div>
-            }
-
-            @for (int day = 1; day <= daysInMonth; day++)
-            {
-                var currentDay = new DateTime(currentDate.Year, currentDate.Month, day);
-                var isSelected = (currentDay.Date == DateTime.Today) ? "selected" : "";
-                <div class="day">
-                    <form asp-action="SelectDate" method="post">
-                        <input type="hidden" name="selectedDate" value="@currentDay.ToString("yyyy-MM-dd")" />
-                        <input type="hidden" name="employeeName" value="" />
-                        <button type="submit" class="@isSelected">@day</button>
-                    </form>
-                </div>
-            }
-        </div>
-
-        <div id="day-details"></div>
+    <div class="month-selector">
+        <form asp-action="ChangeMonth" method="post" class="month-nav">
+            <input type="hidden" name="year" value="@ViewBag.CurrentDate.Year" />
+            <input type="hidden" name="month" value="@ViewBag.CurrentDate.Month" />
+            <button type="submit" name="direction" value="previous">Precedente</button>
+            <span id="current-month">@ViewBag.CurrentDate.ToString("MMMM yyyy")</span>
+            <button type="submit" name="direction" value="next">Successivo</button>
+        </form>
     </div>
+
+    <div id="calendar" class="calendar">
+        @for (int i = 0; i < ViewBag.DayOfWeek; i++)
+        {
+            <div class="day"></div>
+        }
+
+        @for (int day = 1; day <= ViewBag.DaysInMonth; day++)
+        {
+            var currentDay = new DateTime(ViewBag.CurrentDate.Year, ViewBag.CurrentDate.Month, day);
+            var isSelected = (currentDay.Date == DateTime.Today) ? "selected" : "";
+            <div class="day">
+                <form asp-action="SelectDate" method="post">
+                    <input type="hidden" name="selectedDate" value="@currentDay.ToString("yyyy-MM-dd")" />
+                    <input type="hidden" name="employeeName" value="" />
+                    <button type="submit" class="@isSelected">@day</button>
+                </form>
+            </div>
+        }
+    </div>
+
+    <div id="day-details"></div>
+</div>
 }
 else
 {
