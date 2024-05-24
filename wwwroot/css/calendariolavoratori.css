@@ -1,127 +1,117 @@
 .search-container {
     display: flex;
+   
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Stile per la casella di ricerca */
+#search {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  
+    font-size: 16px;
+    width: 200px;
+}
+
+/* Stile per il pulsante di ricerca */
+#search-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.658); /* Imposta il colore del bottone a nero trasparente */
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+/* Effetto al passaggio del mouse sul pulsante di ricerca */
+#search-button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Imposta un effetto di sfondo leggermente grigio al passaggio del mouse */
+    color: black;
+}
+
+/* Stile del calendario */
+.calendar-container {
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Stile del selettore del mese */
+.month-selector {
+    display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
 }
-
-#search {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    margin-right: 10px;
-    transition: border-color 0.3s;
-}
-
-#search:focus {
-    border-color: #ffffff;
-    outline: none;
-}
-
-#search-button {
-    background-color: #141313;
-    border: none;
-    color: #fff;
+.month-nav button {
     padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #91bfca;
+    
+    border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
     transition: background-color 0.3s;
+    margin: 0 10px;
+}
+.month-nav button:hover {
+    background-color: #6299a7;
 }
 
-#search-button:hover {
-    background-color: rgb(255, 255, 255);
-    color: #000;
-}
-
-.container {
-    width: 80%;
+.calendar-container {
+    max-width: 600px;
     margin: 20px auto;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
 
-.buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
+#current-month {
+    font-size: 1.5em;
+    font-weight: bold;
 }
 
-.buttons button {
-    padding: 10px 20px;
-    background-color: #91bfca;
-    color: #fff;
+#prev-month, #next-month {
+    background-color: rgb(133, 221, 224);
+    color: rgb(0, 0, 0);
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.buttons button:hover {
-    background-color: #ffffff;
-    color:black;
-}
-
-#calendar {
-    max-width: 900px;
-    margin: 0 auto;
-}
-.alert-table-container {
-    margin-top: 20px;
-}
-
-.alert-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #ffffff;
-}
-
-.alert-table th, .alert-table td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-.alert-table th {
-    background-color: #f2f2f2;
-}
-
-.alert-table tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-.alert-table tbody tr:hover {
-    background-color: #ddd;
-}
-
-.alert-table .close-alert {
-    background-color: rgb(218, 152, 11);
-    color: white;
-    padding: 6px 10px;
-    border: none;
+    padding: 10px;
     border-radius: 4px;
     cursor: pointer;
 }
 
-.alert-table .close-alert:hover {
-    background-color: rgb(218, 152, 11);
+#prev-month:hover, #next-month:hover {
+    background-color: rgb(93, 189, 192);
+    color: rgb(0, 0, 0);
 }
-.open-alert {
-    background-color: #4CAF50; 
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.day {
+    padding: 15px;
+    background-color: #e9ecef;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
     border: none; 
-    color: white; 
-    padding: 8px 16px; 
-    text-align: center; 
-    text-decoration: none; 
-    display: inline-block; 
-    font-size: 14px; 
-    margin: 4px 2px; 
-    cursor: pointer; 
-    border-radius: 4px;
 }
 
-.open-alert:hover {
-    background-color: #45a049; 
+.day:hover {
+    background-color: #ced4da;
 }
+
+

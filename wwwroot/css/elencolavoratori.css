@@ -18,7 +18,7 @@ th {
 }
 
 tr:hover {
-    background-color: rgb(133, 221, 224);
+    background-color: #91bfca;
 }
 .search-container {
     display: flex;
@@ -34,16 +34,19 @@ tr:hover {
     margin-right: 10px;
 }
 #search-button {
-    background-color: #000000;
-    border: none;
-    color: #fff;
     padding: 10px 20px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.658); /* Imposta il colore del bottone a nero trasparente */
+    color: #fff;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    margin-left: 10px;
 }
+
+/* Effetto al passaggio del mouse sul pulsante di ricerca */
 #search-button:hover {
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.2); /* Imposta un effetto di sfondo leggermente grigio al passaggio del mouse */
     color: black;
 }
 .pagination {
@@ -51,18 +54,19 @@ tr:hover {
     text-align: center;
 }
 .pagination a {
-    color: #ffffff;
+    
     padding: 8px 16px;
     text-decoration: none;
-    border: 1px solid  rgb(133, 221, 224);
     border-radius: 4px;
-    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.658); /* Imposta il colore del bottone a nero trasparente */
+    color: #fff;
 }
 .pagination a:hover {
-    background-color: rgb(133, 221, 224);
-    color: rgb(0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.2); /* Imposta un effetto di sfondo leggermente grigio al passaggio del mouse */
+    color: black;
     border-color: #000000;
 }
+
 .modal {
     display: none;
     position: fixed;
@@ -109,7 +113,7 @@ tr:hover {
 }
 
 .modal-content button {
-    background-color: rgb(133, 221, 224);
+    background-color: #91bfca;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -118,5 +122,5 @@ tr:hover {
 }
 
 .modal-content button:hover {
-    background-color: rgb(133, 221, 224);
+    background-color: #91bfca;
 }
