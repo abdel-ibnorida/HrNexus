@@ -16,7 +16,8 @@ namespace HrNexus.Models.ViewModels
         public bool DipendenteTrovato { get; set; }
         public int MeseProgrammazione { get; set; }
         public int AnnoProgrammazione { get; set; }
-        public ICollection<ProgrammazioniMensiliViewModel> Programmazioni { get; set; }
+        public ProgrammazioneViewModel ProgrammazioneSelezionata { get; set; }
+        public ICollection<ProgrammazioneViewModel> Programmazioni { get; set; }
         public static DipendenteViewModel FromEntity(Dipendente dipendente, int mese, int anno)
         {
             if (dipendente == null)
@@ -30,11 +31,12 @@ namespace HrNexus.Models.ViewModels
             return new DipendenteViewModel
             {
                 IdDipendente = dipendente.IdDipendente,
+                Nome = dipendente.Nome,
                 AnnoProgrammazione = anno,
                 MeseProgrammazione = mese,
                 DipendenteTrovato = true,
                 Programmazioni = dipendente.Programmazioni != null
-                    ? dipendente.Programmazioni.Select(p => new ProgrammazioniMensiliViewModel
+                    ? dipendente.Programmazioni.Select(p => new ProgrammazioneViewModel
                     {
                         IdProgrammazione = p.IdProgrammazione,
                         DataGiorno = p.DataGiorno,
@@ -46,7 +48,7 @@ namespace HrNexus.Models.ViewModels
                         Mese = mese,
                         Anno = anno,
                     }).ToList()
-                    : new List<ProgrammazioniMensiliViewModel>()
+                    : new List<ProgrammazioneViewModel>()
             };
         }
 
