@@ -1,0 +1,16 @@
+@model UserViewModel
+
+<div>
+    @if(Model.Nome != null)
+    {
+        <div>
+            @Model.Nome
+        </div>
+    }
+    else
+    {
+        <div>
+            fallito
+        </div>
+    }
+</div>

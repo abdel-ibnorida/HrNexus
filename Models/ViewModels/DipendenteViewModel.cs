@@ -46,6 +46,8 @@ namespace HrNexus.Models.ViewModels
                         DataGiorno = p.DataGiorno,
                         InizioTurno = p.InizioTurno,
                         FineTurno = p.FineTurno,
+                        TimbraturaInizio = p.TimbraturaInizio,
+                        TimbraturaFine = p.TimbraturaFine,
                         GiornoFerie = p.GiornoFerie,
                         GiornoPermesso = p.GiornoPermesso,
                         GiornoMalattia = p.GiornoMalattia,

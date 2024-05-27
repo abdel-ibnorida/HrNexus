@@ -46,6 +46,7 @@ namespace HrNexus.Models.Services.Application
                 dipendente.Programmazioni = await dbContext.Programmazioni
                 .Where(p => p.IdDipendente == dipendente.IdDipendente && p.DataGiorno.Year == anno && p.DataGiorno.Month == mese)
                 .ToListAsync();
+               
                 return DipendenteViewModel.FromEntity(dipendente, mese, anno);
             }
         }
