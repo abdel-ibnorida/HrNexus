@@ -43,9 +43,22 @@ namespace HrNexus.Models.Services.Application
             }
             else
             {
-                dipendente.Programmazioni = await dbContext.Programmazioni
+                /*dipendente.Programmazioni = await dbContext.Programmazioni
                 .Where(p => p.IdDipendente == dipendente.IdDipendente && p.DataGiorno.Year == anno && p.DataGiorno.Month == mese)
-                .ToListAsync();
+                .ToListAsync();*/
+                dipendente.Programmazioni = await dbContext.Programmazioni
+                    .Where(p => p.IdDipendente == dipendente.IdDipendente && p.DataGiorno.Year == anno && p.DataGiorno.Month == mese)
+                    .Select(p => new Programmazione {
+                        IdProgrammazione = p.IdProgrammazione,
+                        IdDipendente = p.IdDipendente,
+                        DataGiorno = p.DataGiorno,
+                        TimbraturaInizio = p.TimbraturaInizio.HasValue ? p.TimbraturaInizio.Value : DateTime.MinValue,
+                        TimbraturaUscita = p.TimbraturaUscita.HasValue ? p.TimbraturaUscita.Value : DateTime.MinValue,
+                        GiornoFerie = p.GiornoFerie,
+                        GiornoMalattia = p.GiornoMalattia,
+                        GiornoPermesso = p.GiornoPermesso,
+                    })
+                    .ToListAsync();
                 return DipendenteViewModel.FromEntity(dipendente, mese, anno);
             }
         }
@@ -142,7 +155,7 @@ namespace HrNexus.Models.Services.Application
             {
                 if (esitoRichiesta == "accettata")
                 {
-                dipendente.GiorniDiPermesso = dipendente.GiorniDiPermesso - 1;
+                    dipendente.GiorniDiPermesso = dipendente.GiorniDiPermesso - 1;
                     Richiesta richiesta = await dbContext.Richieste
                        .Where(r => r.IdRichiesta == idRichiesta && r.IdDipendente == idDipendente)
                        .FirstOrDefaultAsync();
@@ -171,7 +184,7 @@ namespace HrNexus.Models.Services.Application
                     dbContext.SaveChanges();
                 }
             }
-            else if(tipoRichiesta == "MALATTIA")
+            else if (tipoRichiesta == "MALATTIA")
             {
                 if (esitoRichiesta == "accettata")
                 {
@@ -201,15 +214,16 @@ namespace HrNexus.Models.Services.Application
                         programmazione.GiornoMalattia = true;
                     }
                     dbContext.SaveChanges();
-                }   
+                }
             }
-            else if (tipoRichiesta == "rifiuto"){
-                    Richiesta richiesta = await dbContext.Richieste
-                       .Where(r => r.IdRichiesta == idRichiesta && r.IdDipendente == idDipendente)
-                       .FirstOrDefaultAsync();
-                    richiesta.Archiviato = true;
-                    richiesta.Confermato = false;
-                    dbContext.SaveChanges();
+            else if (tipoRichiesta == "rifiuto")
+            {
+                Richiesta richiesta = await dbContext.Richieste
+                   .Where(r => r.IdRichiesta == idRichiesta && r.IdDipendente == idDipendente)
+                   .FirstOrDefaultAsync();
+                richiesta.Archiviato = true;
+                richiesta.Confermato = false;
+                dbContext.SaveChanges();
             }
             dipendente.Richieste = await dbContext.Richieste
                 .Where(r => r.IdDipendente == dipendente.IdDipendente)

@@ -85,6 +85,8 @@ namespace HrNexus.Models.Entities
                 entity.Property(p => p.DataGiorno).HasColumnName("DATA_GIORNO");
                 entity.Property(p => p.InizioTurno).HasColumnName("INIZIO_TURNO");
                 entity.Property(p => p.FineTurno).HasColumnName("FINE_TURNO");
+                entity.Property(p => p.TimbraturaInizio).HasColumnName("TIMBRATURA_INIZIO");
+                entity.Property(p => p.TimbraturaUscita).HasColumnName("TIMBRATURA_USCITA");
                 entity.Property(p => p.GiornoFerie).HasColumnName("GIORNO_DI_FERIE");
                 entity.Property(p => p.GiornoPermesso).HasColumnName("GIORNO_PERMESSO");
                 entity.Property(p => p.GiornoMalattia).HasColumnName("GIORNO_MALATTIA");
