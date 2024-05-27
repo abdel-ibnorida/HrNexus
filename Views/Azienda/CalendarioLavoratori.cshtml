@@ -1,11 +1,14 @@
 @model DipendenteViewModel
+
 <link rel="stylesheet" href="~/css/calendariolavoratori.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <div class="search-container">
     <form asp-action="CalendarioLavoratori" method="get">
         <input type="text" id="nome" name="nome" placeholder="Cerca dipendente" />
         <input type="hidden" id="annoCorrente" name="annoCorrente" />
         <input type="hidden" id="meseCorrente" name="meseCorrente" />
-        <button type="submit" id="ricarca-button">Cerca</button>
+        <button type="submit" id="ricerca-button">Cerca</button>
     </form>
 </div>
 
@@ -13,49 +16,85 @@
 {
     int meseCorrente = Model.MeseProgrammazione;
     int annoCorrente = Model.AnnoProgrammazione;
-    string meseTestuale = new DateTime(@Model.AnnoProgrammazione,@Model.MeseProgrammazione , 1).ToString("MMMM");
-    <div> 
-        <form asp-action="CalendarioLavoratori" method="get">
-            <input type="hidden" name="nome" value="@Model.Nome" />
-            <input type="hidden" name="annoCorrente" value="@Model.AnnoProgrammazione" />
-            <input type="hidden" name="meseCorrente" value="@Model.MeseProgrammazione" />
-            <button type="submit" name="direzione" value="precedente"> precedente</button>    
-            <span>@meseTestuale</span> 
-            <span>@annoCorrente</span> 
-            <button type="submit" name="direzione" value="successivo"> successivo</button>
+    string meseTestuale = new System.Globalization.CultureInfo("it-IT").TextInfo.ToTitleCase(new DateTime(@Model.AnnoProgrammazione, @Model.MeseProgrammazione, 1).ToString("MMMM"));
+
+    <div class="calendar-container">
+        <div class="mesesuccesoprece">
+            <form asp-action="CalendarioLavoratori" method="get">
+                <input type="hidden" name="nome" value="@Model.Nome" />
+                <input type="hidden" name="annoCorrente" value="@Model.AnnoProgrammazione" />
+                <input type="hidden" name="meseCorrente" value="@Model.MeseProgrammazione" />
+                <button type="submit" name="direzione" value="precedente" class="nav-button">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <span class="month-year">@meseTestuale @annoCorrente</span>
+                <button type="submit" name="direzione" value="successivo" class="nav-button">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </form>
+        </div>
+<div id="impegniModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Aggiungi Impegno</h2>
+        <form id="impegniForm">
+            <input type="hidden" id="giornoSelezionato" name="giornoSelezionato" />
+            <label for="impegno">Impegno:</label>
+            <input type="text" id="impegno" name="impegno" required />
+            <button type="submit">Salva</button>
+            <button type="submit">Modifica</button>
         </form>
     </div>
-    <div class="calendar">
-    @for (int i = 1; i <= DateTime.DaysInMonth(Model.AnnoProgrammazione, Model.MeseProgrammazione); i++)
-    {
-        <div class="day">
-            @i
+</div>
+
+        <div class="calendar">
+            <div class="day-name">Lun</div>
+            <div class="day-name">Mar</div>
+            <div class="day-name">Mer</div>
+            <div class="day-name">Gio</div>
+            <div class="day-name">Ven</div>
+            <div class="day-name">Sab</div>
+            <div class="day-name">Dom</div>
+
             @{
-                ProgrammazioneViewModel programmazione = Model.Programmazioni.FirstOrDefault(pm => pm.DataGiorno.Day == i);
-            }
-            @if (programmazione != null)
-            {
-                <div class="programmazione">
-                    esiste una programmazione
-                </div>
+                DateTime firstDayOfMonth = new DateTime(Model.AnnoProgrammazione, Model.MeseProgrammazione, 1);
+                int startDay = (int)firstDayOfMonth.DayOfWeek;
+                startDay = (startDay == 0) ? 6 : startDay - 1; // Spostare la domenica alla fine
+
+                for (int i = 0; i < startDay; i++)
+                {
+                    <div class="day empty"></div>
+                }
+
+                for (int i = 1; i <= DateTime.DaysInMonth(Model.AnnoProgrammazione, Model.MeseProgrammazione); i++)
+                {
+                    <div class="day">
+                        @i
+                        @{
+                            ProgrammazioneViewModel programmazione = Model.Programmazioni.FirstOrDefault(pm => pm.DataGiorno.Day == i);
+                        }
+                        @if (programmazione != null)
+                        {
+                            
+                        }
+                    </div>
+                }
             }
         </div>
-    }
     </div>
-    <div>
-        form per inserire o modificare una programmazione 
-    </div>
+
+  
 }
 else if (Model != null && Model.DipendenteTrovato == false)
 {
     <div>
-        dipendente nonn trovato
+        dipendente non trovato
     </div>
 }
 else
 {
     <div>
-        benvenuto nella sezione calndari
+        benvenuto nella sezione calendari
     </div>
 }
 
@@ -67,4 +106,82 @@ else
     // Impostare i valori degli input nascosti
     document.getElementById('annoCorrente').value = annoCorrente;
     document.getElementById('meseCorrente').value = meseCorrente;
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const modal = document.getElementById('impegniModal');
+        const span = document.getElementsByClassName('close')[0];
+        const form = document.getElementById('impegniForm');
+        let selectedDayElement;
+        let selectedProgrammazioneElement; // Elemento di programmazione selezionato per la modifica
+
+        document.querySelectorAll('.day').forEach(day => {
+            day.addEventListener('click', function() {
+                if (!day.classList.contains('empty')) {
+                    selectedDayElement = day;
+                    document.getElementById('giornoSelezionato').value = day.innerText.trim();
+
+                    // Seleziona il primo elemento di programmazione per la modifica
+                    selectedProgrammazioneElement = day.querySelector('.programmazione');
+                    if (selectedProgrammazioneElement) {
+                        document.getElementById('impegno').value = selectedProgrammazioneElement.innerText.trim();
+                    } else {
+                        document.getElementById('impegno').value = ''; // Pulisci il campo se non ci sono elementi di programmazione
+                    }
+
+                    modal.style.display = 'block';
+                }
+            });
+        });
+
+        span.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        form.onsubmit = function(event) {
+            event.preventDefault();
+            const impegno = document.getElementById('impegno').value.toLowerCase(); // Converti in minuscolo
+            const giornoSelezionato = document.getElementById('giornoSelezionato').value;
+
+            // Rimuovi eventuali classi di colore precedentemente aggiunte
+            selectedDayElement.querySelectorAll('.programmazione').forEach(el => {
+                el.classList.remove('assenza', 'permesso', 'presenza', 'malattia', 'ferie');
+            });
+
+            const programmazioneDiv = document.createElement('div');
+            programmazioneDiv.className = 'programmazione';
+            programmazioneDiv.innerText = impegno;
+
+            // Aggiungi classi per l'evidenziazione del colore
+            if (impegno === 'assenza') {
+                programmazioneDiv.classList.add('assenza');
+            } else if (impegno === 'permesso') {
+                programmazioneDiv.classList.add('permesso');
+            } else if (impegno === 'presenza') {
+                programmazioneDiv.classList.add('presenza');
+            } else if (impegno === 'malattia') {
+                programmazioneDiv.classList.add('malattia');
+            } else if (impegno === 'ferie') {
+                programmazioneDiv.classList.add('ferie');
+            }
+
+            if (selectedProgrammazioneElement) {
+                // Se è stato selezionato un elemento di programmazione, sostituiscilo con il nuovo
+                selectedProgrammazioneElement.replaceWith(programmazioneDiv);
+            } else {
+                // Altrimenti, aggiungi il nuovo elemento alla giornata selezionata
+                selectedDayElement.appendChild(programmazioneDiv);
+            }
+
+            // Nascondi il modal e resetta il form
+            modal.style.display = 'none';
+            form.reset();
+        }
+    });
 </script>
