@@ -19,6 +19,7 @@ namespace HrNexus.Models.Entities
         public virtual DbSet<Azienda> Aziende { get; set; }
         public virtual DbSet<Dipendente> Dipendenti { get; set; }
         public virtual DbSet<Programmazione> Programmazioni { get; set; }
+        public virtual DbSet<Richiesta> Richieste { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -65,11 +66,15 @@ namespace HrNexus.Models.Entities
                 entity.Property(d => d.DataNascita).HasColumnName("DATA_NASCITA");
                 entity.Property(d => d.Email).HasColumnName("EMAIL");
                 entity.Property(d => d.Stipendio).HasColumnName("STIPENDIO");
+                entity.Property(d => d.GiorniDiFerie).HasColumnName("GIORNI_DI_FERIE");
+                entity.Property(d => d.GiorniDiPermesso).HasColumnName("GIORNI_DI_PERMESSO");
 
                 entity.HasKey(dipendente => dipendente.IdDipendente);
                 //andiamo a settare la relazione n a 1 tra l'entity Dipendente e l'entity Azienda
                 entity.HasOne(dipendente => dipendente.Azienda).WithMany(azienda => azienda.Dipendenti);
                 entity.HasMany(dipendente => dipendente.Programmazioni).WithOne(programmazione => programmazione.Dipendente).HasForeignKey(programmazione => programmazione.IdDipendente);
+                entity.HasMany(dipendente => dipendente.Richieste).WithOne(richiesta => richiesta.Dipendente).HasForeignKey(richiesta => richiesta.IdDipendente);
+           
             });
 
             modelBuilder.Entity<Programmazione>(entity =>{
@@ -88,6 +93,23 @@ namespace HrNexus.Models.Entities
 
                 entity.HasOne(p => p.Dipendente).WithMany(d => d.Programmazioni);
             });
+
+            modelBuilder.Entity<Richiesta>(entity =>{
+                entity.ToTable("RICHIESTE");
+
+                entity.Property(r=> r.IdRichiesta).HasColumnName("ID_RICHIESTA");
+                entity.Property(r=> r.IdDipendente).HasColumnName("ID_DIPENDENTE");
+                entity.Property(r=> r.Confermato).HasColumnName("CONFERMATO");
+                entity.Property(r=> r.Archiviato).HasColumnName("ARCHIVIATO");
+                entity.Property(r=> r.DataRichiesta).HasColumnName("DATA_RICHIESTA");
+                entity.Property(r=> r.Tipo).HasColumnName("TIPO");
+
+
+                entity.HasKey(p => p.IdRichiesta);
+
+                entity.HasOne(p => p.Dipendente).WithMany(d => d.Richieste);
+            });
+
         }
     }
 }

@@ -12,7 +12,9 @@ namespace HrNexus.Models.Entities
         
         public int IdDipendente { get; set; }
         public int IdAzienda { get; set; }
-        
+        public int GiorniDiFerie { get; set; }
+        public int GiorniDiPermesso { get; set; }
+
         public string Cognome { get; set; }
         public string Valutazione { get; set; }
         public DateTime DataNascita { get; set; }
@@ -21,6 +23,6 @@ namespace HrNexus.Models.Entities
 
         public virtual Azienda Azienda { get; set; }
         public virtual ICollection<Programmazione> Programmazioni { get; set; }
-        
+        public virtual ICollection<Richiesta> Richieste { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace HrNexus.Controllers
             AziendaViewModel azienda = await aziendaService.ElencoLavoratoriById(IdAzienda);
             return View(azienda);
         }
-        public async Task<IActionResult> CalendarioLavoratori()
+        public IActionResult CalendarioLavoratori()
         {
             return View();
         }
@@ -41,9 +41,9 @@ namespace HrNexus.Controllers
         {
 
             if (direzione == null){
-            int IdAzienda = Convert.ToInt32(HttpContext.Session.GetString("Id")); //recuperare l'id dell'azienda loggata
-            DipendenteViewModel dipendente = await aziendaService.ProgrammazioniLavoratoreByNome(nome,IdAzienda,meseCorrente,annoCorrente);
-            return View(dipendente);
+                int IdAzienda = Convert.ToInt32(HttpContext.Session.GetString("Id")); //recuperare l'id dell'azienda loggata
+                DipendenteViewModel dipendente = await aziendaService.ProgrammazioniLavoratoreByNome(nome,IdAzienda,meseCorrente,annoCorrente);
+                return View(dipendente);
             }else{
                 if (direzione == "successivo"){
                     if(meseCorrente == 12)
@@ -69,12 +69,36 @@ namespace HrNexus.Controllers
                 DipendenteViewModel dipendente = await aziendaService.ProgrammazioniLavoratoreByNome(nome,IdAzienda,meseCorrente,annoCorrente);
                  return View(dipendente);
             }
-            return View();
         }
 
         public IActionResult GestioneAssenze()
         {
             return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> GestioneAssenze(string nome)
+        {  
+            int IdAzienda = Convert.ToInt32(HttpContext.Session.GetString("Id")); //recuperare l'id dell'azienda loggata
+            DipendenteViewModel dipendente = await aziendaService.ElencoRichieste(nome, IdAzienda);
+            return View(dipendente);
+        }
+        public async Task<IActionResult> AggiungiGiorniFerie(int numeroGiorni, int IdDipendente)
+        {  
+            int IdAzienda = Convert.ToInt32(HttpContext.Session.GetString("Id")); //recuperare l'id dell'azienda loggata
+            DipendenteViewModel dipendente = await aziendaService.AggiungiGiorniFerie(numeroGiorni, IdAzienda, IdDipendente);
+            return View("GestioneAssenze",dipendente);
+        }
+        public async Task<IActionResult> AggiungiGiorniPermesso(int numeroGiorni, int IdDipendente)
+        {  
+            int IdAzienda = Convert.ToInt32(HttpContext.Session.GetString("Id")); //recuperare l'id dell'azienda loggata
+            DipendenteViewModel dipendente = await aziendaService.AggiungiGiorniPermesso(numeroGiorni, IdAzienda, IdDipendente);
+            return View("GestioneAssenze", dipendente);
+        }
+        public async Task<IActionResult> GestisciRichiesta(int idDipendente, string esitoRichiesta, string tipoRichiesta, int idRichiesta)
+        {  
+            int idAzienda = Convert.ToInt32(HttpContext.Session.GetString("Id")); //recuperare l'id dell'azienda loggata
+            DipendenteViewModel dipendente = await aziendaService.GestisciRichiesta(idDipendente, esitoRichiesta, tipoRichiesta, idRichiesta, idAzienda);
+            return View("GestioneAssenze", dipendente);
         }
         public IActionResult GestioneValutazioni()
         {

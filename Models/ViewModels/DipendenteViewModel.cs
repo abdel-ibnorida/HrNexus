@@ -16,8 +16,12 @@ namespace HrNexus.Models.ViewModels
         public bool DipendenteTrovato { get; set; }
         public int MeseProgrammazione { get; set; }
         public int AnnoProgrammazione { get; set; }
+        public int GiorniDiFerie { get; set; }
+        public int GiorniDiPermesso { get; set; }
         public ProgrammazioneViewModel ProgrammazioneSelezionata { get; set; }
         public ICollection<ProgrammazioneViewModel> Programmazioni { get; set; }
+        
+        public ICollection<RichiestaViewModel> Richieste { get; set; }
         public static DipendenteViewModel FromEntity(Dipendente dipendente, int mese, int anno)
         {
             if (dipendente == null)
@@ -49,6 +53,38 @@ namespace HrNexus.Models.ViewModels
                         Anno = anno,
                     }).ToList()
                     : new List<ProgrammazioneViewModel>()
+                
+            };
+        }
+        public static DipendenteViewModel FromEntity(Dipendente dipendente)
+        {
+            if (dipendente == null)
+            {
+                return new DipendenteViewModel
+                {
+                    DipendenteTrovato = false
+                };
+            }
+
+            return new DipendenteViewModel
+            {
+                IdDipendente = dipendente.IdDipendente,
+                Nome = dipendente.Nome,
+                DipendenteTrovato = true,
+                GiorniDiFerie = dipendente.GiorniDiFerie,
+                GiorniDiPermesso = dipendente.GiorniDiPermesso,
+
+                Richieste = dipendente.Richieste != null
+                    ? dipendente.Richieste.Select(r => new RichiestaViewModel
+                    {
+                        IdRichiesta = r.IdRichiesta,
+                        DataRichiesta = r.DataRichiesta,
+                        Confermato = r.Confermato,
+                        Archiviato = r.Archiviato,
+                        Tipo = r.Tipo,
+                    }).ToList()
+                    : new List<RichiestaViewModel>()
+                
             };
         }
 
