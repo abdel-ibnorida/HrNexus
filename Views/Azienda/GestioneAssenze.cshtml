@@ -11,16 +11,19 @@
     <div class="container">
 
         <div class="riquadro">
-            <h2>Richieste di Permesso e Ferie</h2>
-            <ul id="richieste">
+            <h2>Nuove Richieste</h2>
+            <ul>
                 @{
+                    int countNuoveRichieste = 0;
                     foreach (RichiestaViewModel richiesta in Model.Richieste)
                     {
                         if (richiesta.Archiviato == false)
-                        {
+                        {   
+                            countNuoveRichieste++;
                             <li>
                                 @richiesta.Tipo
                                 @richiesta.DataRichiesta.ToString("yyyy-MM-dd")
+                                <span>status @richiesta.Archiviato</span>
                             </li>
                             @if (richiesta.Tipo == "FERIE")
                             {
@@ -65,21 +68,49 @@
                                 <input type="hidden" id="tipoRichiesta" name="tipoRichiesta" value="rifiuto" />
                                 <input type="hidden" id="idRichiesta" name="idRichiesta" value=@richiesta.IdRichiesta />
                             </form>
-                        }else{
+
+                        }
+                    }
+                    if (countNuoveRichieste == 0){
+                        <li>
+                            Non sono presenti Nuove richieste.
+                        </li>
+                    }
+                }
+            </ul>
+            <h2>Richieste Archiviate</h2>
+            <ul id="richieste">
+                @{
+                    int countRichiesteArchiviate = 0;
+                    foreach (RichiestaViewModel richiesta in Model.Richieste)
+                    {
+                        if (richiesta.Archiviato == true)
+                        {
+                            countRichiesteArchiviate++;
                             <li>
                                 @richiesta.Tipo
                                 @richiesta.DataRichiesta.ToString("yyyy-MM-dd")
-                                @if (richiesta.Confermato == true){
+                                @if (richiesta.Confermato == true)
+                                {
                                     <span> Richiesta accettata</span>
-                                }else{
+                                }
+                                else
+                                {
                                     <span> Richiesta rifiutata</span>
                                 }
                             </li>
                         }
                     }
+                    if (countRichiesteArchiviate == 0){
+                        <li>
+                            Non sono presenti richieste archiviate.
+                        </li>
+                    }
                 }
+                
             </ul>
         </div>
+
         <div class="riquadro">
             <h2>Gestione Giorni Disponibili</h2>
             <form method="post" action="AggiungiGiorniFerie">
