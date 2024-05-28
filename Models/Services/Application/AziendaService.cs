@@ -48,7 +48,8 @@ namespace HrNexus.Models.Services.Application
                 .ToListAsync();*/
                 dipendente.Programmazioni = await dbContext.Programmazioni
                     .Where(p => p.IdDipendente == dipendente.IdDipendente && p.DataGiorno.Year == anno && p.DataGiorno.Month == mese)
-                    .Select(p => new Programmazione {
+                    .Select(p => new Programmazione
+                    {
                         IdProgrammazione = p.IdProgrammazione,
                         IdDipendente = p.IdDipendente,
                         DataGiorno = p.DataGiorno,
@@ -113,7 +114,6 @@ namespace HrNexus.Models.Services.Application
                 .ToListAsync();
             return DipendenteViewModel.FromEntity(dipendente);
         }
-
         public async Task<DipendenteViewModel> GestisciRichiesta(int idDipendente, string esitoRichiesta, string tipoRichiesta, int idRichiesta, int idAzienda)
         {
             Dipendente dipendente = await dbContext.Dipendenti
@@ -231,6 +231,43 @@ namespace HrNexus.Models.Services.Application
                 .Where(r => r.IdDipendente == dipendente.IdDipendente)
                 .ToListAsync();
             return DipendenteViewModel.FromEntity(dipendente);
+        }
+
+        public async Task<DipendenteViewModel> GestisciProgrammazione(int IdDipendente, int IdProgrammazione, int idAzienda, int giorno, int mese, int anno, string inizioTurno, string FineTurno, bool giornoFerie, bool giornoPermesso, bool giornoMalattia)
+        {
+            
+
+            Dipendente dipendente = await dbContext.Dipendenti
+                .Where(d => d.IdDipendente == IdDipendente && d.IdAzienda == idAzienda)
+                .FirstOrDefaultAsync();
+            DateTime dataGiorno = new DateTime(anno, mese, giorno);
+            var timePartsInizio = inizioTurno.Split(':');
+            int oraInzio = int.Parse(timePartsInizio[0]);
+            int minutiInizio = int.Parse(timePartsInizio[1]);
+            var timePartsFine = FineTurno.Split(':');
+            int oraFine = int.Parse(timePartsFine[0]);
+            int minutiFine = int.Parse(timePartsFine[1]);
+            DateTime datetimeInizio = new DateTime(anno, mese, giorno, oraInzio, minutiInizio, 0);
+            DateTime datetimeFine = new DateTime(anno, mese, giorno, oraFine, minutiFine, 0);
+
+            bool nuovaCreazione = IdProgrammazione == 0;
+            Programmazione programmazione;
+            if (nuovaCreazione)
+            {
+                // Creazione di una nuova programmazione
+                programmazione = new Programmazione(IdDipendente, dataGiorno, datetimeInizio, datetimeFine, giornoFerie, giornoPermesso, giornoMalattia);
+                dbContext.Programmazioni.Add(programmazione); 
+            }
+            else
+            {
+                // Ricerca della programmazione esistente nel database
+                //programmazione = await dbContext.Programmazioni.FindAsync(IdProgrammazione);
+            }
+            dbContext.SaveChanges();
+            dipendente.Programmazioni = await dbContext.Programmazioni
+                .Where(p => p.IdDipendente == IdDipendente)
+                .ToListAsync();
+            return DipendenteViewModel.FromEntity(dipendente, mese, anno);
         }
     }
 }

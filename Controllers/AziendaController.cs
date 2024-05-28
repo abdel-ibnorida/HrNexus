@@ -100,6 +100,20 @@ namespace HrNexus.Controllers
             DipendenteViewModel dipendente = await aziendaService.GestisciRichiesta(idDipendente, esitoRichiesta, tipoRichiesta, idRichiesta, idAzienda);
             return View("GestioneAssenze", dipendente);
         }
+        [HttpPost]
+        public async Task<IActionResult> GestisciProgrammazione(int idDipendente, int idProgrammazione, int giornoModale, int meseModale, int annoModale, string inizioTurnoModale, string fineTurnoModale, bool giornoFerieModale, bool giornoPermessoModale, bool giornoMalattiaModale)
+        {
+            Console.WriteLine("controller");
+            Console.WriteLine(giornoFerieModale);
+            Console.WriteLine(giornoPermessoModale);
+            Console.WriteLine(giornoMalattiaModale);
+            int idAzienda = Convert.ToInt32(HttpContext.Session.GetString("Id")); //recuperare l'id dell'azienda loggata
+            DipendenteViewModel dipendente = await aziendaService.GestisciProgrammazione(idDipendente, idProgrammazione, idAzienda, giornoModale, meseModale, annoModale, inizioTurnoModale, fineTurnoModale, giornoFerieModale, giornoPermessoModale, giornoMalattiaModale);
+            //return Content("dati che viaggiano");
+            return View("CalendarioLavoratori",dipendente);
+        }
+
+        
         public IActionResult GestioneValutazioni()
         {
             return View();

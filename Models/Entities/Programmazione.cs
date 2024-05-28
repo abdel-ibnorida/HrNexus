@@ -22,6 +22,16 @@ namespace HrNexus.Models.Entities
         public bool GiornoMalattia{ get; set; }
 
         public virtual Dipendente Dipendente { get; set; }
-      
+       public Programmazione(int idDipendente, DateTime dataGiorno, DateTime inizioTurno, DateTime fineTurno,
+                              bool giornoFerie, bool giornoPermesso, bool giornoMalattia)
+        {
+            IdDipendente = idDipendente;
+            DataGiorno = dataGiorno;
+            InizioTurno = inizioTurno;
+            FineTurno = fineTurno;
+            GiornoFerie = giornoFerie;
+            GiornoPermesso = giornoPermesso;
+            GiornoMalattia = giornoMalattia;
+        }
     }
 }

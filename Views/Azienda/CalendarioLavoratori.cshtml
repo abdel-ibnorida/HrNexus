@@ -44,7 +44,7 @@
                 }
                 <div class="day">
                     <i class="fa-solid fa-circle-info"
-                        onclick='gestisciProgrammazione(@i, @Model.MeseProgrammazione, @Model.AnnoProgrammazione, @Html.Raw(jsonModel.Replace("'", "\'")))'></i>
+                        onclick='gestisciProgrammazione(@i, @Model.MeseProgrammazione, @Model.AnnoProgrammazione, @Html.Raw(jsonModel.Replace("'", "\'")), @Model.IdDipendente)'></i>
                     @i
                     @{
                         if (programmazione != null)
@@ -104,12 +104,13 @@
         </div>
         <div id="programmazioneModal" class="modal">
             <div class="modal-content">
-                <span class="close">&times;</span>
-                <form id="programmazioneForm" method="post">
+                <form id="programmazioneForm" asp-action="GestisciProgrammazione" method="post">
                     <h2 id="modalTitle">Gestisci Programmazione</h2>
                     <input type="hidden" id="giornoModale" name="giornoModale" />
                     <input type="hidden" id="meseModale" name="meseModale" />
                     <input type="hidden" id="annoModale" name="annoModale" />
+                    <input type="hidden" id="idDipendente" name="idDipendente" />
+                    <input type="hidden" id="idProgrammazione" name="idProgrammazione" />
 
                     <label for="inizioTurno">Inizio Turno:</label>
                     <input type="time" id="inizioTurnoModale" name="inizioTurnoModale" required />
@@ -118,13 +119,16 @@
                     <input type="time" id="fineTurnoModale" name="fineTurnoModale" required />
 
                     <label for="giornoFerie">Giorno di Ferie:</label>
-                    <input type="checkbox" id="giornoFerieModale" name="giornoFerieModale" />
+                    <input onchange="invertiValoreCheckbox(this)" type="checkbox" id="giornoFerieModale"
+                        name="giornoFerieModale" />
 
                     <label for="giornoPermesso">Giorno di Permesso:</label>
-                    <input type="checkbox" id="giornoPermessoModale" name="giornoPermessoModale" />
+                    <input onchange="invertiValoreCheckbox(this)" type="checkbox" id="giornoPermessoModale"
+                        name="giornoPermessoModale" />
 
                     <label for="giornoMalattia">Giorno di Malattia:</label>
-                    <input type="checkbox" id="giornoMalattiaModale" name="giornoMalattiaModale" />
+                    <input onchange="invertiValoreCheckbox(this)" type="checkbox" id="giornoMalattiaModale"
+                        name="giornoMalattiaModale" />
 
                     <button type="submit" id="submitBtn">Salva</button>
                 </form>
@@ -153,14 +157,20 @@ else
     // Impostare i valori degli input nascosti
     document.getElementById('annoCorrente').value = annoCorrente;
     document.getElementById('meseCorrente').value = meseCorrente;
+
     const modal = document.getElementById('programmazioneModal');
     const span = document.getElementsByClassName('close')[0];
-    function gestisciProgrammazione(giorno, mese, anno, programmazione) {
-        document.getElementById('giornoModale').checked = giorno;
-        document.getElementById('meseModale').checked = mese;
-        document.getElementById('annoModale').checked = anno;
-        if (programmazione) {
 
+    function gestisciProgrammazione(giorno, mese, anno, programmazione, idDipendente) {
+
+        document.getElementById('giornoModale').value = giorno;
+        document.getElementById('meseModale').value = mese;
+        document.getElementById('annoModale').value = anno;
+        document.getElementById('idDipendente').value = idDipendente;
+
+
+        if (programmazione) {
+            document.getElementById('idProgrammazione').value = programmazione.idProgrammazione;
             var orarioInizioTurno = new Date(programmazione.InizioTurno);
             var oreInizio = orarioInizioTurno.getHours();
             var minutiInizio = orarioInizioTurno.getMinutes();
@@ -190,18 +200,23 @@ else
             document.getElementById('giornoFerieModale').checked = false;
             document.getElementById('giornoPermessoModale').checked = false;
             document.getElementById('giornoMalattiaModale').checked = false;
+            document.getElementById('giornoFerieModale').value = false;
+            document.getElementById('giornoPermessoModale').value = false;
+            document.getElementById('giornoMalattiaModale').value = false;
             document.getElementById('modalTitle').innerText = 'Crea Programmazione';
         }
         modal.style.display = 'block';
     }
-    span.onclick = function () {
-        modal.style.display = 'none';
-    }
+
 
     // Quando l'utente clicca fuori dalla modal, chiudi la modal
     window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = 'none';
         }
+    }
+    function invertiValoreCheckbox(checkbox) {
+        checkbox.value = checkbox.checked;
+        console.log('nuovovalore', checkbox.value)
     }
 </script>
