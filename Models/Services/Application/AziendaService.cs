@@ -52,6 +52,8 @@ namespace HrNexus.Models.Services.Application
                         IdProgrammazione = p.IdProgrammazione,
                         IdDipendente = p.IdDipendente,
                         DataGiorno = p.DataGiorno,
+                        InizioTurno = p.InizioTurno,
+                        FineTurno = p.FineTurno,
                         TimbraturaInizio = p.TimbraturaInizio.HasValue ? p.TimbraturaInizio.Value : DateTime.MinValue,
                         TimbraturaUscita = p.TimbraturaUscita.HasValue ? p.TimbraturaUscita.Value : DateTime.MinValue,
                         GiornoFerie = p.GiornoFerie,

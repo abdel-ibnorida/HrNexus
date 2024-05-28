@@ -1,3 +1,4 @@
+@using System.Text.Json
 @model DipendenteViewModel
 <link rel="stylesheet" href="~/css/calendariolavoratori.css">
 <div class="search-container">
@@ -17,7 +18,7 @@
         int annoCorrente = Model.AnnoProgrammazione;
         string meseTestuale = new DateTime(Model.AnnoProgrammazione, Model.MeseProgrammazione, 1).ToString("MMMM");
         <div class="nav-month">
-            <form class="form-month"asp-action="CalendarioLavoratori" method="get">
+            <form class="form-month" asp-action="CalendarioLavoratori" method="get">
                 <input type="hidden" name="nome" value="@Model.Nome" />
                 <input type="hidden" name="annoCorrente" value="@Model.AnnoProgrammazione" />
                 <input type="hidden" name="meseCorrente" value="@Model.MeseProgrammazione" />
@@ -32,11 +33,20 @@
         <div class="calendar">
             @for (int i = 1; i <= DateTime.DaysInMonth(Model.AnnoProgrammazione, Model.MeseProgrammazione); i++)
             {
+                ProgrammazioneViewModel programmazione = Model.Programmazioni.FirstOrDefault(pm => pm.DataGiorno.Day == i);
+                var jsonModel = JsonSerializer.Serialize(programmazione);
+                string inizioTurnoJs = "";
+                string fineTurnoJs = "";
+                if (programmazione != null)
+                {
+                    inizioTurnoJs = programmazione.InizioTurno.ToString("yyyy-MM-ddTHH:mm:ss");
+                    fineTurnoJs = programmazione.FineTurno.ToString("yyyy-MM-ddTHH:mm:ss");
+                }
                 <div class="day">
+                    <i class="fa-solid fa-circle-info"
+                        onclick='gestisciProgrammazione(@i, @Model.MeseProgrammazione, @Model.AnnoProgrammazione, @Html.Raw(jsonModel.Replace("'", "\'")))'></i>
                     @i
                     @{
-                        ProgrammazioneViewModel programmazione = Model.Programmazioni.FirstOrDefault(pm => pm.DataGiorno.Day == i);
-
                         if (programmazione != null)
                         {
                             string cssClass = "";
@@ -84,12 +94,41 @@
 
                             <div class="@cssClass">
                                 <i class="fa-solid fa-square-check"></i>
-                                <span>@programmazione.GiornoMalattia</span>
+                                <span>inizio @programmazione.InizioTurno</span>
+                                <span>fine @programmazione.FineTurno</span>
                             </div>
                         }
                     }
                 </div>
             }
+        </div>
+        <div id="programmazioneModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form id="programmazioneForm" method="post">
+                    <h2 id="modalTitle">Gestisci Programmazione</h2>
+                    <input type="hidden" id="giornoModale" name="giornoModale" />
+                    <input type="hidden" id="meseModale" name="meseModale" />
+                    <input type="hidden" id="annoModale" name="annoModale" />
+
+                    <label for="inizioTurno">Inizio Turno:</label>
+                    <input type="time" id="inizioTurnoModale" name="inizioTurnoModale" required />
+
+                    <label for="fineTurno">Fine Turno:</label>
+                    <input type="time" id="fineTurnoModale" name="fineTurnoModale" required />
+
+                    <label for="giornoFerie">Giorno di Ferie:</label>
+                    <input type="checkbox" id="giornoFerieModale" name="giornoFerieModale" />
+
+                    <label for="giornoPermesso">Giorno di Permesso:</label>
+                    <input type="checkbox" id="giornoPermessoModale" name="giornoPermessoModale" />
+
+                    <label for="giornoMalattia">Giorno di Malattia:</label>
+                    <input type="checkbox" id="giornoMalattiaModale" name="giornoMalattiaModale" />
+
+                    <button type="submit" id="submitBtn">Salva</button>
+                </form>
+            </div>
         </div>
     }
     else
@@ -114,4 +153,43 @@ else
     // Impostare i valori degli input nascosti
     document.getElementById('annoCorrente').value = annoCorrente;
     document.getElementById('meseCorrente').value = meseCorrente;
+
+    function gestisciProgrammazione(giorno, mese, anno, programmazione) {
+        document.getElementById('giornoModale').checked = giorno;
+        document.getElementById('meseModale').checked = mese;
+        document.getElementById('annoModale').checked = anno;
+        if (programmazione) {
+
+            var orarioInizioTurno = new Date(programmazione.InizioTurno);
+            var oreInizio = orarioInizioTurno.getHours();
+            var minutiInizio = orarioInizioTurno.getMinutes();
+            if (minutiInizio < 10) {
+                minutiInizio = "0" + minutiInizio;
+            }
+            var oraFormatoStringaInizio = ('0' + oreInizio).slice(-2) + ':' + ('0' + minutiInizio).slice(-2);
+
+            var orarioFineTurno = new Date(programmazione.FineTurno);
+            var oreFine = orarioFineTurno.getHours();
+            var minutiFine = orarioFineTurno.getMinutes();
+            if (minutiFine < 10) {
+                minutiFine = "0" + minutiFine;
+            }
+            var oraFormatoStringaFine = ('0' + oreFine).slice(-2) + ':' + ('0' + minutiFine).slice(-2);
+            
+            document.getElementById('inizioTurnoModale').value = oraFormatoStringaInizio;
+            document.getElementById('fineTurnoModale').value = oraFormatoStringaFine;
+            document.getElementById('giornoFerieModale').checked = programmazione.GiornoFerie;
+            document.getElementById('giornoPermessoModale').checked = programmazione.GiornoPermesso;
+            document.getElementById('giornoMalattiaModale').checked = programmazione.GiornoMalattia;
+            document.getElementById('modalTitle').innerText = 'Modifica Programmazione';
+        }
+        else {
+            document.getElementById('inizioTurnoModale').value = '';
+            document.getElementById('fineTurnoModale').value = '';
+            document.getElementById('giornoFerieModale').checked = false;
+            document.getElementById('giornoPermessoModale').checked = false;
+            document.getElementById('giornoMalattiaModale').checked = false;
+            document.getElementById('modalTitle').innerText = 'Crea Programmazione';
+        }
+    }
 </script>
