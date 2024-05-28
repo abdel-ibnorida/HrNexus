@@ -153,7 +153,8 @@ else
     // Impostare i valori degli input nascosti
     document.getElementById('annoCorrente').value = annoCorrente;
     document.getElementById('meseCorrente').value = meseCorrente;
-
+    const modal = document.getElementById('programmazioneModal');
+    const span = document.getElementsByClassName('close')[0];
     function gestisciProgrammazione(giorno, mese, anno, programmazione) {
         document.getElementById('giornoModale').checked = giorno;
         document.getElementById('meseModale').checked = mese;
@@ -175,7 +176,7 @@ else
                 minutiFine = "0" + minutiFine;
             }
             var oraFormatoStringaFine = ('0' + oreFine).slice(-2) + ':' + ('0' + minutiFine).slice(-2);
-            
+
             document.getElementById('inizioTurnoModale').value = oraFormatoStringaInizio;
             document.getElementById('fineTurnoModale').value = oraFormatoStringaFine;
             document.getElementById('giornoFerieModale').checked = programmazione.GiornoFerie;
@@ -190,6 +191,17 @@ else
             document.getElementById('giornoPermessoModale').checked = false;
             document.getElementById('giornoMalattiaModale').checked = false;
             document.getElementById('modalTitle').innerText = 'Crea Programmazione';
+        }
+        modal.style.display = 'block';
+    }
+    span.onclick = function () {
+        modal.style.display = 'none';
+    }
+
+    // Quando l'utente clicca fuori dalla modal, chiudi la modal
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
         }
     }
 </script>
