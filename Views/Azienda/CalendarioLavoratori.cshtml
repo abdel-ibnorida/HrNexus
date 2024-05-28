@@ -16,8 +16,8 @@
         int meseCorrente = Model.MeseProgrammazione;
         int annoCorrente = Model.AnnoProgrammazione;
         string meseTestuale = new DateTime(Model.AnnoProgrammazione, Model.MeseProgrammazione, 1).ToString("MMMM");
-        <div>
-            <form asp-action="CalendarioLavoratori" method="get">
+        <div class="nav-month">
+            <form class="form-month"asp-action="CalendarioLavoratori" method="get">
                 <input type="hidden" name="nome" value="@Model.Nome" />
                 <input type="hidden" name="annoCorrente" value="@Model.AnnoProgrammazione" />
                 <input type="hidden" name="meseCorrente" value="@Model.MeseProgrammazione" />

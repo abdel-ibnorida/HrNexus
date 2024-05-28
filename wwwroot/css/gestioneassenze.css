@@ -1,3 +1,39 @@
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-right: 10px;
+  transition: border-color 0.3s;
+}
+
+.search:focus {
+  border-color: #ffffff;
+  outline: none;
+}
+
+.search-btn {
+  background-color: #141313;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.search-btn:hover {
+  background-color: rgb(255, 255, 255);
+  color: #000;
+}
 
 .riquadro {
   border: 1px solid #ccc;
@@ -81,34 +117,3 @@
 .riquadro li button:hover {
   background-color: #ddd;
 }
-.search-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-#search {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  margin-right: 10px;
-}
-#search-button {
-  background-color: #000000;
-  border: none;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-#search-button:hover {
-  background-color: #ffffff;
-  color: black;
-}
-.pagination {
-  margin-top: 20px;
-  text-align: center;
-}
-

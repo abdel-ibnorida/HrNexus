@@ -1,14 +1,13 @@
 @model DipendenteViewModel
+<link rel="stylesheet" href="~/css/gestioneassenze.css">
 <div class="search-container">
     <form asp-action="GestioneAssenze" method="get">
-        <input type="text" id="nome" name="nome" placeholder="Cerca dipendente" />
-        <button type="submit" id="ricarca-button">Cerca</button>
+        <input class="search" type="text" id="nome" name="nome" placeholder="Cerca dipendente" />
+        <button class="search-btn" type="submit" id="ricarca-button">Cerca</button>
     </form>
 </div>
 @if (Model != null && Model.DipendenteTrovato == true)
 {
-
-    <link rel="stylesheet" href="~/css/gestioneassenze.css">
     <div class="container">
 
         <div class="riquadro">
