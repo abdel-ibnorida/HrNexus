@@ -9,7 +9,7 @@ namespace HrNexus.Models.Services.Application
 {
     public interface IAziendaService
     { 
-        Task<DipendenteViewModel> GestisciProgrammazione(int IdDipendente, int IdProgrammazione, int idAzienda, int giorno, int mese, int anno, string inizioTurno, string FineTurno, bool giornoFerie, bool giornoPermesso, bool giornoMalattia); 
+        Task<DipendenteViewModel> GestisciProgrammazione(int idDipendente, int IdProgrammazione, int idAzienda, int giorno, int mese, int anno, string inizioTurno, string FineTurno, bool giornoFerie, bool giornoPermesso, bool giornoMalattia); 
 
         Task<DipendenteViewModel> GestisciRichiesta(int IdDipendente, string esitoRichiesta, string tipoRichiesta, int idRichiesta, int idAzienda); 
         Task<DipendenteViewModel> AggiungiGiorniFerie(int numeroGiorni, int idAzienda, int idDipendente);

@@ -233,12 +233,12 @@ namespace HrNexus.Models.Services.Application
             return DipendenteViewModel.FromEntity(dipendente);
         }
 
-        public async Task<DipendenteViewModel> GestisciProgrammazione(int IdDipendente, int IdProgrammazione, int idAzienda, int giorno, int mese, int anno, string inizioTurno, string FineTurno, bool giornoFerie, bool giornoPermesso, bool giornoMalattia)
+        public async Task<DipendenteViewModel> GestisciProgrammazione(int idDipendente, int IdProgrammazione, int idAzienda, int giorno, int mese, int anno, string inizioTurno, string FineTurno, bool giornoFerie, bool giornoPermesso, bool giornoMalattia)
         {
-            
+
 
             Dipendente dipendente = await dbContext.Dipendenti
-                .Where(d => d.IdDipendente == IdDipendente && d.IdAzienda == idAzienda)
+                .Where(d => d.IdDipendente == idDipendente && d.IdAzienda == idAzienda)
                 .FirstOrDefaultAsync();
             DateTime dataGiorno = new DateTime(anno, mese, giorno);
             var timePartsInizio = inizioTurno.Split(':');
@@ -250,22 +250,30 @@ namespace HrNexus.Models.Services.Application
             DateTime datetimeInizio = new DateTime(anno, mese, giorno, oraInzio, minutiInizio, 0);
             DateTime datetimeFine = new DateTime(anno, mese, giorno, oraFine, minutiFine, 0);
 
-            bool nuovaCreazione = IdProgrammazione == 0;
+            bool nuovaCreazione = IdProgrammazione == 0 ;
             Programmazione programmazione;
             if (nuovaCreazione)
             {
                 // Creazione di una nuova programmazione
-                programmazione = new Programmazione(IdDipendente, dataGiorno, datetimeInizio, datetimeFine, giornoFerie, giornoPermesso, giornoMalattia);
-                dbContext.Programmazioni.Add(programmazione); 
+                programmazione = new Programmazione(idDipendente, dataGiorno, datetimeInizio, datetimeFine, giornoFerie, giornoPermesso, giornoMalattia);
+                dbContext.Programmazioni.Add(programmazione);
+                Console.WriteLine("ho creato nuova");
             }
             else
             {
-                // Ricerca della programmazione esistente nel database
-                //programmazione = await dbContext.Programmazioni.FindAsync(IdProgrammazione);
+
+                programmazione = await dbContext.Programmazioni.FindAsync(IdProgrammazione);
+                programmazione.InizioTurno = datetimeInizio;
+                programmazione.FineTurno = datetimeFine;
+                programmazione.GiornoFerie = giornoFerie;
+                programmazione.GiornoPermesso = giornoPermesso;
+                programmazione.GiornoMalattia = giornoMalattia;
+                dbContext.Programmazioni.Update(programmazione);
+                Console.WriteLine("ho tentato la modifica");
             }
             dbContext.SaveChanges();
             dipendente.Programmazioni = await dbContext.Programmazioni
-                .Where(p => p.IdDipendente == IdDipendente)
+                .Where(p => p.IdDipendente == idDipendente)
                 .ToListAsync();
             return DipendenteViewModel.FromEntity(dipendente, mese, anno);
         }

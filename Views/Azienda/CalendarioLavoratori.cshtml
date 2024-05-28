@@ -94,8 +94,7 @@
 
                             <div class="@cssClass">
                                 <i class="fa-solid fa-square-check"></i>
-                                <span>inizio @programmazione.InizioTurno</span>
-                                <span>fine @programmazione.FineTurno</span>
+                                <span>id: @programmazione.IdProgrammazione</span>
                             </div>
                         }
                     }
@@ -170,7 +169,8 @@ else
 
 
         if (programmazione) {
-            document.getElementById('idProgrammazione').value = programmazione.idProgrammazione;
+            document.getElementById('idProgrammazione').value = programmazione.IdProgrammazione;
+            console.log(programmazione.IdProgrammazione);
             var orarioInizioTurno = new Date(programmazione.InizioTurno);
             var oreInizio = orarioInizioTurno.getHours();
             var minutiInizio = orarioInizioTurno.getMinutes();
