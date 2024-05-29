@@ -10,6 +10,7 @@ namespace HrNexus.Models.ViewModels
     public class DipendenteViewModel : UserViewModel
     {
         public int IdDipendente { get; set; }
+        public int IdAzienda { get; set; }
         public string Cognome { get; set; }
         public string Email { get; set; }
         public decimal Stipendio { get; set; }
@@ -35,6 +36,7 @@ namespace HrNexus.Models.ViewModels
             return new DipendenteViewModel
             {
                 IdDipendente = dipendente.IdDipendente,
+                IdAzienda = dipendente.IdAzienda,
                 Nome = dipendente.Nome,
                 AnnoProgrammazione = anno,
                 MeseProgrammazione = mese,

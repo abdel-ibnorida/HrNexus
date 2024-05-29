@@ -43,7 +43,7 @@ namespace HrNexus.Controllers
                     accessor.HttpContext.Session.SetString("Username", azienda.Username); 
                     accessor.HttpContext.Session.SetString("Nome", azienda.Nome);
                     accessor.HttpContext.Session.SetString("TipoUtente", "azienda");
-                    accessor.HttpContext.Session.SetString("Id", azienda.IdAzienda.ToString());
+                    accessor.HttpContext.Session.SetString("IdAzienda", azienda.IdAzienda.ToString());
 
                     return View(model);
                 }
@@ -56,7 +56,8 @@ namespace HrNexus.Controllers
                     accessor.HttpContext.Session.SetString("Username", dipendente.Username);
                     accessor.HttpContext.Session.SetString("Nome", dipendente.Nome);
                     accessor.HttpContext.Session.SetString("TipoUtente", "dipendente");
-                    accessor.HttpContext.Session.SetString("Id", dipendente.IdDipendente.ToString());
+                    accessor.HttpContext.Session.SetString("IdDipendente", dipendente.IdDipendente.ToString());
+                    accessor.HttpContext.Session.SetString("IdAzienda", dipendente.IdAzienda.ToString());
                     return View(model);
                 }
             }
