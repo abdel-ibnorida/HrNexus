@@ -1,4 +1,6 @@
+@using System.Text.Json
 @model DipendenteViewModel
+
 <link rel="stylesheet" href="~/css/calendariolavoratori.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMV3P8e1Po1URyYDQqUaip48Ac0M7M6V3U5mvr6" crossorigin="anonymous">
@@ -81,6 +83,22 @@
                                 bool isFerie = programmazione.GiornoFerie;
                                 bool isPermesso = programmazione.GiornoPermesso;
                                 bool isMalattia = programmazione.GiornoMalattia;
+                                if (programmazione.TimbraturaInizio != null && programmazione.TimbraturaUscita != null)
+                                {
+                                    TimeSpan? durataEffettiva = programmazione.TimbraturaInizio - programmazione.TimbraturaUscita;
+                                    TimeSpan? differenza = durataProgrammata - durataEffettiva;
+                                    if (differenza.HasValue && differenza.Value.TotalMinutes > 15)
+                                    {
+                                        isTimbraturaIrregolare = true;
+                                    }
+                                    else
+                                    {
+                                        isTimbraturaRegolare = true;
+                                    }
+                                }
+                                bool isFerie = programmazione.GiornoFerie;
+                                bool isPermesso = programmazione.GiornoPermesso;
+                                bool isMalattia = programmazione.GiornoMalattia;
 
                                 if (isTimbraturaRegolare)
                                 {
@@ -144,4 +162,67 @@ else
     // Impostare i valori degli input nascosti
     document.getElementById('annoCorrente').value = annoCorrente;
     document.getElementById('meseCorrente').value = meseCorrente;
+
+    const modal = document.getElementById('programmazioneModal');
+    const span = document.getElementsByClassName('close')[0];
+
+    function gestisciProgrammazione(giorno, mese, anno, programmazione, idDipendente) {
+
+        document.getElementById('giornoModale').value = giorno;
+        document.getElementById('meseModale').value = mese;
+        document.getElementById('annoModale').value = anno;
+        document.getElementById('idDipendente').value = idDipendente;
+
+
+        if (programmazione) {
+            document.getElementById('idProgrammazione').value = programmazione.IdProgrammazione;
+            console.log(programmazione.IdProgrammazione);
+            var orarioInizioTurno = new Date(programmazione.InizioTurno);
+            var oreInizio = orarioInizioTurno.getHours();
+            var minutiInizio = orarioInizioTurno.getMinutes();
+            if (minutiInizio < 10) {
+                minutiInizio = "0" + minutiInizio;
+            }
+            var oraFormatoStringaInizio = ('0' + oreInizio).slice(-2) + ':' + ('0' + minutiInizio).slice(-2);
+
+            var orarioFineTurno = new Date(programmazione.FineTurno);
+            var oreFine = orarioFineTurno.getHours();
+            var minutiFine = orarioFineTurno.getMinutes();
+            if (minutiFine < 10) {
+                minutiFine = "0" + minutiFine;
+            }
+            var oraFormatoStringaFine = ('0' + oreFine).slice(-2) + ':' + ('0' + minutiFine).slice(-2);
+
+            document.getElementById('inizioTurnoModale').value = oraFormatoStringaInizio;
+            document.getElementById('fineTurnoModale').value = oraFormatoStringaFine;
+            document.getElementById('giornoFerieModale').checked = programmazione.GiornoFerie;
+            document.getElementById('giornoPermessoModale').checked = programmazione.GiornoPermesso;
+            document.getElementById('giornoMalattiaModale').checked = programmazione.GiornoMalattia;
+            document.getElementById('modalTitle').innerText = 'Modifica Programmazione';
+        }
+        else {
+            document.getElementById('inizioTurnoModale').value = '';
+            document.getElementById('fineTurnoModale').value = '';
+            document.getElementById('giornoFerieModale').checked = false;
+            document.getElementById('giornoPermessoModale').checked = false;
+            document.getElementById('giornoMalattiaModale').checked = false;
+            document.getElementById('giornoFerieModale').value = false;
+            document.getElementById('giornoPermessoModale').value = false;
+            document.getElementById('giornoMalattiaModale').value = false;
+            document.getElementById('modalTitle').innerText = 'Crea Programmazione';
+        }
+        modal.style.display = 'block';
+    }
+
+
+    // Quando l'utente clicca fuori dalla modal, chiudi la modal
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+    function invertiValoreCheckbox(checkbox) {
+        checkbox.value = checkbox.checked;
+        console.log('nuovovalore', checkbox.value)
+    }
 </script>

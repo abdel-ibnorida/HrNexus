@@ -11,90 +11,120 @@
     <div class="container">
 
         <div class="riquadro">
-            <h2>Richieste di Permesso e Ferie</h2>
-            <ul id="richieste">
+            <h2>Nuove Richieste</h2>
+            <ul class="lista-richieste">
                 @{
+                    int countNuoveRichieste = 0;
                     foreach (RichiestaViewModel richiesta in Model.Richieste)
                     {
                         if (richiesta.Archiviato == false)
                         {
+                            countNuoveRichieste++;
                             <li>
                                 @richiesta.Tipo
                                 @richiesta.DataRichiesta.ToString("yyyy-MM-dd")
+                                <div class="div-button-nuove-richieste">
+                                    @if (richiesta.Tipo == "FERIE")
+                                    {
+                                        if (Model.GiorniDiFerie > 0)
+                                        {
+                                            <form action="GestisciRichiesta" class="inline-form">
+                                                <button class="btn btn-accetta">Accetta</button>
+                                                <input type="hidden" id="esitoRichiesta" name="esitoRichiesta" value="accettata" />
+                                                <input type="hidden" id="idDipendente" name="idDipendente" value=@Model.IdDipendente />
+                                                <input type="hidden" id="tipoRichiesta" name="tipoRichiesta" value="FERIE" />
+                                                <input type="hidden" id="idRichiesta" name="idRichiesta" value=@richiesta.IdRichiesta />
+                                            </form>
+                                        }
+                                    }
+                                    else if (richiesta.Tipo == "PERMESSO")
+                                    {
+                                        if (Model.GiorniDiPermesso > 0)
+                                        {
+                                            <form action="GestisciRichiesta" class="inline-form">
+                                                <button class="btn btn-accetta">Accetta</button>
+                                                <input type="hidden" id="esitoRichiesta" name="esitoRichiesta" value="accettata" />
+                                                <input type="hidden" id="idDipendente" name="idDipendente" value=@Model.IdDipendente />
+                                                <input type="hidden" id="tipoRichiesta" name="tipoRichiesta" value="PERMESSO" />
+                                                <input type="hidden" id="idRichiesta" name="idRichiesta" value=@richiesta.IdRichiesta />
+                                            </form>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <form action="GestisciRichiesta" class="inline-form">
+                                            <button class="btn btn-accetta">Accetta</button>
+                                            <input type="hidden" id="esitoRichiesta" name="esitoRichiesta" value="accettata" />
+                                            <input type="hidden" id="idDipendente" name="idDipendente" value=@Model.IdDipendente />
+                                            <input type="hidden" id="tipoRichiesta" name="tipoRichiesta" value="MALATTIA" />
+                                            <input type="hidden" id="idRichiesta" name="idRichiesta" value=@richiesta.IdRichiesta />
+                                        </form>
+                                    }
+                                    <form action="GestisciRichiesta" class="inline-form">
+                                        <button class="btn btn-rifiuta">Rifiuta</button>
+                                        <input type="hidden" id="esitoRichiesta" name="esitoRichiesta" value="rifiutata" />
+                                        <input type="hidden" id="idDipendente" name="idDipendente" value=@Model.IdDipendente />
+                                        <input type="hidden" id="tipoRichiesta" name="tipoRichiesta" value="rifiuto" />
+                                        <input type="hidden" id="idRichiesta" name="idRichiesta" value=@richiesta.IdRichiesta />
+                                    </form>
+                                </div>
                             </li>
-                            @if (richiesta.Tipo == "FERIE")
-                            {
-                                if (Model.GiorniDiFerie > 0)
-                                {
-                                    <form action="GestisciRichiesta">
-                                        <button class="btn btn-accetaa">Accetta</button>
-                                        <input type="hidden" id="esitoRichiesta" name="esitoRichiesta" value="accettata" />
-                                        <input type="hidden" id="idDipendente" name="idDipendente" value=@Model.IdDipendente />
-                                        <input type="hidden" id="tipoRichiesta" name="tipoRichiesta" value="FERIE" />
-                                        <input type="hidden" id="idRichiesta" name="idRichiesta" value=@richiesta.IdRichiesta />
-                                    </form>
-                                }
-                            }
-                            else if (richiesta.Tipo == "PERMESSO")
-                            {
-                                if (Model.GiorniDiPermesso > 0)
-                                {
-                                    <form action="GestisciRichiesta">
-                                        <button class="btn btn-accetaa">Accetta</button>
-                                        <input type="hidden" id="esitoRichiesta" name="esitoRichiesta" value="accettata" />
-                                        <input type="hidden" id="idDipendente" name="idDipendente" value=@Model.IdDipendente />
-                                        <input type="hidden" id="tipoRichiesta" name="tipoRichiesta" value="PERMESSO" />
-                                        <input type="hidden" id="idRichiesta" name="idRichiesta" value=@richiesta.IdRichiesta />
-                                    </form>
-                                }
-                            }
-                            else
-                            {
-                                <form action="GestisciRichiesta">
-                                    <button class="btn btn-accetaa">Accetta</button>
-                                    <input type="hidden" id="esitoRichiesta" name="esitoRichiesta" value="accettata" />
-                                    <input type="hidden" id="idDipendente" name="idDipendente" value=@Model.IdDipendente />
-                                    <input type="hidden" id="tipoRichiesta" name="tipoRichiesta" value="MALATTIA" />
-                                    <input type="hidden" id="idRichiesta" name="idRichiesta" value=@richiesta.IdRichiesta />
-                                </form>
-                            }
-                            <form action="GestisciRichiesta">
-                                <button class="btn btn-rifiutata">Rifiuta</button>
-                                <input type="hidden" id="esitoRichiesta" name="esitoRichiesta" value="rifiutata" />
-                                <input type="hidden" id="idDipendente" name="idDipendente" value=@Model.IdDipendente />
-                                <input type="hidden" id="tipoRichiesta" name="tipoRichiesta" value="rifiuto" />
-                                <input type="hidden" id="idRichiesta" name="idRichiesta" value=@richiesta.IdRichiesta />
-                            </form>
-                        }else{
+                        }
+                    }
+                    if (countNuoveRichieste == 0)
+                    {
+                        <li>
+                            Non sono presenti Nuove richieste.
+                        </li>
+                    }
+                }
+            </ul>
+            <h2>Richieste Archiviate</h2>
+            <ul class="lista-richieste">
+                @{
+                    int countRichiesteArchiviate = 0;
+                    foreach (RichiestaViewModel richiesta in Model.Richieste)
+                    {
+                        if (richiesta.Archiviato == true)
+                        {
+                            countRichiesteArchiviate++;
                             <li>
                                 @richiesta.Tipo
                                 @richiesta.DataRichiesta.ToString("yyyy-MM-dd")
-                                @if (richiesta.Confermato == true){
-                                    <span> Richiesta accettata</span>
-                                }else{
-                                    <span> Richiesta rifiutata</span>
+                                @if (richiesta.Confermato == true)
+                                {
+                                    <span class="esito-postivio"> Richiesta accettata</span>
+                                }
+                                else
+                                {
+                                    <span class="esito-postivio"> Richiesta rifiutata</span>
                                 }
                             </li>
                         }
                     }
+                    if (countRichiesteArchiviate == 0)
+                    {
+                        <li>
+                            Non sono presenti richieste archiviate.
+                        </li>
+                    }
                 }
             </ul>
         </div>
+
         <div class="riquadro">
             <h2>Gestione Giorni Disponibili</h2>
-            <form method="post" action="AggiungiGiorniFerie">
-                <span>@Model.GiorniDiFerie</span>
-                <label for="numero">Inserisci numero di giorni da aggiungere:</label>
+            <form method="post" action="AggiungiGiorniFerie" class="form-group">
+                <span>Giorni di ferie disponibili: @Model.GiorniDiFerie</span>
                 <input type="number" id="numeroGiorni" name="numeroGiorni" />
                 <input type="hidden" id="idDipendente" name="IdDipendente" value="@Model.IdDipendente" />
-                <button type="submit">Aggiungi</button>
+                <button type="submit" class="blue-button">Aggiungi</button>
             </form>
-            <form method="post" action="AggiungiGiorniPermesso">
-                <span>@Model.GiorniDiPermesso</span>
-                <label for="numero">Inserisci numero di giorni da aggiungere:</label>
+            <form method="post" action="AggiungiGiorniPermesso" class="form-group">
+                <span>Giorni di permesso disponibili: @Model.GiorniDiPermesso</span>
                 <input type="number" id="numeroGiorni" name="numeroGiorni" />
                 <input type="hidden" id="idDipendente" name="IdDipendente" value="@Model.IdDipendente" />
-                <button type="submit">Aggiungi</button>
+                <button type="submit" class="blue-button">Aggiungi</button>
             </form>
         </div>
     </div>
@@ -102,13 +132,13 @@
 
 else if (Model != null && Model.DipendenteTrovato == false)
 {
-    <div>
+    <div class="dipnontrovato">
         dipendente nonn trovato
     </div>
 }
 else
 {
-    <div>
+    <div class='benvenuto'>
         benvenuto nella sezione gestione assenza
     </div>
 }

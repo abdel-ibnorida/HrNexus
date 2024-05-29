@@ -23,10 +23,20 @@
     background-color: rgba(0, 0, 0, 0.774); /* Trasparente */
     
     color: rgb(255, 255, 255); /* Testo bianco con opacità 50% */
+    background-color: rgba(0, 0, 0, 0.774); /* Trasparente */
+    
+    color: rgb(255, 255, 255); /* Testo bianco con opacità 50% */
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s, color 0.3s; /* Effetto di transizione per il cambio di colore */
+  }
+  
+  .search-btn:hover {
+    background-color: rgba(255, 255, 255, 0.5); /* Sfondo bianco con opacità 50% */
+    color: #000; /* Testo nero */
+  }
     transition: background-color 0.3s, color 0.3s; /* Effetto di transizione per il cambio di colore */
   }
   
@@ -41,7 +51,9 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 20px;
     max-width: 600px;
+    max-width: 600px;
     width: 100%;
+    margin: 0 auto;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -50,9 +62,13 @@
 }
 
 .nav-month {
+
+.nav-month {
     display: flex;
     justify-content: center;
 }
+
+.form-month {
 
 .form-month {
     display: flex;
@@ -74,6 +90,7 @@
     border: none;
     color: #fff;
     padding: 5px 10px; /* Ridurre il padding dei pulsanti di navigazione */
+    padding: 5px 10px; /* Ridurre il padding dei pulsanti di navigazione */
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
@@ -90,6 +107,7 @@
     font-weight: bold;
     color: #333;
     margin: 0 40px; /* Aggiungi un margine di 20px tra il nome del mese e le frecce */
+    margin: 0 40px; /* Aggiungi un margine di 20px tra il nome del mese e le frecce */
 }
 
 /* Calendario */
@@ -97,9 +115,13 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 2px; /* Ridurre il gap per un aspetto più compatto */
+    gap: 2px; /* Ridurre il gap per un aspetto più compatto */
     width: 100%;
 }
 
+.calendar .day,
+.calendar .day-of-week {
+    padding: 5px; /* Ridurre il padding per rendere le celle più compatte */
 .calendar .day,
 .calendar .day-of-week {
     padding: 5px; /* Ridurre il padding per rendere le celle più compatte */
@@ -110,6 +132,11 @@
     background-color: #f7f9fa;
     transition: background-color 0.3s, transform 0.3s;
     box-sizing: border-box;
+}
+
+.calendar .day-of-week {
+    background-color: #ececec;
+    font-weight: bold;
 }
 
 .calendar .day-of-week {

@@ -48,10 +48,13 @@ namespace HrNexus.Models.Services.Application
                 .ToListAsync();*/
                 dipendente.Programmazioni = await dbContext.Programmazioni
                     .Where(p => p.IdDipendente == dipendente.IdDipendente && p.DataGiorno.Year == anno && p.DataGiorno.Month == mese)
-                    .Select(p => new Programmazione {
+                    .Select(p => new Programmazione
+                    {
                         IdProgrammazione = p.IdProgrammazione,
                         IdDipendente = p.IdDipendente,
                         DataGiorno = p.DataGiorno,
+                        InizioTurno = p.InizioTurno,
+                        FineTurno = p.FineTurno,
                         TimbraturaInizio = p.TimbraturaInizio.HasValue ? p.TimbraturaInizio.Value : DateTime.MinValue,
                         TimbraturaUscita = p.TimbraturaUscita.HasValue ? p.TimbraturaUscita.Value : DateTime.MinValue,
                         GiornoFerie = p.GiornoFerie,
@@ -111,7 +114,6 @@ namespace HrNexus.Models.Services.Application
                 .ToListAsync();
             return DipendenteViewModel.FromEntity(dipendente);
         }
-
         public async Task<DipendenteViewModel> GestisciRichiesta(int idDipendente, string esitoRichiesta, string tipoRichiesta, int idRichiesta, int idAzienda)
         {
             Dipendente dipendente = await dbContext.Dipendenti
@@ -229,6 +231,51 @@ namespace HrNexus.Models.Services.Application
                 .Where(r => r.IdDipendente == dipendente.IdDipendente)
                 .ToListAsync();
             return DipendenteViewModel.FromEntity(dipendente);
+        }
+
+        public async Task<DipendenteViewModel> GestisciProgrammazione(int idDipendente, int IdProgrammazione, int idAzienda, int giorno, int mese, int anno, string inizioTurno, string FineTurno, bool giornoFerie, bool giornoPermesso, bool giornoMalattia)
+        {
+
+
+            Dipendente dipendente = await dbContext.Dipendenti
+                .Where(d => d.IdDipendente == idDipendente && d.IdAzienda == idAzienda)
+                .FirstOrDefaultAsync();
+            DateTime dataGiorno = new DateTime(anno, mese, giorno);
+            var timePartsInizio = inizioTurno.Split(':');
+            int oraInzio = int.Parse(timePartsInizio[0]);
+            int minutiInizio = int.Parse(timePartsInizio[1]);
+            var timePartsFine = FineTurno.Split(':');
+            int oraFine = int.Parse(timePartsFine[0]);
+            int minutiFine = int.Parse(timePartsFine[1]);
+            DateTime datetimeInizio = new DateTime(anno, mese, giorno, oraInzio, minutiInizio, 0);
+            DateTime datetimeFine = new DateTime(anno, mese, giorno, oraFine, minutiFine, 0);
+
+            bool nuovaCreazione = IdProgrammazione == 0 ;
+            Programmazione programmazione;
+            if (nuovaCreazione)
+            {
+                // Creazione di una nuova programmazione
+                programmazione = new Programmazione(idDipendente, dataGiorno, datetimeInizio, datetimeFine, giornoFerie, giornoPermesso, giornoMalattia);
+                dbContext.Programmazioni.Add(programmazione);
+                Console.WriteLine("ho creato nuova");
+            }
+            else
+            {
+
+                programmazione = await dbContext.Programmazioni.FindAsync(IdProgrammazione);
+                programmazione.InizioTurno = datetimeInizio;
+                programmazione.FineTurno = datetimeFine;
+                programmazione.GiornoFerie = giornoFerie;
+                programmazione.GiornoPermesso = giornoPermesso;
+                programmazione.GiornoMalattia = giornoMalattia;
+                dbContext.Programmazioni.Update(programmazione);
+                Console.WriteLine("ho tentato la modifica");
+            }
+            dbContext.SaveChanges();
+            dipendente.Programmazioni = await dbContext.Programmazioni
+                .Where(p => p.IdDipendente == idDipendente)
+                .ToListAsync();
+            return DipendenteViewModel.FromEntity(dipendente, mese, anno);
         }
     }
 }

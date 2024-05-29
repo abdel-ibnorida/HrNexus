@@ -53,6 +53,7 @@ namespace HrNexus.Models.ViewModels
                         GiornoMalattia = p.GiornoMalattia,
                         Mese = mese,
                         Anno = anno,
+                        IdDipendente = dipendente.IdDipendente,
                     }).ToList()
                     : new List<ProgrammazioneViewModel>()
                 
