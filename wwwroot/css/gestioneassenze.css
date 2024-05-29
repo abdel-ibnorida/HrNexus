@@ -1,3 +1,4 @@
+/*css barra di ricerca*/
 .search-container {
   display: flex;
   align-items: center;
@@ -35,6 +36,7 @@
   color: #0c0c0c;
 }
 
+/**/
 .riquadro {
   border: 1px solid #ccc;
   padding: 20px;
@@ -62,7 +64,7 @@
 }
 
 .riquadro input[type="number"] {
-  width: 100%;
+  width: 20%;
   padding: 8px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
@@ -70,33 +72,23 @@
   box-sizing: border-box;
 }
 
-.riquadro input[type="submit"] {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #4CAF50;
-  color: white;
-  cursor: pointer;
-}
 
-.riquadro input[type="submit"]:hover {
-  background-color: #45a049;
-}
-
-.riquadro ul {
+.lista-richieste {
   list-style-type: none;
   padding: 0;
 }
 
-.riquadro li {
+.lista-richieste li {
   margin-bottom: 10px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #fff;
+  display: flex;
+  justify-content:space-between;
 }
 
-.riquadro li button {
+.lista-richieste li button {
   margin-left: 5px;
   cursor: pointer;
   border: none;
@@ -104,19 +96,20 @@
   padding: 5px 10px;
 }
 
-.riquadro li button.btn-accetta {
+.lista-richieste li button.btn-accetta {
   background-color: #4CAF50;
   color: white;
 }
 
-.riquadro li button.btn-rifiuta {
+.lista-richieste li button.btn-rifiuta {
   background-color: #f44336;
   color: white;
 }
 
-.riquadro li button:hover {
+.lista-richieste li button:hover {
   background-color: #ddd;
 }
+
 .inline-form {
   display: inline;
 }
@@ -124,6 +117,25 @@
 .btn {
   margin-left: 10px;
 }
+
+.esito-postivio{
+  margin-left: 5px;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  color: white;
+}
+
+.esito-negativo{
+  margin-left: 5px;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  background-color: #f44336;
+  color: white;
+}
+
 .form-group {
   display: flex;
   align-items: center;
@@ -133,8 +145,12 @@
 .form-group label {
   margin-right: 10px;
 }
+.form-group span {
+  width: 60%;
+}
 
 .form-group input[type="number"] {
+  width: 15%;
   margin-right: 10px;
   flex-grow: 1;
 }
