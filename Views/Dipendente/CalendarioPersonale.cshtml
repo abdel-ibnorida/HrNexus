@@ -95,6 +95,8 @@
 
                             <div class="@cssClass">
                                 <i class="fa-solid fa-square-check"></i>
+                                @programmazione.TimbraturaInizio
+                                @programmazione.TimbraturaUscita
                             </div>
                         }
                     }
@@ -169,8 +171,8 @@
 
             inizioTurno.innerText = programmazione.InizioTurno ? getFormattedTimeFromString(programmazione.InizioTurno) : 'Dato non presente';
             fineTurno.innerText = programmazione.FineTurno ? getFormattedTimeFromString(programmazione.FineTurno) : 'Dato non presente';
-            inizioTimbratura.innerText = programmazione.InizioTimbratura ? getFormattedTimeFromString(programmazione.InizioTimbratura) : 'Dato non presente';
-            fineTimbratura.innerText = programmazione.FineTimbratura ? getFormattedTimeFromString(programmazione.FineTimbratura) : 'Dato non presente';
+            inizioTimbratura.innerText = programmazione.TimbraturaInizio =! "00:00:00" ? getFormattedTimeFromString(programmazione.TimbraturaInizio) : 'Dato non presente';
+            fineTimbratura.innerText = programmazione.TimbraturaUscita =! "00:00:00" ? getFormattedTimeFromString(programmazione.TimbraturaUscita) : 'Dato non presente';
             giornoFerie.innerText = programmazione.GiornoFerie ? 'Confermata' : 'No';
             giornoPermesso.innerText = programmazione.GiornoPermesso ? 'Confermata' : 'No';
             giornoMalattia.innerText = programmazione.GiornoMalattia ? 'Confermata' : 'No';
