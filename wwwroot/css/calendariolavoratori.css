@@ -20,64 +20,38 @@
 }
 
 .search-btn {
-    background-color: rgba(0, 0, 0, 0.774); /* Trasparente */
+    background-color: rgba(0, 0, 0, 0.774); 
     
-    color: rgb(255, 255, 255); /* Testo bianco con opacità 50% */
-    background-color: rgba(0, 0, 0, 0.774); /* Trasparente */
-    
-    color: rgb(255, 255, 255); /* Testo bianco con opacità 50% */
+    color: rgb(255, 255, 255); 
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s, color 0.3s; /* Effetto di transizione per il cambio di colore */
+    transition: background-color 0.3s, color 0.3s; 
   }
   
-  .search-btn:hover {
-    background-color: rgba(255, 255, 255, 0.5); /* Sfondo bianco con opacità 50% */
-    color: #000; /* Testo nero */
-  }
-    transition: background-color 0.3s, color 0.3s; /* Effetto di transizione per il cambio di colore */
-  }
-  
-  .search-btn:hover {
-    background-color: rgba(255, 255, 255, 0.5); /* Sfondo bianco con opacità 50% */
-    color: #000; /* Testo nero */
+  .search-btn:hover 
+  {
+    background-color: rgba(255, 255, 255, 0.5); 
+    color: #000; 
   }
 
-/* Contenitore del calendario */
-.calendar-container {
-    background-color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 600px;
-    max-width: 600px;
+.nav-month 
+{
+    display:flex;
     width: 100%;
-    margin: 0 auto;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
 }
 
-.nav-month {
-
-.nav-month {
-    display: flex;
-    justify-content: center;
-}
-
-.form-month {
-
-.form-month {
+.form-month 
+{
     display: flex;
     width: 100%;
     justify-content: center;
 }
 
-/* Selettore del mese */
-.month-selector {
+.month-selector
+{
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -85,46 +59,67 @@
     margin-bottom: 20px;
 }
 
-.month-selector button {
-    background-color: #000000;
+.month-selector button 
+{
+    background-color: rgb(94, 224, 224);
     border: none;
     color: #fff;
-    padding: 5px 10px; /* Ridurre il padding dei pulsanti di navigazione */
-    padding: 5px 10px; /* Ridurre il padding dei pulsanti di navigazione */
+    padding: 5px 10px; 
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
 }
 
-.month-selector button:hover {
-    background-color: #f8f8f8;
+.month-selector button:hover 
+{
+    background-color: rgb(168, 235, 235);
     color: #000;
 }
 
-.month-selector #current-month {
+.month-selector #current-month 
+{
     font-size: 18px;
     font-weight: bold;
     color: #333;
-    margin: 0 40px; /* Aggiungi un margine di 20px tra il nome del mese e le frecce */
-    margin: 0 40px; /* Aggiungi un margine di 20px tra il nome del mese e le frecce */
+    margin: 0 40px; 
+    text-transform: capitalize; 
 }
 
-/* Calendario */
+
+.dipnontrovato {
+    background-color: rgb(248, 69, 69);
+    color:#000;
+    font-family: 'Courier New', Courier, monospace;
+    align-content: center;
+    text-align: center;
+    font-size: 25px;
+    border:solid, pink, 2px;
+    width: 50%;
+}
+.calendar-container {
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 800px; 
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 2px; /* Ridurre il gap per un aspetto più compatto */
-    gap: 2px; /* Ridurre il gap per un aspetto più compatto */
+    gap: 5px; 
     width: 100%;
 }
 
 .calendar .day,
 .calendar .day-of-week {
-    padding: 5px; /* Ridurre il padding per rendere le celle più compatte */
-.calendar .day,
-.calendar .day-of-week {
-    padding: 5px; /* Ridurre il padding per rendere le celle più compatte */
+    padding: 10px; 
     text-align: center;
     cursor: pointer;
     border: 1px solid #ddd;
@@ -132,11 +127,7 @@
     background-color: #f7f9fa;
     transition: background-color 0.3s, transform 0.3s;
     box-sizing: border-box;
-}
-
-.calendar .day-of-week {
-    background-color: #ececec;
-    font-weight: bold;
+    font-size: 18px; 
 }
 
 .calendar .day-of-week {
@@ -156,30 +147,141 @@
 }
 
 .regolare {
-    border: 2px solid green;
+    border: 3px solid green;
+    background-color: green;
 }
 
 .irregolare {
-    border: 2px solid red;
+    border: 3px solid red;
+    background-color: red;
 }
 
 .ferie {
-    border: 2px solid orange;
+    border: 3px solid orange;
+    background-color: orange;
 }
 
 .malattia {
-    border: 2px solid purple;
+    border: 3px solid purple;
+    background-color: purple;
 }
 
 .permesso {
-    border: 2px solid yellow;
+    border: 3px solid yellow;
+    background-color: yellow;
 }
+
 .dipnontrovato {
     background-color: rgb(248, 69, 69);
-    color:#000;
+    color: #000;
     font-family: 'Courier New', Courier, monospace;
     align-content: center;
     text-align: center;
     font-size: 25px;
-    border:solid, pink, 2px;
+    border: solid pink 2px; 
+    width: 30%;
 }
+
+#programmazioneModal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+
+#modalTitle {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+
+#programmazioneForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+label {
+    font-size: 16px;
+    color: #555;
+}
+
+
+input[type="time"],
+input[type="checkbox"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+}
+
+
+button{
+    background-color: rgb(94, 224, 224);
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: rgb(168, 235, 235);
+}
+
+
+#current-month {
+    text-transform: capitalize;
+}
+.content {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+
+
+
+
+
+
