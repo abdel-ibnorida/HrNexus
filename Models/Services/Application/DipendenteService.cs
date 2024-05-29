@@ -51,5 +51,51 @@ namespace HrNexus.Models.Services.Application
                 return DipendenteViewModel.FromEntity(dipendente, mese, anno);
             }
         }
+        public async Task<DipendenteViewModel> GestisciTimbratura(int idDipendente, int idAzienda, int idProgrammazione, int giorno, int mese, int anno, string timbratura)
+        {
+            Dipendente dipendente = await dbContext.Dipendenti
+               .Where(d => d.IdDipendente == idDipendente && d.IdAzienda == idAzienda)
+               .FirstOrDefaultAsync();
+
+            if (dipendente == null)
+            {
+                DipendenteViewModel modelVuoto = new DipendenteViewModel();
+                modelVuoto.DipendenteTrovato = false;
+                return modelVuoto;
+            }
+            else
+            {   
+                Programmazione programmazione = await dbContext.Programmazioni.FindAsync(idProgrammazione);
+                if (timbratura == "ingresso")
+                {
+                    programmazione.TimbraturaInizio = DateTime.Now;
+                }
+                else
+                {
+                    programmazione.TimbraturaUscita = DateTime.Now;
+                }
+                dbContext.Programmazioni.Update(programmazione);
+                dbContext.SaveChanges();
+                dipendente.Programmazioni = await dbContext.Programmazioni
+                   .Where(p => p.IdDipendente == dipendente.IdDipendente && p.DataGiorno.Year == anno && p.DataGiorno.Month == mese)
+                   .Select(p => new Programmazione
+                   {
+                       IdProgrammazione = p.IdProgrammazione,
+                       IdDipendente = p.IdDipendente,
+                       DataGiorno = p.DataGiorno,
+                       InizioTurno = p.InizioTurno,
+                       FineTurno = p.FineTurno,
+                       TimbraturaInizio = p.TimbraturaInizio.HasValue ? p.TimbraturaInizio.Value : DateTime.MinValue,
+                       TimbraturaUscita = p.TimbraturaUscita.HasValue ? p.TimbraturaUscita.Value : DateTime.MinValue,
+                       GiornoFerie = p.GiornoFerie,
+                       GiornoMalattia = p.GiornoMalattia,
+                       GiornoPermesso = p.GiornoPermesso,
+                   })
+                   .ToListAsync();
+                
+                return DipendenteViewModel.FromEntity(dipendente, mese, anno);
+            }
+        }
+
     }
 }

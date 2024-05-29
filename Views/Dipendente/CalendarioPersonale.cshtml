@@ -106,4 +106,91 @@
             }
         </div>
     </div>
+    <div id="programmazioneModal" class="modal">
+        <div class="modal-content">
+            <span id="spanAvviso">Non esiste nessuna programmazione per questa data</span>
+            <form id="programmazioneForm" asp-action="GestisciTimbratura" method="post">
+                <h2 id="modalTitle">Gestisci Programmazione</h2>
+                <input type="hidden" id="giornoModale" name="giornoModale" />
+                <input type="hidden" id="meseModale" name="meseModale" />
+                <input type="hidden" id="annoModale" name="annoModale" />
+                <input type="hidden" id="idProgrammazione" name="idProgrammazione" />
+                <label for="inizioTurno">Inizio Turno:</label>
+                <span id="inizioTurnoModale" name="inizioTurnoModale"></span>
+
+                <label for="fineTurno">Fine Turno:</label>
+                <span id="fineTurnoModale" name="fineTurnoModale"></span>
+
+                <label for="inizioTurno">Timbratura Inizio:</label>
+                <span id="inizioTimbraturaModale" name="inizioTurnoModale"></span>
+
+                <label for="fineTurno">Timbratura Fine:</label>
+                <span id="fineTimbraturaModale" name="fineTurnoModale"></span>
+
+                <label for="giornoFerie">Giorno di Ferie:</label>
+                <span id="giornoFerieModale" name="giornoFerieModale"></span>
+
+                <label for="giornoPermesso">Giorno di Permesso:</label>
+                <span id="giornoPermessoModale" name="giornoPermessoModale"></span>
+
+                <label for="giornoMalattia">Giorno di Malattia:</label>
+                <span id="giornoMalattiaModale" name="giornoMalattiaModale"></span>
+                <br />
+                <button type="submit" name="timbratura" value="ingresso">Timbra Ingresso</button>
+                <button type="submit" name="timbratura" value="uscita">Timbra Uscita</button>
+            </form>
+        </div>
+    </div>
 }
+<script>
+    const modal = document.getElementById('programmazioneModal');
+
+    function gestisciProgrammazione(giorno, mese, anno, programmazione) {
+
+        document.getElementById('giornoModale').value = giorno;
+        document.getElementById('meseModale').value = mese;
+        document.getElementById('annoModale').value = anno;
+
+        const modalTitle = document.getElementById('modalTitle');
+        const inizioTurno = document.getElementById('inizioTurnoModale');
+        const fineTurno = document.getElementById('fineTurnoModale');
+        const inizioTimbratura = document.getElementById('inizioTimbraturaModale');
+        const fineTimbratura = document.getElementById('fineTimbraturaModale');
+        const giornoFerie = document.getElementById('giornoFerieModale');
+        const giornoPermesso = document.getElementById('giornoPermessoModale');
+        const giornoMalattia = document.getElementById('giornoMalattiaModale');
+        const programmazioneForm = document.getElementById('programmazioneForm');
+        const spanAvviso = document.getElementById('spanAvviso');
+
+        if (programmazione) {
+            modal.style.display = 'block';
+            spanAvviso.style.display = 'none';
+            programmazioneForm.style.display = 'block';
+
+            inizioTurno.innerText = programmazione.InizioTurno ? getFormattedTimeFromString(programmazione.InizioTurno) : 'Dato non presente';
+            fineTurno.innerText = programmazione.FineTurno ? getFormattedTimeFromString(programmazione.FineTurno) : 'Dato non presente';
+            inizioTimbratura.innerText = programmazione.InizioTimbratura ? getFormattedTimeFromString(programmazione.InizioTimbratura) : 'Dato non presente';
+            fineTimbratura.innerText = programmazione.FineTimbratura ? getFormattedTimeFromString(programmazione.FineTimbratura) : 'Dato non presente';
+            giornoFerie.innerText = programmazione.GiornoFerie ? 'Confermata' : 'No';
+            giornoPermesso.innerText = programmazione.GiornoPermesso ? 'Confermata' : 'No';
+            giornoMalattia.innerText = programmazione.GiornoMalattia ? 'Confermata' : 'No';
+            document.getElementById('idProgrammazione').value = programmazione.IdProgrammazione;
+        } else {
+            programmazioneForm.style.display = 'none';
+            modal.style.display = 'block';
+        }
+        modal.style.display = 'block';
+    }
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    function getFormattedTimeFromString(date) {
+        const timePart = date.substring(11, 19);
+
+        return timePart;
+    }
+</script>
