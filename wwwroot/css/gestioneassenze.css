@@ -20,7 +20,7 @@
 }
 
 .search-btn {
-  background-color: #141313;
+  background-color: rgba(0, 0, 0, 0.61); /* nero trasparente */
   border: none;
   color: #fff;
   padding: 10px 20px;
@@ -31,8 +31,8 @@
 }
 
 .search-btn:hover {
-  background-color: rgb(255, 255, 255);
-  color: #000;
+  background-color: rgba(255, 255, 255, 0.493); /* nero trasparente più scuro al passaggio del mouse */
+  color: #0c0c0c;
 }
 
 .riquadro {
@@ -116,4 +116,50 @@
 
 .riquadro li button:hover {
   background-color: #ddd;
+}
+.inline-form {
+  display: inline;
+}
+
+.btn {
+  margin-left: 10px;
+}
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  margin-right: 10px;
+}
+
+.form-group input[type="number"] {
+  margin-right: 10px;
+  flex-grow: 1;
+}
+
+.form-group button {
+  margin-left: 10px;
+}
+
+.blue-button {
+  background-color: rgb(44, 44, 230);
+  color: white;
+  margin-left: 5px;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+
+.blue-button:hover {
+  background-color: darkblue;
+}
+.dipnontrovato {
+  background-color: #f44336;
+  border: groove, pink, 2px;
+  text-align: center;
+  font-family:'Courier New', Courier, monospace;
+  font-size: 30px;
 }
