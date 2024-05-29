@@ -1,5 +1,6 @@
 @using System.Text.Json
 @model DipendenteViewModel
+
 <link rel="stylesheet" href="~/css/calendariolavoratori.css">
 <div class="search-container">
     <form asp-action="CalendarioLavoratori" method="get">
@@ -17,90 +18,109 @@
         int meseCorrente = Model.MeseProgrammazione;
         int annoCorrente = Model.AnnoProgrammazione;
         string meseTestuale = new DateTime(Model.AnnoProgrammazione, Model.MeseProgrammazione, 1).ToString("MMMM");
-        <div class="nav-month">
-            <form class="form-month" asp-action="CalendarioLavoratori" method="get">
-                <input type="hidden" name="nome" value="@Model.Nome" />
-                <input type="hidden" name="annoCorrente" value="@Model.AnnoProgrammazione" />
-                <input type="hidden" name="meseCorrente" value="@Model.MeseProgrammazione" />
-                <div class="month-selector">
-                    <button type="submit" name="direzione" value="precedente">precedente</button>
-                    <span>@meseTestuale</span>
-                    <span>@annoCorrente</span>
-                    <button type="submit" name="direzione" value="successivo">successivo</button>
-                </div>
-            </form>
-        </div>
-        <div class="calendar">
-            @for (int i = 1; i <= DateTime.DaysInMonth(Model.AnnoProgrammazione, Model.MeseProgrammazione); i++)
-            {
-                ProgrammazioneViewModel programmazione = Model.Programmazioni.FirstOrDefault(pm => pm.DataGiorno.Day == i);
-                var jsonModel = JsonSerializer.Serialize(programmazione);
-                string inizioTurnoJs = "";
-                string fineTurnoJs = "";
-                if (programmazione != null)
+        int giorniNelMese = DateTime.DaysInMonth(annoCorrente, meseCorrente);
+        int primoGiornoDellaSettimana = (int)new DateTime(annoCorrente, meseCorrente, 1).DayOfWeek;
+        primoGiornoDellaSettimana = primoGiornoDellaSettimana == 0 ? 7 : primoGiornoDellaSettimana;
+        <div class="calendar-container">
+
+            <div class="nav-month">
+                <form class="form-month" asp-action="CalendarioLavoratori" method="get">
+                    <input type="hidden" name="nome" value="@Model.Nome" />
+                    <input type="hidden" name="annoCorrente" value="@Model.AnnoProgrammazione" />
+                    <input type="hidden" name="meseCorrente" value="@Model.MeseProgrammazione" />
+                    <div class="month-selector">
+                        <button type="submit" name="direzione" value="precedente">Precedente</button>
+                        <span>@meseTestuale @annoCorrente</span>
+                        <button type="submit" name="direzione" value="successivo">Successivo</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="calendar">
+                <div class="day-of-week">Lunedì</div>
+                <div class="day-of-week">Martedì</div>
+                <div class="day-of-week">Mercoledì</div>
+                <div class="day-of-week">Giovedì</div>
+                <div class="day-of-week">Venerdì</div>
+                <div class="day-of-week">Sabato</div>
+                <div class="day-of-week">Domenica</div>
+                @for (int i = 1; i < primoGiornoDellaSettimana; i++)
                 {
-                    inizioTurnoJs = programmazione.InizioTurno.ToString("yyyy-MM-ddTHH:mm:ss");
-                    fineTurnoJs = programmazione.FineTurno.ToString("yyyy-MM-ddTHH:mm:ss");
+                    <div class="day empty"></div>
                 }
-                <div class="day">
-                    <i class="fa-solid fa-circle-info"
-                        onclick='gestisciProgrammazione(@i, @Model.MeseProgrammazione, @Model.AnnoProgrammazione, @Html.Raw(jsonModel.Replace("'", "\'")), @Model.IdDipendente)'></i>
-                    @i
-                    @{
-                        if (programmazione != null)
-                        {
-                            string cssClass = "";
-                            bool isTimbraturaIrregolare = false; // Da rivedere la logica per questa variabile
-                            bool isTimbraturaRegolare = true; // Da rivedere la logica per questa variabile
-                            TimeSpan durataProgrammata = programmazione.InizioTurno - programmazione.FineTurno;
-
-                            if (programmazione.TimbraturaInizio != null && programmazione.TimbraturaUscita != null)
-                            {
-                                TimeSpan? durataEffettiva = programmazione.TimbraturaInizio - programmazione.TimbraturaUscita;
-                                TimeSpan? differenza = durataProgrammata - durataEffettiva;
-                                if (differenza.HasValue && differenza.Value.TotalMinutes > 15)
-                                {
-                                    isTimbraturaIrregolare = true;
-                                }
-                                else
-                                {
-                                    isTimbraturaRegolare = true;
-                                }
-                            }
-                            bool isFerie = programmazione.GiornoFerie;
-                            bool isPermesso = programmazione.GiornoPermesso;
-                            bool isMalattia = programmazione.GiornoMalattia;
-
-                            if (isTimbraturaRegolare)
-                            {
-                                cssClass = "regolare";
-                            }
-                            if (isTimbraturaIrregolare)
-                            {
-                                cssClass = "irregolare";
-                            }
-                            if (isFerie)
-                            {
-                                cssClass = "ferie";
-                            }
-                            if (isMalattia)
-                            {
-                                cssClass = "malattia";
-                            }
-                            if (isPermesso)
-                            {
-                                cssClass = "permesso";
-                            }
-
-                            <div class="@cssClass">
-                                <i class="fa-solid fa-square-check"></i>
-                                <span>id: @programmazione.IdProgrammazione</span>
-                            </div>
-                        }
+                @for (int i = 1; i <= giorniNelMese; i++)
+                {
+                    ProgrammazioneViewModel programmazione = Model.Programmazioni.FirstOrDefault(pm => pm.DataGiorno.Day == i);
+                    var jsonModel = JsonSerializer.Serialize(programmazione);
+                    string inizioTurnoJs = "";
+                    string fineTurnoJs = "";
+                    if (programmazione != null)
+                    {
+                        inizioTurnoJs = programmazione.InizioTurno.ToString("yyyy-MM-ddTHH:mm:ss");
+                        fineTurnoJs = programmazione.FineTurno.ToString("yyyy-MM-ddTHH:mm:ss");
                     }
-                </div>
-            }
+                    <div class="day" onclick='gestisciProgrammazione(@i, @Model.MeseProgrammazione, @Model.AnnoProgrammazione, @Html.Raw(jsonModel.Replace("'", "\'")), @Model.IdDipendente)'>
+                        @i
+                        @{
+                            if (programmazione != null)
+                            {
+                                string cssClass = "";
+                                bool isTimbraturaIrregolare = false; // Da rivedere la logica per questa variabile
+                                bool isTimbraturaRegolare = true; // Da rivedere la logica per questa variabile
+                                TimeSpan durataProgrammata = programmazione.InizioTurno - programmazione.FineTurno;
+
+                                if (programmazione.TimbraturaInizio != null && programmazione.TimbraturaUscita != null)
+                                {
+                                    TimeSpan? durataEffettiva = programmazione.TimbraturaInizio - programmazione.TimbraturaUscita;
+                                    TimeSpan? differenza = durataProgrammata - durataEffettiva;
+                                    if (differenza.HasValue && differenza.Value.TotalMinutes > 15)
+                                    {
+                                        isTimbraturaIrregolare = true;
+                                    }
+                                    else
+                                    {
+                                        isTimbraturaRegolare = true;
+                                    }
+                                }
+                                bool isFerie = programmazione.GiornoFerie;
+                                bool isPermesso = programmazione.GiornoPermesso;
+                                bool isMalattia = programmazione.GiornoMalattia;
+
+                                if (isTimbraturaRegolare)
+                                {
+                                    cssClass = "regolare";
+                                }
+                                if (isTimbraturaIrregolare)
+                                {
+                                    cssClass = "irregolare";
+                                }
+                                if (isFerie)
+                                {
+                                    cssClass = "ferie";
+                                }
+                                if (isMalattia)
+                                {
+                                    cssClass = "malattia";
+                                }
+                                if (isPermesso)
+                                {
+                                    cssClass = "permesso";
+                                }
+
+                                <div class="@cssClass">
+                                    <i class="fa-solid fa-square-check"></i>
+                                </div>
+                            }
+                        }
+                    </div>
+                }
+                @for (int i = (primoGiornoDellaSettimana + giorniNelMese - 1) % 7; i < 7 && i > 0; i++)
+                {
+                    <div class="day empty"></div>
+                }
+            </div>
         </div>
+        /*modale che gestisce la programmazione del giorno cliccato*/
         <div id="programmazioneModal" class="modal">
             <div class="modal-content">
                 <form id="programmazioneForm" asp-action="GestisciProgrammazione" method="post">
