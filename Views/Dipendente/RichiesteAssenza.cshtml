@@ -1,0 +1,75 @@
+@model DipendenteViewModel
+
+<link rel="stylesheet" href="~/css/gestioneassenze.css">
+<div class="container">
+    <div class="riquadro">
+        <h2>Richieste in sospeso</h2>
+        <ul class="lista-richieste">
+            @{
+                int countRichiesteSospeso = 0;
+                foreach (RichiestaViewModel richiesta in Model.Richieste)
+                {
+                    if (richiesta.Archiviato == false)
+                    {
+                        countRichiesteSospeso++;
+                        <li>
+                            @richiesta.Tipo
+                            @richiesta.DataRichiesta.ToString("yyyy-MM-dd")
+                        </li>
+                    }
+                }
+                if (countRichiesteSospeso == 0)
+                {
+                    <li>
+                        Non sono presenti richieste in sospeso.
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+    <div class="riquadro">
+        <h2>Richieste archiviate</h2>
+        <ul class="lista-richieste">
+            @{
+                int countRichiesteArchiviate = 0;
+                foreach (RichiestaViewModel richiesta in Model.Richieste)
+                {
+                    if (richiesta.Archiviato == true)
+                    {
+                        countRichiesteArchiviate++;
+                        <li>
+                            @richiesta.Tipo
+                            @richiesta.DataRichiesta.ToString("yyyy-MM-dd")
+                            @if (richiesta.Confermato == true)
+                            {
+                                <span class="esito-postivio"> Richiesta accettata</span>
+                            }
+                            else
+                            {
+                                <span class="esito-postivio"> Richiesta rifiutata</span>
+                            }
+                        </li>
+                    }
+                }
+                if (countRichiesteArchiviate == 0)
+                {
+                    <li>
+                        Non sono presenti richieste archiviate.
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+    <div class="riquadro">
+        <form asp-action="InviaRichiesta" method="post">
+            <input type="date"  name="dataRichiesta" required>
+            <select name="sceltaTipo">
+                <option value="malattia">malattia</option>
+                <option value="permesso">permesso</option>
+                <option value="ferie">ferie</option>
+            </select>
+            
+            <button type="submit">Manda richiesta</button>
+        </form>
+    </div>
+</div>

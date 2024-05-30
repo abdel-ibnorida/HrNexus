@@ -78,14 +78,17 @@ namespace HrNexus.Controllers
         public async Task<ActionResult> GestisciTimbratura(int idProgrammazione, int giornoModale, int meseModale, int annoModale, string timbratura)
         {
             int idDipendente = Convert.ToInt32(HttpContext.Session.GetString("IdDipendente"));
-            int idAzienda = Convert.ToInt32(HttpContext.Session.GetString("IdAzienda")); 
+            int idAzienda = Convert.ToInt32(HttpContext.Session.GetString("IdAzienda"));
 
-            DipendenteViewModel dipendente = await dipendenteService.GestisciTimbratura(idDipendente, idAzienda, idProgrammazione, giornoModale, meseModale,annoModale, timbratura);
+            DipendenteViewModel dipendente = await dipendenteService.GestisciTimbratura(idDipendente, idAzienda, idProgrammazione, giornoModale, meseModale, annoModale, timbratura);
             return View("CalendarioPersonale", dipendente);
         }
-        public IActionResult RichiestaAssenze()
+        public async Task<ActionResult> RichiesteAssenza()
         {
-            return View();
+            int idDipendente = Convert.ToInt32(HttpContext.Session.GetString("IdDipendente"));
+            int idAzienda = Convert.ToInt32(HttpContext.Session.GetString("IdAzienda"));
+            DipendenteViewModel dipendente = await dipendenteService.RichiesteDipendente(idDipendente, idAzienda);
+            return View(dipendente);
         }
     }
 }

@@ -11,5 +11,6 @@ namespace HrNexus.Models.Services.Application
     { 
         Task<DipendenteViewModel> ProgrammazioniLavoratore(int idDipendente,int idAzienda, int mese, int anno);
         Task<DipendenteViewModel> GestisciTimbratura(int idDipendente, int idAzienda,int idProgrammazione, int giorno, int mese, int anno, string timbratura);
+        Task<DipendenteViewModel> RichiesteDipendente(int idDipendente, int idAzienda);
     }
 }

@@ -96,6 +96,27 @@ namespace HrNexus.Models.Services.Application
                 return DipendenteViewModel.FromEntity(dipendente, mese, anno);
             }
         }
+         public async Task<DipendenteViewModel> RichiesteDipendente(int idDipendente, int idAzienda)
+        {
+            Dipendente dipendente = await dbContext.Dipendenti
+                .Where(d => d.IdDipendente == idDipendente && d.IdAzienda == idAzienda)
+                .FirstOrDefaultAsync();
 
+
+            if (dipendente == null)
+            {
+                DipendenteViewModel modelVuoto = new DipendenteViewModel();
+                modelVuoto.DipendenteTrovato = false;
+                return modelVuoto;
+            }
+            else
+            {
+                dipendente.Richieste = await dbContext.Richieste
+                .Where(r => r.IdDipendente == dipendente.IdDipendente)
+                .ToListAsync();
+                return DipendenteViewModel.FromEntity(dipendente);
+            }
+
+        }
     }
 }
