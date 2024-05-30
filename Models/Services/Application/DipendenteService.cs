@@ -96,6 +96,52 @@ namespace HrNexus.Models.Services.Application
                 return DipendenteViewModel.FromEntity(dipendente, mese, anno);
             }
         }
+         public async Task<DipendenteViewModel> RichiesteDipendente(int idDipendente, int idAzienda)
+        {
+            Dipendente dipendente = await dbContext.Dipendenti
+                .Where(d => d.IdDipendente == idDipendente && d.IdAzienda == idAzienda)
+                .FirstOrDefaultAsync();
 
+
+            if (dipendente == null)
+            {
+                DipendenteViewModel modelVuoto = new DipendenteViewModel();
+                modelVuoto.DipendenteTrovato = false;
+                return modelVuoto;
+            }
+            else
+            {
+                dipendente.Richieste = await dbContext.Richieste
+                .Where(r => r.IdDipendente == dipendente.IdDipendente)
+                .ToListAsync();
+                return DipendenteViewModel.FromEntity(dipendente);
+            }
+
+        }
+        public async Task<DipendenteViewModel> InviaRichiesta(int idDipendente, int idAzienda, string dataRichiesta, string sceltaTipo)
+        {
+            Dipendente dipendente = await dbContext.Dipendenti
+                .Where(d => d.IdDipendente == idDipendente && d.IdAzienda == idAzienda)
+                .FirstOrDefaultAsync();
+            if (dipendente == null)
+            {
+                DipendenteViewModel modelVuoto = new DipendenteViewModel();
+                modelVuoto.DipendenteTrovato = false;
+                return modelVuoto;
+            }
+            else
+            {
+                bool confermato = false;
+                bool archiviato = false;
+                DateTime data = DateTime.Now;
+                Richiesta nuovaRichiesta = new Richiesta(data, idDipendente, confermato, archiviato, sceltaTipo);
+                dbContext.Richieste.Add(nuovaRichiesta);
+                dbContext.SaveChanges();
+                dipendente.Richieste = await dbContext.Richieste
+                    .Where(r => r.IdDipendente == dipendente.IdDipendente)
+                    .ToListAsync();
+                return DipendenteViewModel.FromEntity(dipendente);
+            }
+        }
     }
 }
