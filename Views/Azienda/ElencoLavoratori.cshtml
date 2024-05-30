@@ -24,7 +24,7 @@
                 <td>@dipendente.Nome</td>
                 <td>@dipendente.Cognome</td>
                 <td>@dipendente.Email</td>
-                <td><button onclick="editEmployee(@Html.Raw(jsonModel))">i</button></td>
+                <td><button onclick='editEmployee(@Html.Raw(jsonModel.Replace("\"", "&quot;")))'>i</button></td>
             </tr>
         }
     </tbody>

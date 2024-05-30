@@ -60,7 +60,7 @@
                         fineTurnoJs = programmazione.FineTurno.ToString("yyyy-MM-ddTHH:mm:ss");
                     }
                     <div class="day"
-                        onclick='gestisciProgrammazione(@i, @Model.MeseProgrammazione, @Model.AnnoProgrammazione, @Html.Raw(jsonModel.Replace("'", "\'")), @Model.IdDipendente)'>
+                        onclick='gestisciProgrammazione(@i, @Model.MeseProgrammazione, @Model.AnnoProgrammazione, @Html.Raw(jsonModel.Replace("'" , "\'")), @Model.IdDipendente)'>
                         @i
                         @{
                             if (programmazione != null)
