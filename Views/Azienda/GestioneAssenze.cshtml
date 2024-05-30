@@ -1,7 +1,7 @@
 @model DipendenteViewModel
 <link rel="stylesheet" href="~/css/gestioneassenze.css">
 <div class="search-container">
-    <form asp-action="GestioneAssenze" method="get">
+    <form asp-action="GestioneAssenze" method="post">
         <input class="search" type="text" id="nome" name="nome" placeholder="Cerca dipendente" />
         <button class="search-btn" type="submit" id="ricarca-button">Cerca</button>
     </form>

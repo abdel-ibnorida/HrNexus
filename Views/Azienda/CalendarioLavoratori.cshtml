@@ -3,7 +3,7 @@
 
 <link rel="stylesheet" href="~/css/calendariolavoratori.css">
 <div class="search-container">
-    <form asp-action="CalendarioLavoratori" method="get">
+    <form asp-action="CalendarioLavoratori" method="post">
         <input class="search" type="text" id="nome" name="nome" placeholder="Cerca dipendente" />
         <input type="hidden" id="annoCorrente" name="annoCorrente" />
         <input type="hidden" id="meseCorrente" name="meseCorrente" />
@@ -24,7 +24,7 @@
         <div class="calendar-container">
 
             <div class="nav-month">
-                <form class="form-month" asp-action="CalendarioLavoratori" method="get">
+                <form class="form-month" asp-action="CalendarioLavoratori" method="post">
                     <input type="hidden" name="nome" value="@Model.Nome" />
                     <input type="hidden" name="annoCorrente" value="@Model.AnnoProgrammazione" />
                     <input type="hidden" name="meseCorrente" value="@Model.MeseProgrammazione" />
@@ -59,7 +59,8 @@
                         inizioTurnoJs = programmazione.InizioTurno.ToString("yyyy-MM-ddTHH:mm:ss");
                         fineTurnoJs = programmazione.FineTurno.ToString("yyyy-MM-ddTHH:mm:ss");
                     }
-                    <div class="day" onclick='gestisciProgrammazione(@i, @Model.MeseProgrammazione, @Model.AnnoProgrammazione, @Html.Raw(jsonModel.Replace("'", "\'")), @Model.IdDipendente)'>
+                    <div class="day"
+                        onclick='gestisciProgrammazione(@i, @Model.MeseProgrammazione, @Model.AnnoProgrammazione, @Html.Raw(jsonModel.Replace("'", "\'")), @Model.IdDipendente)'>
                         @i
                         @{
                             if (programmazione != null)

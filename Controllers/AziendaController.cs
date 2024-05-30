@@ -36,7 +36,7 @@ namespace HrNexus.Controllers
         {
             return View();
         }
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> CalendarioLavoratori(string nome, int meseCorrente, int annoCorrente, string direzione)
         {
 
@@ -75,7 +75,7 @@ namespace HrNexus.Controllers
         {
             return View();
         }
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> GestioneAssenze(string nome)
         {  
             int IdAzienda = Convert.ToInt32(HttpContext.Session.GetString("IdAzienda")); //recuperare l'id dell'azienda loggata
