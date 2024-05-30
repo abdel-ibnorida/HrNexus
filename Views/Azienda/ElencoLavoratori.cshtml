@@ -47,7 +47,11 @@
         var modalEmail = document.getElementById('employee-email');
         var modalStipendio = document.getElementById('employee-stipendio');
         var modalValutazione = document.getElementById('employee-valutazione');
-        modalNome.value = "Mario";
+        modalNome.value = dipendente.Nome;
+        modalCognome.value = dipendente.Cognome;
+        modalEmail.value = dipendente.Email;
+        modalStipendio.value = dipendente.Stipendio;
+        modalValutazione.value = dipendente.Valutazione;
         modal.style.display = 'block';
     }
     window.onclick = function (event) {
