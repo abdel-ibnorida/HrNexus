@@ -1,11 +1,11 @@
-@model UserViewModel
+
 @inject IHttpContextAccessor Accessor
-@if (Model is AziendaViewModel || @Accessor.HttpContext.Session.GetString("TipoUtente") == "azienda" ){
+@if (@Accessor.HttpContext.Session.GetString("TipoUtente") == "azienda" ){
     <div>
         benevenuto azienda 
     </div>
 }
-else if(Model is DipendenteViewModel || @Accessor.HttpContext.Session.GetString("TipoUtente") == "dipendente")
+else if(@Accessor.HttpContext.Session.GetString("TipoUtente") == "dipendente")
 {
     <div>
         benevenuto dipendnete 

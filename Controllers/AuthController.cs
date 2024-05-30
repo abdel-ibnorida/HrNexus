@@ -36,10 +36,10 @@ namespace HrNexus.Controllers
             {
                 if (user is Azienda azienda)
                 {
-                    AziendaViewModel model = new AziendaViewModel();
+                    /*AziendaViewModel model = new AziendaViewModel();
                     model.Username = azienda.Username;
                     model.Nome = azienda.Nome;
-                    model.IdAzienda = azienda.IdAzienda;
+                    model.IdAzienda = azienda.IdAzienda;*/
                     accessor.HttpContext.Session.SetString("Username", azienda.Username); 
                     accessor.HttpContext.Session.SetString("Nome", azienda.Nome);
                     accessor.HttpContext.Session.SetString("TipoUtente", "azienda");
@@ -49,10 +49,10 @@ namespace HrNexus.Controllers
                 }
                 else if (user is Dipendente dipendente)
                 {
-                    DipendenteViewModel model = new DipendenteViewModel();
+                   /* DipendenteViewModel model = new DipendenteViewModel();
                     model.Username = dipendente.Username;
                     model.Nome = dipendente.Nome;
-                    model.IdDipendente = dipendente.IdDipendente;
+                    model.IdDipendente = dipendente.IdDipendente;*/
                     accessor.HttpContext.Session.SetString("Username", dipendente.Username);
                     accessor.HttpContext.Session.SetString("Nome", dipendente.Nome);
                     accessor.HttpContext.Session.SetString("TipoUtente", "dipendente");
