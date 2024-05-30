@@ -25,6 +25,7 @@ namespace HrNexus.Models.ViewModels
                     Cognome = d.Cognome,
                     Email = d.Email,
                     Stipendio = d.Stipendio,
+                    Valutazione = d.Valutazione,
                 }).ToList()
             };
         }

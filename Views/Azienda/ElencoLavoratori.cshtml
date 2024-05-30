@@ -1,100 +1,59 @@
 @model AziendaViewModel
-    <link rel="stylesheet" href="~/css/elencolavoratori.css">
+@using System.Text.Json
+<link rel="stylesheet" href="~/css/elencolavoratori.css">
 
-    <div class="search-container">
-        <input type="text" id="search" placeholder="Cerca dipendente...">
-        <button id="search-button">Cerca</button>
-    </div>
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th style="min-width: 150px;">Nome</th>
-                <th style="min-width: 150px;">Cognome</th>
-                <th>Email</th>
+<div class="search-container">
+    <input type="text" id="search" placeholder="Cerca dipendente...">
+    <button id="search-button">Cerca</button>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th style="min-width: 150px;">Nome</th>
+            <th style="min-width: 150px;">Cognome</th>
+            <th>Email</th>
+            <th>Azioni</th>
     </thead>
-        <tbody>
-             @foreach (DipendenteViewModel dipendente in Model.Dipendenti)
-                {
-                    <tr>
-                        <td>@dipendente.IdDipendente</td>
-                        <td>@dipendente.Nome</td>
-                        <td>@dipendente.Cognome</td>
-                        <td>@dipendente.Email</td>
-                        <td><button onclick="editEmployee(this)">i</button></td>
-                    </tr>
-                }
-        </tbody>
-    </table>
-
-   
- <div class="modal" id="modal">
+    <tbody>
+        @foreach (DipendenteViewModel dipendente in Model.Dipendenti)
+        {
+            var jsonModel = JsonSerializer.Serialize(dipendente);
+            <tr>
+                <td>@dipendente.IdDipendente</td>
+                <td>@dipendente.Nome</td>
+                <td>@dipendente.Cognome</td>
+                <td>@dipendente.Email</td>
+                <td><button onclick="editEmployee(@Html.Raw(jsonModel))">i</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="modal" id="modal">
     <div class="modal-content">
-        <span class="close" id="close">&times;</span>
-        <h2 id="employee-name">Nome Cognome</h2>
         <input type="text" id="employee-nome" placeholder="Nome">
         <input type="text" id="employee-cognome" placeholder="Cognome">
-        <input type="date" id="employee-data-nascita" placeholder="Data di nascita">
-        <input type="text" id="employee-nazionalita" placeholder="Nazionalità">
-        <input type="text" id="employee-residenza" placeholder="Residenza">
-        <input type="text" id="employee-citta" placeholder="Città">
-        <input type="text" id="employee-cap" placeholder="CAP">
-        <input type="tel" id="employee-telefono" placeholder="Telefono">
-        <input type="email" id="employee-email" placeholder="Email">
-        
-        <button onclick="saveChanges()">Salva</button>
+        <input type="text" id="employee-data-nascita" placeholder="Data di nascita">
+        <input type="text" id="employee-email" placeholder="Email">
+        <input type="text" id="employee-stipendio" placeholder="Stipendio">
+        <input type="text" id="employee-valutazione" placeholder="Valutazione">
     </div>
 </div>
 <script>
-    function editEmployee(button) {
- 
-    var nome = "Mario";
-    var cognome = "Rossi";
-    var email = "mariorossi45@gmail.com";
-    var numero = "3950269105";
-    var id = "MR40353";
-    var longevita = "7 anni";
+    function editEmployee(dipendente) {
+        var modal = document.getElementById('modal');
+        var modalNome = document.getElementById('employee-nome');
+        var modalCognome = document.getElementById('employee-cognome');
+        var modalEmail = document.getElementById('employee-email');
+        var modalStipendio = document.getElementById('employee-stipendio');
+        var modalValutazione = document.getElementById('employee-valutazione');
+        modalNome.value = "Mario";
+        modal.style.display = 'block';
+    }
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
 
-    var modal = document.getElementById('modal');
-    var modalName = document.getElementById('employee-name');
-    var modalNome = document.getElementById('employee-nome');
-    var modalCognome = document.getElementById('employee-cognome');
-    var modalDataNascita = document.getElementById('employee-data-nascita');
-    var modalNazionalita = document.getElementById('employee-nazionalita');
-    var modalResidenza = document.getElementById('employee-residenza');
-    var modalCitta = document.getElementById('employee-citta');
-    var modalCAP = document.getElementById('employee-cap');
-    var modalTelefono = document.getElementById('employee-telefono');
-    var modalEmail = document.getElementById('employee-email');
-    var modalID = document.getElementById('employee-id');
-
-    modalName.textContent = nome + " " + cognome;
-    modalNome.value = nome;
-    modalCognome.value = cognome;
-    modal.style.display = 'block';
-}
-
-function saveChanges() {
-
-    var nome = document.getElementById('employee-nome').value;
-    var cognome = document.getElementById('employee-cognome').value;
-    var dataNascita = document.getElementById('employee-data-nascita').value;
-    var nazionalita = document.getElementById('employee-nazionalita').value;
-    var residenza = document.getElementById('employee-residenza').value;
-    var citta = document.getElementById('employee-citta').value;
-    var cap = document.getElementById('employee-cap').value;
-    var telefono = document.getElementById('employee-telefono').value;
-    var email = document.getElementById('employee-email').value;
-    var id = document.getElementById('employee-id').value;
-
-    var modalName = document.getElementById('employee-name');
-    modalName.textContent = nome + " " + cognome;
-
-  
-    var modal = document.getElementById('modal');
-    modal.style.display = 'none';
-
-    
-    alert('Modifiche salvate con successo!');
-}
 </script>

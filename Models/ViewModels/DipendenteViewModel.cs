@@ -14,6 +14,7 @@ namespace HrNexus.Models.ViewModels
         public string Cognome { get; set; }
         public string Email { get; set; }
         public decimal Stipendio { get; set; }
+         public string Valutazione { get; set; }
         public bool DipendenteTrovato { get; set; }
         public int MeseProgrammazione { get; set; }
         public int AnnoProgrammazione { get; set; }
