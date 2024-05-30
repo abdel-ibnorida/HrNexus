@@ -138,8 +138,8 @@
                 <label for="giornoMalattia">Giorno di Malattia:</label>
                 <span id="giornoMalattiaModale" name="giornoMalattiaModale"></span>
                 <br />
-                <button type="submit" name="timbratura" value="ingresso">Timbra Ingresso</button>
-                <button type="submit" name="timbratura" value="uscita">Timbra Uscita</button>
+                <button type="submit" id="buttonInizio" name="timbratura" value="ingresso">Timbra Ingresso</button>
+                <button type="submit" id="buttonFine" name="timbratura" value="uscita">Timbra Uscita</button>
             </form>
         </div>
     </div>
@@ -163,23 +163,37 @@
         const giornoMalattia = document.getElementById('giornoMalattiaModale');
         const programmazioneForm = document.getElementById('programmazioneForm');
         const spanAvviso = document.getElementById('spanAvviso');
+        const buttonInizio = document.getElementById('buttonInizio');
+        const buttonFine = document.getElementById('buttonFine');
 
         if (programmazione) {
-            modal.style.display = 'block';
-            spanAvviso.style.display = 'none';
             programmazioneForm.style.display = 'block';
-
+            spanAvviso.style.display = 'none';
+            if (programmazione.TimbraturaInizio == "0001-01-01T00:00:00")
+            {
+                buttonInizio.style.display = "block";
+                buttonFine.style.display = "none";
+            }
+            else {
+                buttonInizio.style.display = "none";
+                buttonFine.style.display = "block";
+            }
+            if (programmazione.TimbraturaUscita != "0001-01-01T00:00:00")
+            {
+                buttonFine.style.display = "none";
+            }
             inizioTurno.innerText = programmazione.InizioTurno ? getFormattedTimeFromString(programmazione.InizioTurno) : 'Dato non presente';
             fineTurno.innerText = programmazione.FineTurno ? getFormattedTimeFromString(programmazione.FineTurno) : 'Dato non presente';
-            inizioTimbratura.innerText = programmazione.TimbraturaInizio =! "00:00:00" ? getFormattedTimeFromString(programmazione.TimbraturaInizio) : 'Dato non presente';
-            fineTimbratura.innerText = programmazione.TimbraturaUscita =! "00:00:00" ? getFormattedTimeFromString(programmazione.TimbraturaUscita) : 'Dato non presente';
+            console.log(programmazione.TimbraturaInizio);
+            inizioTimbratura.innerText = programmazione.TimbraturaInizio == "0001-01-01T00:00:00" ? 'Dato non presente' : getFormattedTimeFromString(programmazione.TimbraturaInizio);
+            fineTimbratura.innerText = programmazione.TimbraturaUscita == "0001-01-01T00:00:00" ? 'Dato non presente' : getFormattedTimeFromString(programmazione.TimbraturaUscita);
             giornoFerie.innerText = programmazione.GiornoFerie ? 'Confermata' : 'No';
             giornoPermesso.innerText = programmazione.GiornoPermesso ? 'Confermata' : 'No';
             giornoMalattia.innerText = programmazione.GiornoMalattia ? 'Confermata' : 'No';
             document.getElementById('idProgrammazione').value = programmazione.IdProgrammazione;
         } else {
             programmazioneForm.style.display = 'none';
-            modal.style.display = 'block';
+            spanAvviso.style.display = 'block';
         }
         modal.style.display = 'block';
     }

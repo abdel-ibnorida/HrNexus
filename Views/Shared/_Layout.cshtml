@@ -29,9 +29,11 @@
             </div>
             <a asp-action="GestioneAssenze" asp-controller="Azienda">Gestione
                 <br>
-                permessi/ferie/malattie
+                Assenze
             </a>
-            <a asp-action="GestioneValutazioni" asp-controller="Azienda">Valutazione</a>
+            <a asp-action="Logout" asp-controller="Auth">
+                <i class="fa-solid fa-right-from-bracket"></i>
+            </a>
         </div>
 
         <div class="content">
@@ -72,7 +74,10 @@ else if (Model is DipendenteViewModel || @Accessor.HttpContext.Session.GetString
             </div>
             <a asp-action="RichiestaAssenze" asp-controller="Dipendente">Gestione
                 <br>
-                permessi/ferie/malattie
+                Assenze
+            </a>
+            <a asp-action="Logout" asp-controller="Auth">
+                <i class="fa-solid fa-right-from-bracket"></i>
             </a>
         </div>
 

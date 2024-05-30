@@ -10,5 +10,6 @@ namespace HrNexus.Models.Services.Application
     {
         //Task<User> CreaNuovoUtente(User user);
         Task<User> Accesso(User user);
+        
     }
 }

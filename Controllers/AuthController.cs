@@ -45,7 +45,7 @@ namespace HrNexus.Controllers
                     accessor.HttpContext.Session.SetString("TipoUtente", "azienda");
                     accessor.HttpContext.Session.SetString("IdAzienda", azienda.IdAzienda.ToString());
 
-                    return View(model);
+                    return RedirectToAction("Index", "Home");
                 }
                 else if (user is Dipendente dipendente)
                 {
@@ -58,7 +58,7 @@ namespace HrNexus.Controllers
                     accessor.HttpContext.Session.SetString("TipoUtente", "dipendente");
                     accessor.HttpContext.Session.SetString("IdDipendente", dipendente.IdDipendente.ToString());
                     accessor.HttpContext.Session.SetString("IdAzienda", dipendente.IdAzienda.ToString());
-                    return View(model);
+                    return RedirectToAction("Index", "Home");
                 }
             }
             else
@@ -67,5 +67,11 @@ namespace HrNexus.Controllers
             }
             return View();
         }
+        public IActionResult Logout()
+        {
+            accessor.HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
+    
     }
 }

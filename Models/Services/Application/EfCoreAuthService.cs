@@ -40,5 +40,6 @@ namespace HrNexus.Models.Services.Application
             User userNotFound = new User();
             return userNotFound;
         }
+        
     }
 }
