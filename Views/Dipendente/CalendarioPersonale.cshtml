@@ -105,6 +105,23 @@
                 <div class="day empty"></div>
             }
         </div>
+         <div class="leggenda">
+                <label>Regolare</label>
+                <div class="quadrato regolare"></div>
+                <label>Timbratura irregolare</label>
+                <div class="quadrato irregolare"></div>
+                <label>Malattia</label>
+                <div class="quadrato malattia"></div>
+                <label>Permesso</label>
+                <div class="quadrato permesso"></div>
+                <label>Ferie</label>
+                <div class="quadrato ferie"></div>
+            </div>
+            <div>
+                <form asp-action="RichiesteAssenza" method="post">
+                    <button type="submit" class="btn-assenze search-btn">Sezione Richieste Assenze</button>
+                </form>
+            </div>
     </div>
     <div id="programmazioneModal" class="modal">
         <div class="modal-content">

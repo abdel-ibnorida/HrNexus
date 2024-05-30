@@ -18,13 +18,28 @@
     <tbody>
         @foreach (DipendenteViewModel dipendente in Model.Dipendenti)
         {
+            int meseCorrente = DateTime.Now.Month;
+            int annoCorrente = DateTime.Now.Year;
             var jsonModel = JsonSerializer.Serialize(dipendente);
             <tr>
                 <td>@dipendente.IdDipendente</td>
                 <td>@dipendente.Nome</td>
                 <td>@dipendente.Cognome</td>
                 <td>@dipendente.Email</td>
-                <td><button onclick='editEmployee(@Html.Raw(jsonModel.Replace("\"", "&quot;")))'>i</button></td>
+                <td class="container-azioni">
+                    <button onclick='editEmployee(@Html.Raw(jsonModel.Replace("\"", "&quot;")))'><i
+                            class="fa-solid fa-info"></i></button>
+                    <form asp-action="CalendarioLavoratori" method="post">
+                        <button type="submit"><i class="fa-regular fa-calendar-days"></i></button>
+                        <input type="hidden" name="nome" value="@dipendente.Nome" />
+                        <input type="hidden" name="annoCorrente" value="@annoCorrente" />
+                        <input type="hidden" name="meseCorrente" value="@meseCorrente" />
+                    </form>
+                    <form asp-action="GestioneAssenze" method="post">
+                        <button type="submit"><i class="fa-solid fa-list"></i></button>
+                        <input type="hidden" name="nome" value="@dipendente.Nome" />
+                    </form>
+                </td>
             </tr>
         }
     </tbody>

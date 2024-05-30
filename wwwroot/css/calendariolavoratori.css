@@ -20,20 +20,25 @@
 }
 
 .search-btn {
-    background-color: rgba(0, 0, 0, 0.774); /* Trasparente */
-    
-    color: rgb(255, 255, 255); /* Testo bianco con opacità 50% */
+    background-color: rgba(0, 0, 0, 0.774);
+    /* Trasparente */
+
+    color: rgb(255, 255, 255);
+    /* Testo bianco con opacità 50% */
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s, color 0.3s; /* Effetto di transizione per il cambio di colore */
-  }
-  
-  .search-btn:hover {
-    background-color: rgba(255, 255, 255, 0.5); /* Sfondo bianco con opacità 50% */
-    color: #000; /* Testo nero */
-  }
+    transition: background-color 0.3s, color 0.3s;
+    /* Effetto di transizione per il cambio di colore */
+}
+
+.search-btn:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    /* Sfondo bianco con opacità 50% */
+    color: #000;
+    /* Testo nero */
+}
 
 /* Contenitore del calendario */
 .calendar-container {
@@ -47,11 +52,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 5px;
 }
 
 .nav-month {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    gap: 5px;
+    width: 100%;
+    align-items: center;
 }
 
 .form-month {
@@ -64,8 +74,8 @@
 .month-selector {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    width: 70%;
+    justify-content: space-between;
+    width: 100%;
     margin-bottom: 20px;
 }
 
@@ -73,7 +83,8 @@
     background-color: #000000;
     border: none;
     color: #fff;
-    padding: 5px 10px; /* Ridurre il padding dei pulsanti di navigazione */
+    padding: 5px 10px;
+    /* Ridurre il padding dei pulsanti di navigazione */
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
@@ -89,20 +100,23 @@
     font-size: 18px;
     font-weight: bold;
     color: #333;
-    margin: 0 40px; /* Aggiungi un margine di 20px tra il nome del mese e le frecce */
+    margin: 0 40px;
+    /* Aggiungi un margine di 20px tra il nome del mese e le frecce */
 }
 
 /* Calendario */
 .calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 2px; /* Ridurre il gap per un aspetto più compatto */
+    gap: 2px;
+    /* Ridurre il gap per un aspetto più compatto */
     width: 100%;
 }
 
 .calendar .day,
 .calendar .day-of-week {
-    padding: 5px; /* Ridurre il padding per rendere le celle più compatte */
+    padding: 5px;
+    /* Ridurre il padding per rendere le celle più compatte */
     text-align: center;
     cursor: pointer;
     border: 1px solid #ddd;
@@ -126,6 +140,18 @@
     background-color: transparent;
     border: none;
     cursor: default;
+}
+
+.leggenda {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.quadrato {
+    width: 15px;
+    height: 15px;
 }
 
 .regolare {
@@ -152,17 +178,20 @@
     border: 3px solid yellow;
     background-color: yellow;
 }
+
 .dipnontrovato {
     background-color: rgb(248, 69, 69);
-    color:#000;
+    color: #000;
     font-family: 'Courier New', Courier, monospace;
     align-content: center;
     text-align: center;
     font-size: 25px;
-    border:solid, pink, 2px;
+    border: solid, pink, 2px;
 }
+
 .modal {
-    display: none; /* Nascosta di default */
+    display: none;
+    /* Nascosta di default */
     position: fixed;
     z-index: 1;
     left: 0;
@@ -170,8 +199,8 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 /* Stile per il contenuto della Modal */
@@ -196,4 +225,7 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+.btn-assenze{
+    margin-top: 8px;
 }

@@ -116,13 +116,13 @@
             <h2>Gestione Giorni Disponibili</h2>
             <form method="post" action="AggiungiGiorniFerie" class="form-group">
                 <span>Giorni di ferie disponibili: @Model.GiorniDiFerie</span>
-                <input type="number" id="numeroGiorni" name="numeroGiorni" />
+                <input type="number" id="numeroGiorni" name="numeroGiorni" required/>
                 <input type="hidden" id="idDipendente" name="IdDipendente" value="@Model.IdDipendente" />
                 <button type="submit" class="blue-button">Aggiungi</button>
             </form>
             <form method="post" action="AggiungiGiorniPermesso" class="form-group">
                 <span>Giorni di permesso disponibili: @Model.GiorniDiPermesso</span>
-                <input type="number" id="numeroGiorni" name="numeroGiorni" />
+                <input type="number" id="numeroGiorni" name="numeroGiorni" required/>
                 <input type="hidden" id="idDipendente" name="IdDipendente" value="@Model.IdDipendente" />
                 <button type="submit" class="blue-button">Aggiungi</button>
             </form>
