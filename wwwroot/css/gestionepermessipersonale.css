@@ -1,56 +1,13 @@
-.container {
-    width: 80%;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1, h2 {
-    text-align: center;
-}
-
-.form-container, .requests-container {
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.form-group input, .form-group select, .form-group textarea {
-    width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-}
-
-button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-ul li {
-    background-color: #e9ecef;
-    padding: 10px;
-    margin-bottom: 10px;
+.assenzedip{
+    background-color: rgb(223, 213, 213);
+    border: 2px solid rgb(91, 202, 221);
+    color: rgb(0, 0, 0);
+    padding: 15px;
     border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    width: 50%; /* Imposta la larghezza al 50% */
+    margin: auto; /* Per centrare l'elemento orizzontalmente */
+
 }

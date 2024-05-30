@@ -29,9 +29,9 @@
                     <input type="hidden" name="annoCorrente" value="@Model.AnnoProgrammazione" />
                     <input type="hidden" name="meseCorrente" value="@Model.MeseProgrammazione" />
                     <div class="month-selector">
-                        <button type="submit" name="direzione" value="precedente">Precedente</button>
+                        <button type="submit" name="direzione" value="precedente">←</button>
                         <span>@meseTestuale @annoCorrente</span>
-                        <button type="submit" name="direzione" value="successivo">Successivo</button>
+                        <button type="submit" name="direzione" value="successivo">→</button>
                     </div>
                 </form>
             </div>
@@ -121,7 +121,7 @@
                 }
             </div>
         </div>
-        /*modale che gestisce la programmazione del giorno cliccato*/
+      
         <div id="programmazioneModal" class="modal">
             <div class="modal-content">
                 <form id="programmazioneForm" asp-action="GestisciProgrammazione" method="post">
@@ -157,15 +157,19 @@
     }
     else
     {
-        <div>
-            dipendente non trovato
+
+      
+        <div class="dipnontrovato">
+            Errore dipendente non trovato
         </div>
     }
 }
 else
 {
-    <div>
-        benvenuto nella sezione calendario
+    
+       
+    <div class="benvenuto">
+        Benvenuto nella sezione calendario
     </div>
 }
 

@@ -35,20 +35,18 @@
     color: #000; /* Testo nero */
   }
 
-/* Contenitore del calendario */
-.calendar-container {
-    background-color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 600px;
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
+  .calendar-container {
+      background-color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 30px; /* Aumentato da 20px a 30px */
+      max-width: 700px; /* Aumentato da 600px a 700px */
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  }
 .nav-month {
     display: flex;
     justify-content: center;
@@ -60,7 +58,7 @@
     justify-content: center;
 }
 
-/* Selettore del mese */
+
 .month-selector {
     display: flex;
     align-items: center;
@@ -73,11 +71,12 @@
     background-color: #000000;
     border: none;
     color: #fff;
-    padding: 5px 10px; /* Ridurre il padding dei pulsanti di navigazione */
+    padding: 5px 10px; 
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
+    margin: 0 20px; 
 }
 
 .month-selector button:hover {
@@ -89,20 +88,20 @@
     font-size: 18px;
     font-weight: bold;
     color: #333;
-    margin: 0 40px; /* Aggiungi un margine di 20px tra il nome del mese e le frecce */
+    text-transform: capitalize; 
+    margin: 0 40px; 
 }
 
-/* Calendario */
 .calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 2px; /* Ridurre il gap per un aspetto più compatto */
+    gap: 2px; 
     width: 100%;
 }
 
 .calendar .day,
 .calendar .day-of-week {
-    padding: 5px; /* Ridurre il padding per rendere le celle più compatte */
+    padding: 5px; 
     text-align: center;
     cursor: pointer;
     border: 1px solid #ddd;
@@ -153,47 +152,57 @@
     background-color: yellow;
 }
 .dipnontrovato {
-    background-color: rgb(248, 69, 69);
-    color:#000;
-    font-family: 'Courier New', Courier, monospace;
-    align-content: center;
+    background-color: #ebd4d4;
+    border: 2px solid #dd5b5b;
+    color: #a94442;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
     text-align: center;
-    font-size: 25px;
-    border:solid, pink, 2px;
+    width: 50%; /* Imposta la larghezza al 50% */
+    margin: auto; /* Per centrare l'elemento orizzontalmente */
 }
 .modal {
-    display: none; /* Nascosta di default */
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.6); 
+   
 }
 
-/* Stile per il contenuto della Modal */
+
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+    background-color: #fff;
+    margin: 10% auto; 
+    padding: 30px; 
+    border: none; 
+    width: 60%; 
+    max-width: 600px;
+    border-radius: 12px; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); 
+    animation: fadeIn 0.5s ease-in-out; 
+    font-family: 'Arial', sans-serif; 
 }
 
-/* Stile per il bottone di chiusura */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
+.benvenuto {
+    background-color: rgb(223, 213, 213);
+    border: 2px solid rgb(91, 202, 221);
+    color: rgb(0, 0, 0);
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
     font-weight: bold;
+    text-align: center;
+    width: 50%; /* Imposta la larghezza al 50% */
+    margin: auto; /* Per centrare l'elemento orizzontalmente */
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
+
+
+
