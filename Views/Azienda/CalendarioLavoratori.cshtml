@@ -144,33 +144,39 @@
         /*modale che gestisce la programmazione del giorno cliccato*/
         <div id="programmazioneModal" class="modal">
             <div class="modal-content">
-                <form id="programmazioneForm" asp-action="GestisciProgrammazione" method="post">
-                    <h2 id="modalTitle">Gestisci Programmazione</h2>
-                    <input type="hidden" id="giornoModale" name="giornoModale" />
-                    <input type="hidden" id="meseModale" name="meseModale" />
-                    <input type="hidden" id="annoModale" name="annoModale" />
-                    <input type="hidden" id="idDipendente" name="idDipendente" />
-                    <input type="hidden" id="idProgrammazione" name="idProgrammazione" />
+                <form class="programmazione-form" id="programmazioneForm" asp-action="GestisciProgrammazione" method="post">
+                    <h2 class="modal-title" id="modalTitle">Gestisci Programmazione</h2>
+                    <input class="giorno-modale" type="hidden" id="giornoModale" name="giornoModale" />
+                    <input class="mese-modale" type="hidden" id="meseModale" name="meseModale" />
+                    <input class="anno-modale" type="hidden" id="annoModale" name="annoModale" />
+                    <input class="id-dipendente" type="hidden" id="idDipendente" name="idDipendente" />
+                    <input class="id-programmazione" type="hidden" id="idProgrammazione" name="idProgrammazione" />
 
-                    <label for="inizioTurno">Inizio Turno:</label>
-                    <input type="time" id="inizioTurnoModale" name="inizioTurnoModale" required />
+                    <label class="label" for="inizioTurno">Inizio Turno:</label>
+                    <input class="input-time" type="time" id="inizioTurnoModale" name="inizioTurnoModale" required />
 
-                    <label for="fineTurno">Fine Turno:</label>
-                    <input type="time" id="fineTurnoModale" name="fineTurnoModale" required />
+                    <label class="label" for="fineTurno">Fine Turno:</label>
+                    <input class="input-time" type="time" id="fineTurnoModale" name="fineTurnoModale" required />
 
-                    <label for="giornoFerie">Giorno di Ferie:</label>
-                    <input onchange="invertiValoreCheckbox(this)" type="checkbox" id="giornoFerieModale"
-                        name="giornoFerieModale" />
+                    <div class="container-checkbox">
+                        <label class="label" for="giornoFerie">Giorno di Ferie:</label>
+                        <input class="input-checkbox" onchange="invertiValoreCheckbox(this)" type="checkbox"
+                            id="giornoFerieModale" name="giornoFerieModale" />
+                    </div>
 
-                    <label for="giornoPermesso">Giorno di Permesso:</label>
-                    <input onchange="invertiValoreCheckbox(this)" type="checkbox" id="giornoPermessoModale"
-                        name="giornoPermessoModale" />
+                    <div class="container-checkbox">
+                        <label class="label" for="giornoPermesso">Giorno di Permesso:</label>
+                        <input class="input-checkbox" onchange="invertiValoreCheckbox(this)" type="checkbox"
+                            id="giornoPermessoModale" name="giornoPermessoModale" />
 
-                    <label for="giornoMalattia">Giorno di Malattia:</label>
-                    <input onchange="invertiValoreCheckbox(this)" type="checkbox" id="giornoMalattiaModale"
-                        name="giornoMalattiaModale" />
+                    </div>
+                    <div class="container-checkbox">
+                        <label class="label" for="giornoMalattia">Giorno di Malattia:</label>
+                        <input class="input-checkbox" onchange="invertiValoreCheckbox(this)" type="checkbox"
+                            id="giornoMalattiaModale" name="giornoMalattiaModale" />
+                    </div>
 
-                    <button type="submit" id="submitBtn">Salva</button>
+                    <button class="btn-assenze search-btn" type="submit" id="submitBtn ">Salva</button>
                 </form>
             </div>
         </div>
@@ -246,7 +252,7 @@ else
             document.getElementById('giornoMalattiaModale').value = false;
             document.getElementById('modalTitle').innerText = 'Crea Programmazione';
         }
-        modal.style.display = 'block';
+        modal.style.display = 'flex';
     }
 
 

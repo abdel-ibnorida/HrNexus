@@ -46,12 +46,23 @@
 </table>
 <div class="modal" id="modal">
     <div class="modal-content">
-        <input type="text" id="employee-nome" placeholder="Nome">
-        <input type="text" id="employee-cognome" placeholder="Cognome">
-        <input type="text" id="employee-data-nascita" placeholder="Data di nascita">
-        <input type="text" id="employee-email" placeholder="Email">
-        <input type="text" id="employee-stipendio" placeholder="Stipendio">
-        <input type="text" id="employee-valutazione" placeholder="Valutazione">
+        <form action="">
+            <input class="input-noteditable" type="text" id="employee-nome" placeholder="Nome" readonly>
+            <input class="input-noteditable" type="text" id="employee-cognome" placeholder="Cognome" readonly>
+            <input class="input-noteditable" type="text" id="employee-data-nascita" placeholder="Data di nascita" readonly>
+            <input class="input-noteditable" type="text" id="employee-email" placeholder="Email" readonly>
+            <div class="input-container">
+                <input class="input-editable" type="text" id="employee-stipendio" placeholder="Stipendio" readonly>
+                <i class="fa-solid fa-pen-to-square" data-target="employee-stipendio"
+                    onclick="rendiModificabile(this)"></i>
+            </div>
+            <div class="input-container">
+                <input class="input-editable" type="text" id="employee-valutazione" placeholder="Valutazione" readonly>
+                <i class="fa-solid fa-pen-to-square" data-target="employee-valutazione"
+                    onclick="rendiModificabile(this)"></i>
+            </div>
+            <button type="submit" class="submit-btn">Cerca</button>
+        </form>
     </div>
 </div>
 <script>
@@ -67,12 +78,18 @@
         modalEmail.value = dipendente.Email;
         modalStipendio.value = dipendente.Stipendio;
         modalValutazione.value = dipendente.Valutazione;
-        modal.style.display = 'block';
+        modal.style.display = 'flex';
     }
     window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = 'none';
         }
     }
-
+    function rendiModificabile(icon) {
+        var targetId = icon.getAttribute('data-target');
+        var input = document.getElementById(targetId);
+        console.log(targetId);
+        console.log(input);
+        input.removeAttribute('readonly');
+    }
 </script>
