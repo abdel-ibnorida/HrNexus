@@ -1,15 +1,19 @@
 
 @inject IHttpContextAccessor Accessor
 @if (@Accessor.HttpContext.Session.GetString("TipoUtente") == "azienda" ){
-    <div>
-        benevenuto azienda 
+    <link rel="stylesheet" href="~/css/home.css">
+        <div class="azienda">
+          Benvenuto nella sezione aziendale
     </div>
+     
 }
 else if(@Accessor.HttpContext.Session.GetString("TipoUtente") == "dipendente")
 {
-    <div>
-        benevenuto dipendnete 
+     <link rel="stylesheet" href="~/css/home.css">
+     <div class="azienda">
+           Benvenuto nella sezione dipendente
     </div>
+    
 }
 else{
     <link rel="stylesheet" href="~/css/home.css">
@@ -27,6 +31,5 @@ else{
     <a class="login-link" asp-controller="Auth" asp-action="Index">LOGIN</a>
     </div>
 }
-
 
 
