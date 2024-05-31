@@ -16,7 +16,7 @@
                 <input type="hidden" name="meseCorrente" value="@Model.MeseProgrammazione" />
                 <div class="month-selector">
                     <button type="submit" name="direzione" value="precedente">Precedente</button>
-                    <span>@meseTestuale @annoCorrente</span>
+                    <span class="mese-testuale">@meseTestuale @annoCorrente</span>
                     <button type="submit" name="direzione" value="successivo">Successivo</button>
                 </div>
             </form>
@@ -35,71 +35,67 @@
             }
             @for (int i = 1; i <= giorniNelMese; i++)
             {
-                ProgrammazioneViewModel programmazione = Model.Programmazioni.FirstOrDefault(pm => pm.DataGiorno.Day == i);
-                var jsonModel = JsonSerializer.Serialize(programmazione);
-                string inizioTurnoJs = "";
-                string fineTurnoJs = "";
-                if (programmazione != null)
-                {
-                    inizioTurnoJs = programmazione.InizioTurno.ToString("yyyy-MM-ddTHH:mm:ss");
-                    fineTurnoJs = programmazione.FineTurno.ToString("yyyy-MM-ddTHH:mm:ss");
-                }
-                <div class="day"
-                    onclick='gestisciProgrammazione(@i, @Model.MeseProgrammazione, @Model.AnnoProgrammazione, @Html.Raw(jsonModel.Replace("'", "\'")), @Model.IdDipendente)'>
-                    @i
-                    @{
-                        if (programmazione != null)
+                    ProgrammazioneViewModel programmazione = Model.Programmazioni.FirstOrDefault(pm => pm.DataGiorno.Day == i);
+                    var jsonModel = JsonSerializer.Serialize(programmazione);
+                    string inizioTurnoJs = "";
+                    string fineTurnoJs = "";
+                    string cssClass = "";
+
+                    if (programmazione != null)
+                    {
+                        inizioTurnoJs = programmazione.InizioTurno.ToString("yyyy-MM-ddTHH:mm:ss");
+                        fineTurnoJs = programmazione.FineTurno.ToString("yyyy-MM-ddTHH:mm:ss");
+
+                        // Determina la classe CSS
+                        bool isTimbraturaIrregolare = false; // Da rivedere la logica per questa variabile
+                        bool isTimbraturaRegolare = true; // Da rivedere la logica per questa variabile
+                        TimeSpan durataProgrammata = programmazione.FineTurno - programmazione.InizioTurno;
+
+                        if (programmazione.TimbraturaInizio != null && programmazione.TimbraturaUscita != null)
                         {
-                            string cssClass = "";
-                            bool isTimbraturaIrregolare = false; // Da rivedere la logica per questa variabile
-                            bool isTimbraturaRegolare = true; // Da rivedere la logica per questa variabile
-                            TimeSpan durataProgrammata = programmazione.InizioTurno - programmazione.FineTurno;
+                            TimeSpan? durataEffettiva = programmazione.TimbraturaUscita - programmazione.TimbraturaInizio;
+                            TimeSpan? differenza = durataProgrammata - durataEffettiva;
+                            if (differenza.HasValue && differenza.Value.TotalMinutes > 15)
+                            {
+                                isTimbraturaIrregolare = true;
+                            }
+                            else
+                            {
+                                isTimbraturaRegolare = true;
+                            }
+                        }
 
-                            if (programmazione.TimbraturaInizio != null && programmazione.TimbraturaUscita != null)
-                            {
-                                TimeSpan? durataEffettiva = programmazione.TimbraturaInizio - programmazione.TimbraturaUscita;
-                                TimeSpan? differenza = durataProgrammata - durataEffettiva;
-                                if (differenza.HasValue && differenza.Value.TotalMinutes > 15)
-                                {
-                                    isTimbraturaIrregolare = true;
-                                }
-                                else
-                                {
-                                    isTimbraturaRegolare = true;
-                                }
-                            }
-                            bool isFerie = programmazione.GiornoFerie;
-                            bool isPermesso = programmazione.GiornoPermesso;
-                            bool isMalattia = programmazione.GiornoMalattia;
+                        bool isFerie = programmazione.GiornoFerie;
+                        bool isPermesso = programmazione.GiornoPermesso;
+                        bool isMalattia = programmazione.GiornoMalattia;
 
-                            if (isTimbraturaRegolare)
-                            {
-                                cssClass = "regolare";
-                            }
-                            if (isTimbraturaIrregolare)
-                            {
-                                cssClass = "irregolare";
-                            }
-                            if (isFerie)
-                            {
-                                cssClass = "ferie";
-                            }
-                            if (isMalattia)
-                            {
-                                cssClass = "malattia";
-                            }
-                            if (isPermesso)
-                            {
-                                cssClass = "permesso";
-                            }
-
-                            <div class="@cssClass">
-                                <i class="fa-solid fa-square-check"></i>
-                            </div>
+                        if (isTimbraturaRegolare)
+                        {
+                            cssClass = "regolare";
+                        }
+                        if (isTimbraturaIrregolare)
+                        {
+                            cssClass = "irregolare";
+                        }
+                        if (isFerie)
+                        {
+                            cssClass = "ferie";
+                        }
+                        if (isMalattia)
+                        {
+                            cssClass = "malattia";
+                        }
+                        if (isPermesso)
+                        {
+                            cssClass = "permesso";
                         }
                     }
-                </div>
-            }
+
+                    <div class="day @cssClass"
+                        onclick='gestisciProgrammazione(@i, @Model.MeseProgrammazione, @Model.AnnoProgrammazione, @Html.Raw(jsonModel.Replace("'", "\'")), @Model.IdDipendente)'>
+                        @i
+                    </div>
+                }
             @for (int i = (primoGiornoDellaSettimana + giorniNelMese - 1) % 7; i < 7 && i > 0; i++)
             {
                 <div class="day empty"></div>

@@ -1,66 +1,25 @@
-.search-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.search {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    margin-right: 10px;
-    transition: border-color 0.3s;
-}
-
-.search:focus {
-    border-color: #ffffff;
-    outline: none;
-}
-
-.search-btn {
-    background-color: rgba(0, 0, 0, 0.774);
-    /* Trasparente */
-
-    color: rgb(255, 255, 255);
-    /* Testo bianco con opacità 50% */
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    
-    transition: background-color 0.3s, color 0.3s;
-    /* Effetto di transizione per il cambio di colore */
-}
-
-.search-btn:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-    /* Sfondo bianco con opacità 50% */
-    color: #000;
-    /* Testo nero */
-}
-
 /* Contenitore del calendario */
 .calendar-container {
     background-color: #ffffff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    max-width: 600px;
+    max-width: 800px;
     width: 100%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 20px;
+    border-radius: 10px;
 }
 
+/* Navigazione del mese */
 .nav-month {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 5px;
+    gap: 10px;
     width: 100%;
     align-items: center;
 }
@@ -71,7 +30,6 @@
     justify-content: center;
 }
 
-/* Selettore del mese */
 .month-selector {
     display: flex;
     align-items: center;
@@ -81,11 +39,10 @@
 }
 
 .month-selector button {
-    background-color: #000000;
+    background-color: #000;
     border: none;
     color: #fff;
-    padding: 5px 10px;
-    /* Ridurre il padding dei pulsanti di navigazione */
+    padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
@@ -101,40 +58,35 @@
     font-size: 18px;
     font-weight: bold;
     color: #333;
-    margin: 0 40px;
-    /* Aggiungi un margine di 20px tra il nome del mese e le frecce */
+    margin: 0 20px;
 }
 
-/* Calendario */
+/* Stili del calendario */
 .calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
-    /* Ridurre il gap per un aspetto più compatto */
+    gap: 5px;
     width: 100%;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 10px;
 }
 
-.calendar .day,
-.calendar .day-of-week {
-    padding: 5px;
-    /* Ridurre il padding per rendere le celle più compatte */
-    text-align: center;
-    cursor: pointer;
+.day {
     border: 1px solid #ddd;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
     border-radius: 5px;
-    background-color: #f7f9fa;
-    transition: background-color 0.3s, transform 0.3s;
-    box-sizing: border-box;
+    transition: background-color 0.3s, border-color 0.3s;
+    cursor: pointer;
 }
 
-.calendar .day-of-week {
-    background-color: #ececec;
-    font-weight: bold;
-}
-
-.calendar .day:hover {
-    background-color: #e9e9e9;
-    transform: scale(1.05);
+.day:hover {
+    background-color: #f0f0f0;
+    border-color: #bbb;
 }
 
 .day.empty {
@@ -143,58 +95,67 @@
     cursor: default;
 }
 
+.day-of-week {
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #eee;
+    border-radius: 5px;
+}
+
+/* Classi per i giorni con diverse condizioni */
+.regolare {
+    border: 3px solid green;
+    background-color: rgba(0, 128, 0, 0.1);
+    color: green;
+}
+
+.irregolare {
+    border: 3px solid red;
+    background-color: rgba(255, 0, 0, 0.1);
+    color: red;
+}
+
+.ferie {
+    border: 3px solid orange;
+    background-color: rgba(255, 165, 0, 0.1);
+    color: orange;
+}
+
+.malattia {
+    border: 3px solid purple;
+    background-color: rgba(128, 0, 128, 0.1);
+    color: purple;
+}
+
+.permesso {
+    border: 3px solid yellow;
+    background-color: rgba(255, 255, 0, 0.1);
+    color: yellow;
+}
+
+/* Legenda */
 .leggenda {
     display: flex;
     justify-content: space-between;
     width: 100%;
     align-items: center;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .quadrato {
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
 }
 
-.regolare {
-    border: 3px solid green;
-    background-color: green;
-}
-
-.irregolare {
-    border: 3px solid red;
-    background-color: red;
-}
-
-.ferie {
-    border: 3px solid orange;
-    background-color: orange;
-}
-
-.malattia {
-    border: 3px solid purple;
-    background-color: purple;
-}
-
-.permesso {
-    border: 3px solid yellow;
-    background-color: yellow;
-}
-
-.dipnontrovato {
-    background-color: rgb(248, 69, 69);
-    color: #000;
-    font-family: 'Courier New', Courier, monospace;
-    align-content: center;
-    text-align: center;
-    font-size: 25px;
-    border: solid, pink, 2px;
-}
-
+/* Modal */
 .modal {
     display: none;
     justify-content: center;
     align-items: center;
-    /* Nascosta di default */
     position: fixed;
     z-index: 1;
     left: 0;
@@ -202,12 +163,10 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
 }
 
 /* Stile per il contenuto della Modal */
-/* General Modal Styles */
 .modal-content {
     background-color: #fff;
     border-radius: 10px;
@@ -278,7 +237,6 @@
     display: flex;
 }
 
-
 /* Stile per il bottone di chiusura */
 .close {
     color: #aaa;
@@ -297,6 +255,63 @@
 .btn-assenze {
     margin-top: 8px;
 }
-.programmazione-form .search-btn{
+
+.programmazione-form .search-btn {
     width: 100%;
+}
+
+/* Stili di ricerca */
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-right: 10px;
+    transition: border-color 0.3s;
+}
+
+.search:focus {
+    border-color: #ffffff;
+    outline: none;
+}
+
+.search-btn {
+    background-color: rgba(0, 0, 0, 0.774);
+    color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.search-btn:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #000;
+}
+
+/* Messaggio di dipendente non trovato */
+.dipnontrovato {
+    background-color: rgb(248, 69, 69);
+    color: #000;
+    font-family: 'Courier New', Courier, monospace;
+    align-content: center;
+    text-align: center;
+    font-size: 25px;
+    border: solid, pink, 2px;
+}
+.mese-testuale{
+    font-weight: bold;
+    font-size: x-large;
+}
+.nome-dipendente{
+    font-weight: bold;
+    font-size: x-large;
 }

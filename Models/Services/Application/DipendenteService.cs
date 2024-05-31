@@ -120,6 +120,7 @@ namespace HrNexus.Models.Services.Application
         }
         public async Task<DipendenteViewModel> InviaRichiesta(int idDipendente, int idAzienda, string dataRichiesta, string sceltaTipo)
         {
+            Console.WriteLine(dataRichiesta);
             Dipendente dipendente = await dbContext.Dipendenti
                 .Where(d => d.IdDipendente == idDipendente && d.IdAzienda == idAzienda)
                 .FirstOrDefaultAsync();
@@ -133,7 +134,8 @@ namespace HrNexus.Models.Services.Application
             {
                 bool confermato = false;
                 bool archiviato = false;
-                DateTime data = DateTime.Now;
+
+                DateTime data = DateTime.ParseExact(dataRichiesta, "yyyy-MM-dd", null);
                 Richiesta nuovaRichiesta = new Richiesta(data, idDipendente, confermato, archiviato, sceltaTipo);
                 dbContext.Richieste.Add(nuovaRichiesta);
                 dbContext.SaveChanges();
