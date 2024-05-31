@@ -70,12 +70,17 @@
         var modal = document.getElementById('modal');
         var modalNome = document.getElementById('employee-nome');
         var modalCognome = document.getElementById('employee-cognome');
+        var modalNascita = document.getElementById('employee-data-nascita');
         var modalEmail = document.getElementById('employee-email');
         var modalStipendio = document.getElementById('employee-stipendio');
         var modalValutazione = document.getElementById('employee-valutazione');
+        var dataCasuale = new Date(1960 + Math.random() * (1990 - 1960), Math.floor(Math.random() * 12), Math.floor(Math.random() * 31) + 1);
+        var dataCasualeFormattata = `${dataCasuale.getDate().toString().padStart(2, '0')}-${(dataCasuale.getMonth() + 1).toString().padStart(2, '0')}-${dataCasuale.getFullYear()}`;
+
         modalNome.value = dipendente.Nome;
         modalCognome.value = dipendente.Cognome;
         modalEmail.value = dipendente.Email;
+        modalNascita.value = dataCasualeFormattata;
         modalStipendio.value = dipendente.Stipendio;
         modalValutazione.value = dipendente.Valutazione;
         modal.style.display = 'flex';
