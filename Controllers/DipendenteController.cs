@@ -96,6 +96,7 @@ namespace HrNexus.Controllers
         {
             int idDipendente = Convert.ToInt32(HttpContext.Session.GetString("IdDipendente"));
             int idAzienda = Convert.ToInt32(HttpContext.Session.GetString("IdAzienda"));
+            Console.WriteLine(sceltaTipo);
             DipendenteViewModel dipendente = await dipendenteService.InviaRichiesta(idDipendente, idAzienda, dataRichiesta, sceltaTipo);
             return RedirectToAction("RichiesteAssenza", "Dipendente");
         }

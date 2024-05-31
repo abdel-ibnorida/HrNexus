@@ -24,7 +24,7 @@
                                 @richiesta.Tipo
                                 @richiesta.DataRichiesta.ToString("yyyy-MM-dd")
                                 <div class="div-button-nuove-richieste">
-                                    @if (richiesta.Tipo == "FERIE")
+                                    @if (richiesta.Tipo == "ferie")
                                     {
                                         if (Model.GiorniDiFerie > 0)
                                         {
@@ -37,7 +37,7 @@
                                             </form>
                                         }
                                     }
-                                    else if (richiesta.Tipo == "PERMESSO")
+                                    else if (richiesta.Tipo == "permesso")
                                     {
                                         if (Model.GiorniDiPermesso > 0)
                                         {
@@ -97,7 +97,7 @@
                                 }
                                 else
                                 {
-                                    <span class="esito-postivio"> Richiesta rifiutata</span>
+                                    <span class="esito-negativo"> Richiesta rifiutata</span>
                                 }
                             </li>
                         }
@@ -133,7 +133,7 @@
 else if (Model != null && Model.DipendenteTrovato == false)
 {
     <div class="dipnontrovato">
-        dipendente nonn trovato
+        Dipendente non trovato
     </div>
 }
 else

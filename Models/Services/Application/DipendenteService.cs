@@ -120,7 +120,6 @@ namespace HrNexus.Models.Services.Application
         }
         public async Task<DipendenteViewModel> InviaRichiesta(int idDipendente, int idAzienda, string dataRichiesta, string sceltaTipo)
         {
-            Console.WriteLine(dataRichiesta);
             Dipendente dipendente = await dbContext.Dipendenti
                 .Where(d => d.IdDipendente == idDipendente && d.IdAzienda == idAzienda)
                 .FirstOrDefaultAsync();

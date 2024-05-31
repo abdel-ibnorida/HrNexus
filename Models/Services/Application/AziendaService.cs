@@ -122,6 +122,7 @@ namespace HrNexus.Models.Services.Application
 
             if (tipoRichiesta == "FERIE")
             {
+                Console.WriteLine("siamo nella scelta ferie");
                 if (esitoRichiesta == "accettata")
                 {
                     dipendente.GiorniDiFerie = dipendente.GiorniDiFerie - 1;
@@ -155,6 +156,7 @@ namespace HrNexus.Models.Services.Application
             }
             else if (tipoRichiesta == "PERMESSO")
             {
+                Console.WriteLine("siamo nella scelta permesso");
                 if (esitoRichiesta == "accettata")
                 {
                     dipendente.GiorniDiPermesso = dipendente.GiorniDiPermesso - 1;
@@ -163,6 +165,7 @@ namespace HrNexus.Models.Services.Application
                        .FirstOrDefaultAsync();
                     richiesta.Archiviato = true;
                     richiesta.Confermato = true;
+                    richiesta.Tipo = "permesso";
                     Programmazione programmazione = await dbContext.Programmazioni
                        .Where(p => p.DataGiorno.Date == richiesta.DataRichiesta.Date && p.IdDipendente == idDipendente)
                        .FirstOrDefaultAsync();
@@ -188,6 +191,7 @@ namespace HrNexus.Models.Services.Application
             }
             else if (tipoRichiesta == "MALATTIA")
             {
+                Console.WriteLine("siamo nella scelta malattia");
                 if (esitoRichiesta == "accettata")
                 {
                     Richiesta richiesta = await dbContext.Richieste

@@ -122,35 +122,35 @@
     <div id="programmazioneModal" class="modal">
         <div class="modal-content">
             <span id="spanAvviso">Non esiste nessuna programmazione per questa data</span>
-            <form id="programmazioneForm" asp-action="GestisciTimbratura" method="post">
+            <form class="programmazione-form"id="programmazioneForm" asp-action="GestisciTimbratura" method="post">
                 <h2 id="modalTitle">Gestisci Programmazione</h2>
                 <input type="hidden" id="giornoModale" name="giornoModale" />
                 <input type="hidden" id="meseModale" name="meseModale" />
                 <input type="hidden" id="annoModale" name="annoModale" />
                 <input type="hidden" id="idProgrammazione" name="idProgrammazione" />
-                <label for="inizioTurno">Inizio Turno:</label>
+                <label class="label" for="inizioTurno">Inizio Turno:</label>
                 <span id="inizioTurnoModale" name="inizioTurnoModale"></span>
 
-                <label for="fineTurno">Fine Turno:</label>
+                <label class="label" for="fineTurno">Fine Turno:</label>
                 <span id="fineTurnoModale" name="fineTurnoModale"></span>
 
-                <label for="inizioTurno">Timbratura Inizio:</label>
+                <label class="label" for="inizioTurno">Timbratura Inizio:</label>
                 <span id="inizioTimbraturaModale" name="inizioTurnoModale"></span>
 
-                <label for="fineTurno">Timbratura Fine:</label>
+                <label class="label" for="fineTurno">Timbratura Fine:</label>
                 <span id="fineTimbraturaModale" name="fineTurnoModale"></span>
 
-                <label for="giornoFerie">Giorno di Ferie:</label>
+                <label class="label" for="giornoFerie">Giorno di Ferie:</label>
                 <span id="giornoFerieModale" name="giornoFerieModale"></span>
 
-                <label for="giornoPermesso">Giorno di Permesso:</label>
+                <label class="label" for="giornoPermesso">Giorno di Permesso:</label>
                 <span id="giornoPermessoModale" name="giornoPermessoModale"></span>
 
-                <label for="giornoMalattia">Giorno di Malattia:</label>
+                <label class="label" for="giornoMalattia">Giorno di Malattia:</label>
                 <span id="giornoMalattiaModale" name="giornoMalattiaModale"></span>
                 <br />
-                <button type="submit" id="buttonInizio" name="timbratura" value="ingresso">Timbra Ingresso</button>
-                <button type="submit" id="buttonFine" name="timbratura" value="uscita">Timbra Uscita</button>
+                <button class="btn-assenze search-btn" type="submit" id="buttonInizio" name="timbratura" value="ingresso">Timbra Ingresso</button>
+                <button class="btn-assenze search-btn" type="submit" id="buttonFine" name="timbratura" value="uscita">Timbra Uscita</button>
             </form>
         </div>
     </div>
@@ -206,7 +206,7 @@
             programmazioneForm.style.display = 'none';
             spanAvviso.style.display = 'block';
         }
-        modal.style.display = 'block';
+        modal.style.display = 'flex';
     }
 
     window.onclick = function (event) {
