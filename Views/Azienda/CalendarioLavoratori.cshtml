@@ -155,6 +155,11 @@
                     <label class="label" for="fineTurno">Fine Turno:</label>
                     <input class="input-time" type="time" id="fineTurnoModale" name="fineTurnoModale" required />
 
+                    <label class="label" >Timbratura Inizio</label>
+                    <span id="span-timb-inizio"></span>
+                    <label class="label" >Timbratura Fine:</label>
+                    <span id="span-timb-fine"></span>
+
                     <div class="container-checkbox">
                         <label class="label" for="giornoFerie">Giorno di Ferie:</label>
                         <input class="input-checkbox" onchange="invertiValoreCheckbox(this)" type="checkbox"
@@ -230,12 +235,21 @@ else
                 minutiFine = "0" + minutiFine;
             }
             var oraFormatoStringaFine = ('0' + oreFine).slice(-2) + ':' + ('0' + minutiFine).slice(-2);
+            var timbraturaInizio = new Date(programmazione.TimbraturaInizio);
+            var orarioTimbInizio = timbraturaInizio.toLocaleTimeString();
+            var timbraturaUscita = new Date(programmazione.TimbraturaUscita);
+            var orarioTimbUscita = timbraturaUscita.toLocaleTimeString();
+            
+
 
             document.getElementById('inizioTurnoModale').value = oraFormatoStringaInizio;
             document.getElementById('fineTurnoModale').value = oraFormatoStringaFine;
             document.getElementById('giornoFerieModale').checked = programmazione.GiornoFerie;
             document.getElementById('giornoPermessoModale').checked = programmazione.GiornoPermesso;
             document.getElementById('giornoMalattiaModale').checked = programmazione.GiornoMalattia;
+            document.getElementById('span-timb-inizio').textContent = programmazione.TimbraturaInizio ? orarioTimbInizio : "Dato non presente";
+            document.getElementById('span-timb-fine').textContent = programmazione.TimbraturaUscita ? orarioTimbUscita : "Dato non presente" ;
+            
             document.getElementById('modalTitle').innerText = 'Modifica Programmazione';
         }
         else {
