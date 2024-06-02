@@ -315,3 +315,15 @@
     font-weight: bold;
     font-size: x-large;
 }
+.benvenuto {
+    background-color: rgb(223, 213, 213);
+    border: 2px solid rgb(91, 202, 221);
+    color: rgb(0, 0, 0);
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    width: 50%; /* Imposta la larghezza al 50% */
+    margin: auto; /* Per centrare l'elemento orizzontalmente */
+  }

@@ -1,4 +1,3 @@
-/*css barra di ricerca*/
 .search-container {
   display: flex;
   align-items: center;
@@ -21,20 +20,20 @@
 }
 
 .search-btn {
-  background-color: rgba(0, 0, 0, 0.61); /* nero trasparente */
-  border: none;
-  color: #fff;
+  background-color: rgba(0, 0, 0, 0.774);
+  color: rgb(255, 255, 255);
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .search-btn:hover {
-  background-color: rgba(255, 255, 255, 0.493); /* nero trasparente più scuro al passaggio del mouse */
-  color: #0c0c0c;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #000;
 }
+
 
 /**/
 .riquadro {
@@ -178,4 +177,16 @@
   text-align: center;
   font-family:'Courier New', Courier, monospace;
   font-size: 30px;
+}
+.benvenuto {
+  background-color: rgb(223, 213, 213);
+  border: 2px solid rgb(91, 202, 221);
+  color: rgb(0, 0, 0);
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  width: 50%; /* Imposta la larghezza al 50% */
+  margin: auto; /* Per centrare l'elemento orizzontalmente */
 }

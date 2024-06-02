@@ -19,33 +19,7 @@ th {
 }
 
 tr:hover {
-    background-color: rgb(133, 221, 224);
-}
-.search-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-#search {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    margin-right: 10px;
-}
-#search-button {
-    background-color: #000000;
-    border: none;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-#search-button:hover {
-    background-color: #ffffff;
-    color: black;
+    background-color: rgb(111, 155, 156);
 }
 
 
@@ -143,7 +117,7 @@ tr:hover {
 }
 
 .submit-btn:hover {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.329);
     color: #000;
 }
 
